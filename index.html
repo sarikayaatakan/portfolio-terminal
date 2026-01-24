@@ -98,4 +98,61 @@
                 const log = document.createElement('div');
                 log.className = 'boot-log';
                 log.innerHTML = msg.replace("[ OK ]", "<span class='ok'>[ OK ]</span>");
-                bootContainer.
+                bootContainer.appendChild(log);
+                await new Promise(r => setTimeout(r, Math.random() * 200 + 50));
+            }
+            await new Promise(r => setTimeout(r, 500));
+            bootContainer.style.display = 'none';
+            header.style.display = 'block';
+            inputArea.style.display = 'flex';
+            printOutput(content[currentLang].welcome);
+            input.focus();
+        }
+
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                const val = input.value.toLowerCase().trim();
+                if (!val) return;
+                const match = Object.keys(cmdMap).find(c => c.startsWith(val));
+                if (match) input.value = match;
+            }
+            if (e.key === 'Enter') {
+                const fullCmd = input.value.toLowerCase().trim();
+                printOutput(`<span class="prompt">atakan@production:~$</span> <span style="color:white">${fullCmd}</span>`, true);
+                if (fullCmd === 'clear') { history.innerHTML = ''; }
+                else if (fullCmd === 'en') {
+                    currentLang = 'en';
+                    header.innerText = content['en'].header;
+                    printOutput(content['en'].lang_switched);
+                } else if (fullCmd === 'tr') {
+                    currentLang = 'tr';
+                    header.innerText = content['tr'].header;
+                    printOutput("Dil 'Türkçe' olarak değiştirildi.");
+                } else if (fullCmd === 'linkedin') {
+                    printOutput(content[currentLang].linkedin);
+                    window.open(linkedin_url, '_blank');
+                } else {
+                    const logicalCmd = cmdMap[fullCmd];
+                    if (logicalCmd && content[currentLang][logicalCmd]) {
+                        printOutput(content[currentLang][logicalCmd]);
+                    } else if (fullCmd !== "") {
+                        printOutput(content[currentLang].error);
+                    }
+                }
+                input.value = '';
+                window.scrollTo(0, document.body.scrollHeight);
+            }
+        });
+
+        function printOutput(text, isCommand = false) {
+            const resp = document.createElement('div');
+            resp.className = 'output';
+            isCommand ? resp.innerHTML = text : resp.textContent = text;
+            history.appendChild(resp);
+        }
+
+        runBootSequence();
+    </script>
+</body>
+</html>
