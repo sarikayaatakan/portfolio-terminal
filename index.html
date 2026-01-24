@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Atakan Sarıkaya | Linux System Administrator</title>
+    <title>Atakan Sarıkaya | Linux System Administrator & DevOps Specialist</title>
     <style>
         body { background-color: #0d0d0d; color: #00ff41; font-family: 'Consolas', 'Courier New', monospace; padding: 30px; line-height: 1.5; }
         #terminal { max-width: 1000px; margin: auto; }
@@ -14,9 +14,9 @@
 </head>
 <body>
     <div id="terminal">
-        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 1.8] - LINUX SYSTEM ADMIN CONSOLE ***</div>
+        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 2.0] - SPECIALIST CONSOLE ***</div>
         <div id="history">
-            <div class="output" id="welcome-msg">Erişim yetkisi verildi: misafir. Yardım için 'yardim' yazın. English? Type 'lang en'</div>
+            <div class="output" id="welcome-msg">Erişim yetkisi verildi: misafir. Yardım için 'yardim' yazın. English? Type 'en'</div>
         </div>
         <div class="input-line">
             <span class="prompt">atakan@production:~$</span>
@@ -34,31 +34,31 @@
 
         const content = {
             'tr': {
-                'header': '*** ATAKAN_SARIKAYA_OS [Versiyon 1.8] - LINUX SYSTEM ADMIN CONSOLE ***',
-                'welcome': "Erişim yetkisi verildi: misafir. Yardım için 'yardim' yazın. English? Type 'lang en'",
-                'help': "Komutlar: yardim, kimim, tecrube, orkestrasyon, izleme, veritabanı, sertifikalar, linkedin, lang [en/tr], clear",
-                'whoami': "Atakan Sarıkaya | 27\nLinux Sistem Yöneticisi\nTürk Telekom bünyesinde (Sekom aracılığıyla) Uygulama Operasyon Uzmanı olarak çalışıyor.",
-                'experience': "1. Türk Telekom (via Sekom): Uygulama Operasyon Uzmanı\n2. Sekom: Yazılım Destek Uzmanı (DevSecOps Cloud Operations)",
-                'orchestration': "[Uygulama Orkestrasyonu]\n- Docker ve RedHat OpenShift platformları ile deployment.\n- Manuel uygulama kurulumu ve konfigürasyon yönetimi.\n- Linux systemd (systemctl) ile Java tabanlı servis yönetimi.\n- ROOT (WAR/JAR) dosyalarının deployment süreçleri.",
-                'monitoring': "[İzleme ve Loglama]\n- Prometheus & Grafana kurulum ve yönetimi.\n- Log analizi ve proaktif alarm takibi.",
-                'db_ops': "[Veritabanı]\n- SQL: PostgreSQL ve Oracle DB operasyonları.\n- Araçlar: Jira ve Confluence.",
-                'certifications': "[Sertifikalar]\n- HCCDA - Tech Essentials\n- RedHat Linux System Administration (RH124) - Eğitim\n- Ağ Temelleri & SQL - BTK Akademi",
+                'header': '*** ATAKAN_SARIKAYA_OS [Versiyon 2.0] - SPECIALIST CONSOLE ***',
+                'welcome': "Erişim yetkisi verildi: misafir. Yardım için 'yardim' yazın. English? Type 'en'",
+                'help': "Komutlar: yardim, kimim, tecrube, orkestrasyon, izleme, veritabanı, sertifikalar, linkedin, en/tr, clear",
+                'whoami': "Atakan Sarıkaya | 27\nLinux Sistem Yöneticisi & DevOps Uzmanı\nTürk Telekom bünyesinde (Sekom aracılığıyla) Uygulama Operasyon Uzmanı olarak çalışıyor.",
+                'experience': "1. Türk Telekom (via Sekom): Uygulama Operasyon Uzmanı (6 Ay - Güncel)\n2. Sekom: Yazılım Destek Uzmanı / DevSecOps Cloud Operations (1 Yıl 3 Ay)",
+                'orchestration': "[Uygulama Orkestrasyonu ve Provizyon]\n- Docker ve RedHat OpenShift platformları ile uygulama provizyonu.\n- Uçtan uca operasyonel yapılandırma ve konfigürasyon yönetimi.\n- Linux systemd (systemctl) ile Java tabanlı servis yönetimi.\n- Kritik uygulama bileşenlerinin (ROOT/WAR/JAR) yayına alınma süreçleri.",
+                'monitoring': "[İzleme ve Loglama]\n- Çözümler: Prometheus & Grafana entegrasyonu ve takibi.\n- Operasyon: Log analizi, proaktif alarm yönetimi ve sistem sağlığı denetimi.",
+                'db_ops': "[Veritabanı ve Süreç Yönetimi]\n- SQL: PostgreSQL ve Oracle DB üzerinde operasyonel işlemler.\n- Dokümantasyon: Jira ve Confluence ile şeffaf iş takibi.",
+                'certifications': "[Profesyonel Sertifikalar]\n- Huawei Cloud Certified Associate (HCCDA) - Tech Essentials\n- RedHat Linux System Administration (RH124)\n- Ağ Temelleri - BTK Akademi\n- Uygulamalarla SQL - BTK Akademi",
                 'linkedin': "LinkedIn profili yeni sekmede açılıyor...",
-                'lang_switched': "Dil 'İngilizce' olarak değiştirildi. Type 'help'",
+                'lang_switched': "Dil 'İngilizce' olarak değiştirildi.",
                 'error': "Komut bulunamadı. Yardım için 'yardim' yazın."
             },
             'en': {
-                'header': '*** ATAKAN_SARIKAYA_OS [Version 1.8] - LINUX SYSTEM ADMIN CONSOLE ***',
-                'welcome': "Authorized Access: guest. Type 'help' to see all commands. Türkçe? 'lang tr' yazın",
-                'help': "Commands: help, whoami, experience, orchestration, monitoring, db_ops, certifications, linkedin, lang [en/tr], clear",
-                'whoami': "Atakan Sarıkaya | 27\nLinux System Administrator\nCurrently working as an Application Operation Specialist @ Turk Telekom (via Sekom).",
-                'experience': "1. Turk Telekom (via Sekom): Application Operation Specialist\n2. Sekom: Software Support Specialist (DevSecOps Cloud Operations)",
-                'orchestration': "[App Orchestration]\n- Deployment with Docker & RedHat OpenShift Platforms.\n- Manual provisioning and configuration management.\n- Java-based service management via Linux systemd.\n- ROOT (WAR/JAR) file deployment operations.",
-                'monitoring': "[Monitoring & Logging]\n- Stack: Prometheus & Grafana implementation.\n- Ops: Log analysis and alarm tracking.",
-                'db_ops': "[Database]\n- SQL Ops: PostgreSQL and Oracle DB management.\n- Workflow: Jira & Confluence.",
-                'certifications': "[Certifications]\n- HCCDA - Tech Essentials\n- RedHat Linux System Administration (RH124) - Training\n- Network & SQL Essentials - BTK Akademi",
+                'header': '*** ATAKAN_SARIKAYA_OS [Version 2.0] - SPECIALIST CONSOLE ***',
+                'welcome': "Authorized Access: guest. Type 'help' to see all commands. Türkçe? 'tr' yazın",
+                'help': "Commands: help, whoami, experience, orchestration, monitoring, db_ops, certifications, linkedin, en/tr, clear",
+                'whoami': "Atakan Sarıkaya | 27\nLinux System Administrator & DevOps Specialist\nCurrently working as an Application Operation Specialist @ Turk Telekom (via Sekom).",
+                'experience': "1. Turk Telekom (via Sekom): Application Operation Specialist (6 Months - Current)\n2. Sekom: Software Support Specialist / DevSecOps Cloud Operations (1 Year 3 Months)",
+                'orchestration': "[Application Orchestration & Provisioning]\n- Application provisioning on Docker & RedHat OpenShift platforms.\n- End-to-end operational configuration and environment management.\n- Java-based service management via Linux systemd (systemctl).\n- Lifecycle management of application components (ROOT/WAR/JAR).",
+                'monitoring': "[Monitoring & Logging]\n- Stack: Prometheus & Grafana implementation and tracking.\n- Ops: Log analysis, proactive alarm management, and health checks.",
+                'db_ops': "[Database & Workflow]\n- SQL Ops: Operational management of PostgreSQL and Oracle DB.\n- Workflow: Process documentation via Jira & Confluence.",
+                'certifications': "[Certifications]\n- Huawei Cloud Certified Associate (HCCDA) - Tech Essentials\n- RedHat Linux System Administration (RH124)\n- Network Essentials - BTK Akademi\n- SQL with Applications - BTK Akademi",
                 'linkedin': "Opening LinkedIn profile in a new tab...",
-                'lang_switched': "Language switched to 'English'. Type 'help'",
+                'lang_switched': "Language switched to 'English'.",
                 'error': "Command not found. Type 'help' for assistance."
             }
         };
@@ -77,7 +77,7 @@
                 } else if (fullCmd === 'lang tr' || fullCmd === 'tr') {
                     currentLang = 'tr';
                     header.innerText = content['tr'].header;
-                    printOutput("Dil 'Türkçe' olarak değiştirildi. 'yardim' yazın.");
+                    printOutput("Dil 'Türkçe' olarak değiştirildi.");
                 } else if (fullCmd === 'linkedin' || fullCmd === 'contact' || fullCmd === 'iletisim') {
                     printOutput(content[currentLang].linkedin);
                     window.open(linkedin_url, '_blank');
