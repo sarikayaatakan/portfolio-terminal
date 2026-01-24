@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Atakan Sarıkaya | DevOps / Cloud & Linux System Specialist</title>
     <style>
-        body { background-color: #0d0d0d; color: #00ff41; font-family: 'Consolas', 'Courier New', monospace; padding: 30px; line-height: 1.5; cursor: text; }
+        body { background-color: #0d0d0d; color: #00ff41; font-family: 'Consolas', 'Courier New', monospace; padding: 30px; line-height: 1.5; cursor: text; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
         #terminal { max-width: 1000px; margin: auto; }
         .prompt { color: #00aaff; }
         .command-input { background: transparent; border: none; color: #ffffff; font-family: inherit; font-size: inherit; outline: none; width: 60%; caret-color: #00ff41; }
@@ -18,7 +18,7 @@
 <body>
     <div id="terminal">
         <div id="boot-container"></div>
-        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 2.6] - DevOps / Cloud & Linux System Specialist ***</div>
+        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 2.7] - PRODUCTION CONSOLE ***</div>
         <div id="history"></div>
         <div class="input-line" id="input-area">
             <span class="prompt">atakan@production:~$</span>
@@ -36,21 +36,30 @@
         let currentLang = 'tr';
         const linkedin_url = "https://www.linkedin.com/in/atakansarikaya/";
 
+        // Güvenlik Engelleri (Security Theater)
+        document.addEventListener('contextmenu', (e) => e.preventDefault()); // Sağ tık engelleme
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123) return false; // F12 engelleme
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Ctrl+Shift+I
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Ctrl+Shift+J
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // Ctrl+Shift+C
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U (View Source)
+        };
+
         const bootMessages = [
             "[  0.000000] Linux version 5.14.0-70.13.1.el9_0.x86_64",
-            "[  OK  ] Reached target System Initialization",
-            "[  OK  ] Started Network Manager",
+            "[  OK  ] TLS Handshake... Established",
+            "[  OK  ] SSL Certificate... Let's Encrypt Verified",
             "[  OK  ] Initializing Container Runtime (Docker/CRI-O)...",
             "[  OK  ] Starting OpenShift Node Agent (Kubelet)...",
             "[  OK  ] Reached target Multi-User System",
-            "[  OK  ] Initializing Application Operation Environment...",
-            "Loading shell configurations... [ DONE ]",
-            "Welcome to Atakan's Production Environment."
+            "Loading localized shell... [ DONE ]",
+            "System is secure. Welcome to Atakan's Production Environment."
         ];
 
         const content = {
             'tr': {
-                'header': '*** ATAKAN_SARIKAYA_OS [Versiyon 2.6] - DevOps / Cloud & Linux System Specialist ***',
+                'header': '*** ATAKAN_SARIKAYA_OS [Versiyon 2.7] - DevOps / Cloud & Linux System Specialist ***',
                 'welcome': "Erişim yetkisi verildi: misafir. Yardım için 'yardim' yazın. English? Type 'en'",
                 'help': "Komutlar: yardim, kimim, tecrube, orkestrasyon, izleme, veritabanı, dokumantasyon, sertifikalar, linkedin, en/tr, clear",
                 'whoami': "Atakan Sarıkaya | 27\nDevOps / Cloud & Linux System Specialist\nTürk Telekom bünyesinde (Sekom aracılığıyla) Uygulama Operasyon Uzmanı olarak çalışıyor.",
@@ -65,7 +74,7 @@
                 'error': "Komut bulunamadı. Yardım için 'yardim' yazın."
             },
             'en': {
-                'header': '*** ATAKAN_SARIKAYA_OS [Version 2.6] - DevOps / Cloud & Linux System Specialist ***',
+                'header': '*** ATAKAN_SARIKAYA_OS [Version 2.7] - DevOps / Cloud & Linux System Specialist ***',
                 'welcome': "Authorized Access: guest. Type 'help'. Türkçe? 'tr' yazın",
                 'help': "Commands: help, whoami, experience, orchestration, monitoring, db_ops, documentation, certifications, linkedin, en/tr, clear",
                 'whoami': "Atakan Sarıkaya | 27\nDevOps / Cloud & Linux System Specialist\nWorking as an Application Operation Specialist @ Turk Telekom (via Sekom).",
@@ -82,15 +91,13 @@
         };
 
         const cmdMap = {
-            'yardim': 'help', 'help': 'help',
-            'kimim': 'whoami', 'whoami': 'whoami',
-            'tecrube': 'experience', 'experience': 'experience',
-            'orkestrasyon': 'orchestration', 'orchestration': 'orchestration',
-            'izleme': 'monitoring', 'monitoring': 'monitoring',
+            'yardim': 'help', 'help': 'help', 'kimim': 'whoami', 'whoami': 'whoami',
+            'tecrube': 'experience', 'experience': 'experience', 'orkestrasyon': 'orchestration',
+            'orkestrasyon': 'orchestration', 'izleme': 'monitoring', 'monitoring': 'monitoring',
             'veritabanı': 'db_ops', 'veritabani': 'db_ops', 'db_ops': 'db_ops',
             'dokumantasyon': 'documentation', 'documentation': 'documentation',
             'sertifikalar': 'certifications', 'certifications': 'certifications',
-            'linkedin': 'linkedin', 'contact': 'linkedin', 'en': 'en', 'tr': 'tr', 'clear': 'clear'
+            'linkedin': 'linkedin', 'en': 'en', 'tr': 'tr', 'clear': 'clear'
         };
 
         async function runBootSequence() {
@@ -106,13 +113,10 @@
             header.style.display = 'block';
             inputArea.style.display = 'flex';
             printOutput(content[currentLang].welcome);
-            input.focus(); // Boot sonrası otomatik focus
+            input.focus();
         }
 
-        // Global Tıklama Dinleyicisi: Sayfanın herhangi bir yerine tıklandığında input'u odakla
-        document.addEventListener('click', function() {
-            input.focus();
-        });
+        document.addEventListener('click', () => input.focus());
 
         input.addEventListener('keydown', function(e) {
             if (e.key === 'Tab') {
@@ -126,24 +130,13 @@
                 const fullCmd = input.value.toLowerCase().trim();
                 printOutput(`<span class="prompt">atakan@production:~$</span> <span style="color:white">${fullCmd}</span>`, true);
                 if (fullCmd === 'clear') { history.innerHTML = ''; }
-                else if (fullCmd === 'en') {
-                    currentLang = 'en';
-                    header.innerText = content['en'].header;
-                    printOutput(content['en'].lang_switched);
-                } else if (fullCmd === 'tr') {
-                    currentLang = 'tr';
-                    header.innerText = content['tr'].header;
-                    printOutput("Dil 'Türkçe' olarak değiştirildi.");
-                } else if (fullCmd === 'linkedin') {
-                    printOutput(content[currentLang].linkedin);
-                    window.open(linkedin_url, '_blank');
-                } else {
+                else if (fullCmd === 'en') { currentLang = 'en'; header.innerText = content['en'].header; printOutput(content['en'].lang_switched); }
+                else if (fullCmd === 'tr') { currentLang = 'tr'; header.innerText = content['tr'].header; printOutput("Dil 'Türkçe' olarak değiştirildi."); }
+                else if (fullCmd === 'linkedin') { window.open(linkedin_url, '_blank'); }
+                else {
                     const logicalCmd = cmdMap[fullCmd];
-                    if (logicalCmd && content[currentLang][logicalCmd]) {
-                        printOutput(content[currentLang][logicalCmd]);
-                    } else if (fullCmd !== "") {
-                        printOutput(content[currentLang].error);
-                    }
+                    if (logicalCmd && content[currentLang][logicalCmd]) { printOutput(content[currentLang][logicalCmd]); }
+                    else if (fullCmd !== "") { printOutput(content[currentLang].error); }
                 }
                 input.value = '';
                 window.scrollTo(0, document.body.scrollHeight);
