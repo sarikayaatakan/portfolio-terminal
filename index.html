@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Atakan Sarıkaya | Terminal CV</title>
+    <title>Atakan Sarıkaya | System & DevOps Engineer</title>
     <style>
-        body { background-color: #0a0a0a; color: #00ff41; font-family: 'Courier New', Courier, monospace; padding: 20px; line-height: 1.6; }
-        #terminal { max-width: 950px; }
-        .prompt { color: #0087ff; }
-        .command-input { background: transparent; border: none; color: #ffffff; font-family: inherit; font-size: inherit; outline: none; width: 70%; }
-        .header { color: #ffcc00; font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px; }
-        .output { margin-bottom: 10px; white-space: pre-wrap; }
+        body { background-color: #0d0d0d; color: #00ff41; font-family: 'Consolas', 'Courier New', monospace; padding: 30px; line-height: 1.5; }
+        #terminal { max-width: 1000px; margin: auto; }
+        .prompt { color: #00aaff; }
+        .command-input { background: transparent; border: none; color: #ffffff; font-family: inherit; font-size: inherit; outline: none; width: 60%; }
+        .header { color: #ffcc00; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #333; padding-bottom: 10px; }
+        .output { margin-bottom: 12px; white-space: pre-wrap; color: #d1d1d1; }
     </style>
 </head>
 <body>
     <div id="terminal">
-        <div class="header">*** ATAKAN SARIKAYA | APP OPS & SYSTEM CONSOLE V1.3 ***</div>
+        <div class="header">*** ATAKAN_SARIKAYA_OS [Version 1.4] - SYSTEM ADMINISTRATION CONSOLE ***</div>
         <div id="history">
-            <div class="output">Sistem hazır. Manuel deployment kayıtları yüklendi. 'help' yazın.</div>
+            <div class="output">Welcome, Admin. Type 'help' to see all operational commands.</div>
         </div>
         <div class="input-line">
-            <span class="prompt">atakan@devops:~$</span>
+            <span class="prompt">atakan@production:~$</span>
             <input type="text" id="command-input" class="command-input" autofocus autocomplete="off">
         </div>
     </div>
@@ -29,19 +29,34 @@
         const history = document.getElementById('history');
 
         const commands = {
-            'help': "Komutlar: whoami, experience, deployment_ops, skills, clear",
-            'whoami': "Atakan Sarıkaya | 27 Yaşında\nElement Management Systems / Application Operation Specialist @ Turk Telekom",
+            'help': "Available commands: whoami, experience, orchestration, monitoring, db_ops, certifications, clear",
+            
+            'whoami': "Atakan Sarıkaya | 27 | System Administrator & App Ops Specialist\nCurrently managing Element Management Systems @ Turk Telekom",
+            
             'experience': `1. Turk Telekom: EMS / Application Operation Specialist
-2. Sekom: Software Support Specialist (DevSecOps Cloud Operations)`,
-            'deployment_ops': `[Container Operations]
-- RedHat OpenShift: Manuel image deployment ve pod yönetimi.
-- Docker: Uygulama deployment ve operasyonel yönetim.
-[Java & Linux Systems]
-- Java Web Apps: ROOT (WAR/JAR) dosyalarının deployment süreçleri.
-- Service Management: Linux systemctl (systemd) üzerinden Java servis yönetimi.`,
-            'skills': `[System Admin] Linux (RHEL, CentOS), Systemd, Log Monitoring
-[Monitoring] Prometheus, Grafana
-[Container] RedHat OpenShift, Docker`,
+2. Sekom: Software Support Specialist (DevSecOps Cloud Operations / Software Support Specialist)`,
+
+            'orchestration': `[Application Orchestration & Deployment]
+- Deployment with Docker & RedHat OpenShift Platforms.
+- Manual app provisioning and configuration management.
+- Service Management: Linux systemctl / systemd for Java-based applications.
+- Java App Deployment: ROOT (WAR/JAR) file management.`,
+
+            'monitoring': `[Monitoring & Logging]
+- Solutions: Prometheus & Grafana implementation.
+- Ops: Log analysis, monitoring, and proactive alarm tracking.
+- Reliability: Optimizing operational processes for system efficiency.`,
+
+            'db_ops': `[Database & Task Management]
+- SQL Ops: Management of PostgreSQL and Oracle DB.
+- Workflow: Jira & Confluence for task tracking and documentation.`,
+
+            'certifications': `[Professional Certifications]
+- HCCDA - Tech Essentials
+- RedHat Linux System Administration (RH124) - Training
+- Network Essentials - BTK Akademi
+- SQL with Applications - BTK Akademi`,
+
             'clear': ""
         };
 
@@ -49,7 +64,7 @@
             if (e.key === 'Enter') {
                 const cmd = input.value.toLowerCase().trim();
                 const output = document.createElement('div');
-                output.innerHTML = `<span class="prompt">atakan@devops:~$</span> <span style="color:white">${cmd}</span>`;
+                output.innerHTML = `<span class="prompt">atakan@production:~$</span> <span style="color:white">${cmd}</span>`;
                 history.appendChild(output);
 
                 if (cmd === 'clear') {
@@ -59,9 +74,9 @@
                     response.className = 'output';
                     response.textContent = commands[cmd];
                     history.appendChild(response);
-                } else {
+                } else if (cmd !== "") {
                     const error = document.createElement('div');
-                    error.textContent = `-bash: ${cmd}: command not found.`;
+                    error.textContent = `-bash: ${cmd}: command not found. Reference 'help'.`;
                     history.appendChild(error);
                 }
                 input.value = '';
