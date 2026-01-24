@@ -19,7 +19,7 @@
 <body>
     <div id="terminal">
         <div id="boot-container"></div>
-        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 3.0] - SPECIALIST FILESYSTEM ***</div>
+        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 3.1] - ORCHESTRATION CONSOLE ***</div>
         <div id="history"></div>
         <div class="input-line" id="input-area">
             <span class="prompt" id="prompt-label">atakan@production:~$</span>
@@ -72,7 +72,7 @@
                 files: ['sistem.txt', 'devops.txt', 'monitoring.txt'],
                 content: {
                     'sistem.txt': "Linux (RHEL, CentOS), Systemd, Bash Scripting, Web Service Management",
-                    'devops.txt': "Docker, RedHat OpenShift, CI/CD, Application Provisioning",
+                    'devops.txt': "Docker, RedHat OpenShift, Orchestration",
                     'monitoring.txt': "Prometheus, Grafana, Log Analysis, Alarm Tracking"
                 }
             }
@@ -80,10 +80,10 @@
 
         const bootMessages = [
             "[  0.000000] Linux version 5.14.0-70.13.1.el9_0.x86_64",
-            "[  OK  ] Initializing System Core...",
+            "[  OK  ] TLS Handshake... Established",
             "[  OK  ] Mounting /home/atakan... (Local FS)",
-            "[  OK  ] Tab Completion Engine... Started",
-            "Welcome, Admin. System is ready."
+            "[  OK  ] Loading Orchestration Modules...",
+            "Welcome, Admin. System is secure."
         ];
 
         async function runBootSequence() {
@@ -97,7 +97,7 @@
             bootContainer.style.display = 'none';
             header.style.display = 'block';
             inputArea.style.display = 'flex';
-            printOutput("Oturum açıldı: misafir. Yardım için 'yardim' yazın.");
+            printOutput("Erişim yetkisi verildi: misafir. Yardım için 'yardim' yazın.");
             input.focus();
         }
 
@@ -108,12 +108,8 @@
                 e.preventDefault();
                 const val = input.value.toLowerCase().trim().split(' ').pop();
                 if (!val) return;
-
                 const commands = ['yardim', 'help', 'clear', 'pwd', 'ls', 'cd', 'cat', 'linkedin'];
-                const currentFiles = fs[currentPath].files;
-                const currentDirs = fs[currentPath].dirs;
-                const allPossible = [...commands, ...currentFiles, ...currentDirs];
-
+                const allPossible = [...commands, ...fs[currentPath].files, ...fs[currentPath].dirs];
                 const match = allPossible.find(c => c.startsWith(val));
                 if (match) {
                     const words = input.value.split(' ');
@@ -130,7 +126,7 @@
                 printOutput(`<span class="prompt">atakan@production:${currentPath === 'home' ? '~' : '~/' + currentPath}$</span> <span style="color:white">${rawInput}</span>`, true);
 
                 if (cmd === 'clear') { history.innerHTML = ''; }
-                else if (cmd === 'yardim' || cmd === 'help') { printOutput("Komutlar: ls, cd, cat, pwd, clear, linkedin, tr/en"); }
+                else if (cmd === 'yardim' || cmd === 'help') { printOutput("Komutlar: ls, cd, cat, pwd, clear, linkedin"); }
                 else if (cmd === 'pwd') { printOutput(currentPath === 'home' ? "/home/atakan" : "/home/atakan/" + currentPath); }
                 else if (cmd === 'ls') {
                     let output = "";
