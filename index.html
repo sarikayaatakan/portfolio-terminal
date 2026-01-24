@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>Atakan Sarıkaya | DevOps / Cloud & Linux System Specialist</title>
     <style>
-        body { background-color: #0d0d0d; color: #00ff41; font-family: 'Consolas', 'Courier New', monospace; padding: 30px; line-height: 1.5; }
+        body { background-color: #0d0d0d; color: #00ff41; font-family: 'Consolas', 'Courier New', monospace; padding: 30px; line-height: 1.5; cursor: text; }
         #terminal { max-width: 1000px; margin: auto; }
         .prompt { color: #00aaff; }
-        .command-input { background: transparent; border: none; color: #ffffff; font-family: inherit; font-size: inherit; outline: none; width: 60%; }
+        .command-input { background: transparent; border: none; color: #ffffff; font-family: inherit; font-size: inherit; outline: none; width: 60%; caret-color: #00ff41; }
         .header { color: #ffcc00; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #333; padding-bottom: 10px; display: none; }
         .output { margin-bottom: 12px; white-space: pre-wrap; color: #d1d1d1; }
         .input-line { display: none; }
@@ -18,7 +18,7 @@
 <body>
     <div id="terminal">
         <div id="boot-container"></div>
-        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 2.5] - DevOps / Cloud & Linux System Specialist ***</div>
+        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 2.6] - DevOps / Cloud & Linux System Specialist ***</div>
         <div id="history"></div>
         <div class="input-line" id="input-area">
             <span class="prompt">atakan@production:~$</span>
@@ -50,7 +50,7 @@
 
         const content = {
             'tr': {
-                'header': '*** ATAKAN_SARIKAYA_OS [Versiyon 2.5] - DevOps / Cloud & Linux System Specialist ***',
+                'header': '*** ATAKAN_SARIKAYA_OS [Versiyon 2.6] - DevOps / Cloud & Linux System Specialist ***',
                 'welcome': "Erişim yetkisi verildi: misafir. Yardım için 'yardim' yazın. English? Type 'en'",
                 'help': "Komutlar: yardim, kimim, tecrube, orkestrasyon, izleme, veritabanı, dokumantasyon, sertifikalar, linkedin, en/tr, clear",
                 'whoami': "Atakan Sarıkaya | 27\nDevOps / Cloud & Linux System Specialist\nTürk Telekom bünyesinde (Sekom aracılığıyla) Uygulama Operasyon Uzmanı olarak çalışıyor.",
@@ -58,14 +58,14 @@
                 'orchestration': "[Uygulama Dağıtımı ve Yönetimi]\n- Docker ve RedHat OpenShift platformları ile uygulama dağıtımı.\n- Docker üzerinde Python tabanlı uygulamaların deployment süreçleri.\n- Linux systemd (systemctl) ile Java tabanlı servis yönetimi.\n- Kritik uygulama bileşenlerinin (ROOT/WAR/JAR) yayına alınma süreçleri.",
                 'monitoring': "[İzleme ve Loglama]\n- Çözümler: Prometheus & Grafana entegrasyonu ve takibi.\n- Operasyon: Log analizi, proaktif alarm yönetimi ve sistem sağlığı denetimi.",
                 'db_ops': "[Veritabanı Operasyonları]\n- SQL: PostgreSQL ve Oracle DB üzerinde operasyonel yönetim ve sorgulama.",
-                'documentation': "[Dokümantasyon ve İş Takibi]\n- Jira: süreç yönetimi, task takibi ve workflow yönetimi.\n- Confluence: Teknik dokümantasyon, Knowledge Base (Bilgi Bankası) oluşturma.",
+                'documentation': "[Dokümantasyon ve İş Takibi]\n- Jira: Agile süreç yönetimi, task takibi ve workflow yönetimi.\n- Confluence: Teknik dokümantasyon, Knowledge Base oluşturma.",
                 'certifications': "[Sertifikalar]\n- Huawei Cloud Certified Associate (HCCDA) - Tech Essentials\n- RedHat Linux System Administration (RH124)\n- Ağ Temelleri & SQL - BTK Akademi",
                 'linkedin': "LinkedIn profili açılıyor...",
                 'lang_switched': "Dil 'İngilizce' olarak değiştirildi.",
                 'error': "Komut bulunamadı. Yardım için 'yardim' yazın."
             },
             'en': {
-                'header': '*** ATAKAN_SARIKAYA_OS [Version 2.5] - DevOps / Cloud & Linux System Specialist ***',
+                'header': '*** ATAKAN_SARIKAYA_OS [Version 2.6] - DevOps / Cloud & Linux System Specialist ***',
                 'welcome': "Authorized Access: guest. Type 'help'. Türkçe? 'tr' yazın",
                 'help': "Commands: help, whoami, experience, orchestration, monitoring, db_ops, documentation, certifications, linkedin, en/tr, clear",
                 'whoami': "Atakan Sarıkaya | 27\nDevOps / Cloud & Linux System Specialist\nWorking as an Application Operation Specialist @ Turk Telekom (via Sekom).",
@@ -106,8 +106,13 @@
             header.style.display = 'block';
             inputArea.style.display = 'flex';
             printOutput(content[currentLang].welcome);
-            input.focus();
+            input.focus(); // Boot sonrası otomatik focus
         }
+
+        // Global Tıklama Dinleyicisi: Sayfanın herhangi bir yerine tıklandığında input'u odakla
+        document.addEventListener('click', function() {
+            input.focus();
+        });
 
         input.addEventListener('keydown', function(e) {
             if (e.key === 'Tab') {
