@@ -14,12 +14,13 @@
         .boot-log { color: #888; margin-bottom: 2px; font-size: 13px; font-family: 'Courier New', Courier, monospace; }
         .ok { color: #00ff41; font-weight: bold; }
         .dir { color: #00aaff; font-weight: bold; }
+        .file { color: #ffffff; }
     </style>
 </head>
 <body>
     <div id="terminal">
         <div id="boot-container"></div>
-        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 2.8] - FILESYSTEM CONSOLE ***</div>
+        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 2.9] - KERNEL FILESYSTEM ***</div>
         <div id="history"></div>
         <div class="input-line" id="input-area">
             <span class="prompt" id="prompt-label">atakan@production:~$</span>
@@ -35,8 +36,7 @@
         const bootContainer = document.getElementById('boot-container');
         const promptLabel = document.getElementById('prompt-label');
         
-        let currentLang = 'tr';
-        let currentPath = '~'; // Root path simülasyonu
+        let currentPath = 'home'; // home, sertifikalar, tecrube, projeler
         const linkedin_url = "https://www.linkedin.com/in/atakansarikaya/";
 
         // Güvenlik
@@ -46,39 +46,57 @@
         const bootMessages = [
             "[  0.000000] Linux version 5.14.0-70.13.1.el9_0.x86_64",
             "[  OK  ] TLS Handshake... Established",
-            "[  OK  ] Loading Mock Filesystem Layer...",
-            "[  OK  ] Reached target Multi-User System",
-            "System is secure. Welcome, Specialist."
+            "[  OK  ] Mounting /home/atakan virtual filesystem...",
+            "[  OK  ] Starting Shell Environment...",
+            "Welcome, Atakan. System is ready."
         ];
 
-        const content = {
-            'tr': {
-                'welcome': "Erişim yetkisi verildi: misafir. Yardım için 'yardim' yazın.",
-                'help': "Komutlar: yardim, kimim, tecrube, orkestrasyon, izleme, veritabanı, dokumantasyon, sertifikalar, linkedin, ls, pwd, cd, clear, en/tr",
-                'whoami': "Atakan Sarıkaya | 27\nDevOps / Cloud & Linux System Specialist\nTürk Telekom bünyesinde Uygulama Operasyon Uzmanı.",
-                'ls_home': "sertifikalar/  tecrube/  projeler/  cv.pdf",
-                'pwd_home': "/home/atakan",
-                'error': "Komut bulunamadı. Yardım için 'yardim' yazın."
+        // Sanal Dosya Sistemi Yapısı
+        const fs = {
+            'home': {
+                dirs: ['sertifikalar', 'tecrube', 'projeler'],
+                files: ['ozgecmis.txt', 'iletisim.sh'],
+                content: {
+                    'ozgecmis.txt': "Atakan Sarıkaya | 27\nDevOps / Cloud & Linux System Specialist\nTürk Telekom bünyesinde Uygulama Operasyon Uzmanı.",
+                    'iletisim.sh': "LinkedIn profilim açılıyor..."
+                }
             },
-            'en': {
-                'welcome': "Authorized Access: guest. Type 'help'.",
-                'help': "Commands: help, whoami, experience, orchestration, monitoring, db_ops, documentation, certifications, linkedin, ls, pwd, cd, clear, en/tr",
-                'whoami': "Atakan Sarıkaya | 27\nDevOps / Cloud & Linux System Specialist\nWorking as an App Ops Specialist @ Turk Telekom.",
-                'ls_home': "certifications/  experience/  projects/  resume.pdf",
-                'pwd_home': "/home/atakan",
-                'error': "Command not found. Type 'help'."
+            'sertifikalar': {
+                dirs: [],
+                files: ['hccda.txt', 'rh124.txt', 'btk_sql.txt'],
+                content: {
+                    'hccda.txt': "Huawei Cloud Certified Associate (HCCDA) - Tech Essentials",
+                    'rh124.txt': "RedHat Linux System Administration (RH124)",
+                    'btk_sql.txt': "Uygulamalarla SQL - BTK Akademi"
+                }
+            },
+            'tecrube': {
+                dirs: [],
+                files: ['turk_telekom.txt', 'sekom.txt'],
+                content: {
+                    'turk_telekom.txt': "Türk Telekom (via Sekom): Uygulama Operasyon Uzmanı (6 Ay - Güncel)",
+                    'sekom.txt': "Sekom: Yazılım Destek Uzmanı / DevSecOps Cloud Operations (1 Yıl 3 Ay)"
+                }
+            },
+            'projeler': {
+                dirs: [],
+                files: ['orkestrasyon.txt', 'izleme.txt'],
+                content: {
+                    'orkestrasyon.txt': "Docker & OpenShift üzerinde Java/Python dağıtım ve yönetim süreçleri.",
+                    'izleme.txt': "Prometheus & Grafana ile log analizi ve alarm yönetimi."
+                }
             }
         };
 
-        const cmdMap = {
-            'yardim': 'help', 'help': 'help', 'kimim': 'whoami', 'whoami': 'whoami',
-            'tecrube': 'experience', 'experience': 'experience', 'orkestrasyon': 'orchestration',
-            'izleme': 'monitoring', 'monitoring': 'monitoring', 'veritabanı': 'db_ops', 
-            'veritabani': 'db_ops', 'db_ops': 'db_ops', 'dokumantasyon': 'documentation',
-            'documentation': 'documentation', 'sertifikalar': 'certifications', 
-            'certifications': 'certifications', 'linkedin': 'linkedin', 'ls': 'ls', 
-            'pwd': 'pwd', 'cd': 'cd', 'clear': 'clear', 'en': 'en', 'tr': 'tr'
-        };
+        const helpMsg = `Kullanılabilir Komutlar:
+- ls: Dizin içeriğini listeler
+- cd [dizin]: Dizine girer (örn: cd sertifikalar)
+- cd .. : Bir üst dizine çıkar
+- cat [dosya]: Dosya içeriğini okur (örn: cat ozgecmis.txt)
+- pwd: Mevcut çalışma dizinini gösterir
+- clear: Ekranı temizler
+- en / tr: Dil değiştirir
+- linkedin: Profili açar`;
 
         async function runBootSequence() {
             for (let msg of bootMessages) {
@@ -86,12 +104,12 @@
                 log.className = 'boot-log';
                 log.innerHTML = msg.replace("[ OK ]", "<span class='ok'>[ OK ]</span>");
                 bootContainer.appendChild(log);
-                await new Promise(r => setTimeout(r, 100));
+                await new Promise(r => setTimeout(r, 80));
             }
             bootContainer.style.display = 'none';
             header.style.display = 'block';
             inputArea.style.display = 'flex';
-            printOutput(content[currentLang].welcome);
+            printOutput("Erişim yetkisi verildi: misafir. Yardım için 'yardim' yazın.");
             input.focus();
         }
 
@@ -101,55 +119,61 @@
             if (e.key === 'Tab') {
                 e.preventDefault();
                 const val = input.value.toLowerCase().trim();
-                const match = Object.keys(cmdMap).find(c => c.startsWith(val));
+                const allPossible = [...Object.keys(fs), ...fs[currentPath].dirs, ...fs[currentPath].files, 'yardim', 'clear', 'linkedin', 'pwd'];
+                const match = allPossible.find(c => c.startsWith(val));
                 if (match) input.value = match;
             }
             if (e.key === 'Enter') {
                 const rawInput = input.value.trim();
-                const fullCmd = rawInput.toLowerCase();
-                const args = fullCmd.split(' ');
-                const cmd = args[0];
+                const args = rawInput.split(' ');
+                const cmd = args[0].toLowerCase();
+                const target = args[1];
 
-                printOutput(`<span class="prompt">atakan@production:${currentPath}$</span> <span style="color:white">${rawInput}</span>`, true);
+                printOutput(`<span class="prompt">atakan@production:${currentPath === 'home' ? '~' : '~/' + currentPath}$</span> <span style="color:white">${rawInput}</span>`, true);
 
                 if (cmd === 'clear') {
                     history.innerHTML = '';
+                } else if (cmd === 'yardim' || cmd === 'help') {
+                    printOutput(helpMsg);
                 } else if (cmd === 'pwd') {
-                    printOutput(currentPath === '~' ? "/home/atakan" : "/home/atakan/" + currentPath.replace('~/',''));
+                    printOutput(currentPath === 'home' ? "/home/atakan" : "/home/atakan/" + currentPath);
                 } else if (cmd === 'ls') {
-                    printOutput(content[currentLang].ls_home);
+                    let output = "";
+                    fs[currentPath].dirs.forEach(d => output += `<span class="dir">${d}/</span>  `);
+                    fs[currentPath].files.forEach(f => output += `<span class="file">${f}</span>  `);
+                    printOutput(output, true);
                 } else if (cmd === 'cd') {
-                    if (!args[1] || args[1] === '~') {
-                        currentPath = '~';
-                    } else if (args[1] === '..') {
-                        currentPath = '~';
+                    if (!target || target === '~' || (target === '..' && currentPath !== 'home')) {
+                        currentPath = 'home';
+                    } else if (fs[currentPath].dirs.includes(target)) {
+                        currentPath = target;
                     } else {
-                        currentPath = '~/' + args[1].replace('/','');
+                        printOutput(`-bash: cd: ${target}: Dizin bulunamadı.`);
                     }
-                    promptLabel.innerText = `atakan@production:${currentPath}$`;
-                } else if (cmd === 'en' || cmd === 'tr') {
-                    currentLang = cmd;
-                    header.innerText = content[cmd].header || header.innerText;
-                    printOutput(cmd === 'en' ? "Language: English" : "Dil: Türkçe");
-                } else if (cmd === 'linkedin') {
+                    promptLabel.innerText = `atakan@production:${currentPath === 'home' ? '~' : '~/' + currentPath}$`;
+                } else if (cmd === 'cat') {
+                    if (fs[currentPath].content && fs[currentPath].content[target]) {
+                        printOutput(fs[currentPath].content[target]);
+                    } else {
+                        printOutput(`-bash: cat: ${target || ''}: Dosya bulunamadı.`);
+                    }
+                } else if (cmd === 'linkedin' || (cmd === 'cat' && target === 'iletisim.sh')) {
                     window.open(linkedin_url, '_blank');
-                } else {
-                    const logicalCmd = cmdMap[cmd];
-                    if (logicalCmd && content[currentLang][logicalCmd]) {
-                        printOutput(content[currentLang][logicalCmd]);
-                    } else if (cmd !== "") {
-                        printOutput(content[currentLang].error);
-                    }
+                } else if (cmd === 'en' || cmd === 'tr') {
+                    printOutput(cmd === 'en' ? "Language changed." : "Dil değiştirildi.");
+                } else if (cmd !== "") {
+                    printOutput(`-bash: ${cmd}: komut bulunamadı.`);
                 }
+
                 input.value = '';
                 window.scrollTo(0, document.body.scrollHeight);
             }
         });
 
-        function printOutput(text, isCommand = false) {
+        function printOutput(text, isHTML = false) {
             const resp = document.createElement('div');
             resp.className = 'output';
-            isCommand ? resp.innerHTML = text : resp.textContent = text;
+            isHTML ? resp.innerHTML = text : resp.textContent = text;
             history.appendChild(resp);
         }
 
