@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Atakan Sarıkaya | System & DevOps Engineer</title>
+    <title>Atakan Sarıkaya | Linux System Administrator</title>
     <style>
         body { background-color: #0d0d0d; color: #00ff41; font-family: 'Consolas', 'Courier New', monospace; padding: 30px; line-height: 1.5; }
         #terminal { max-width: 1000px; margin: auto; }
@@ -10,12 +10,11 @@
         .command-input { background: transparent; border: none; color: #ffffff; font-family: inherit; font-size: inherit; outline: none; width: 60%; }
         .header { color: #ffcc00; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #333; padding-bottom: 10px; }
         .output { margin-bottom: 12px; white-space: pre-wrap; color: #d1d1d1; }
-        .highlight { color: #ffffff; font-weight: bold; }
     </style>
 </head>
 <body>
     <div id="terminal">
-        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 1.6] - SISTEM YONETIM KONSOLU ***</div>
+        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 1.7] - LINUX SYSTEM ADMIN CONSOLE ***</div>
         <div id="history">
             <div class="output" id="welcome-msg">Erişim yetkisi verildi: misafir. Yardım için 'yardim' yazın. English? Type 'lang en'</div>
         </div>
@@ -31,35 +30,35 @@
         const header = document.getElementById('terminal-header');
         
         let currentLang = 'tr';
-        const linkedin_url = "https://www.linkedin.com/in/atakansarikaya/"; // BURAYI GÜNCELLE
+        const linkedin_url = "https://www.linkedin.com/in/sarikayaatakan/";
 
         const content = {
             'tr': {
-                'header': '*** ATAKAN_SARIKAYA_OS [Versiyon 1.6] - SISTEM YONETIM KONSOLU ***',
+                'header': '*** ATAKAN_SARIKAYA_OS [Versiyon 1.7] - LINUX SYSTEM ADMIN CONSOLE ***',
                 'welcome': "Erişim yetkisi verildi: misafir. Yardım için 'yardim' yazın. English? Type 'lang en'",
-                'help': "Komutlar: yardim, kimim, tecrube, orkestrasyon, izleme, veritabani, sertifikalar, linkedin, lang [en/tr], clear",
-                'whoami': "Atakan Sarıkaya | 27 | Sistem Yöneticisi & Uygulama Operasyon Uzmanı\nŞu an: Turk Telekom bünyesinde Element Management Systems yönetimi.",
-                'experience': "1. Turk Telekom: EMS / Uygulama Operasyon Uzmanı\n2. Sekom: Yazılım Destek Uzmanı (DevSecOps Cloud Operations)",
+                'help': "Komutlar: yardim, kimim, tecrube, orkestrasyon, izleme, veritabanı, sertifikalar, linkedin, lang [en/tr], clear",
+                'whoami': "Atakan Sarıkaya | 27\nLinux Sistem Yöneticisi\nTürk Telekom'da Uygulama Operasyon Uzmanı",
+                'experience': "1. Turk Telekom: Uygulama Operasyon Uzmanı\n2. Sekom: Yazılım Destek Uzmanı (DevSecOps Cloud Operations)",
                 'orchestration': "[Uygulama Orkestrasyonu]\n- Docker ve RedHat OpenShift platformları ile deployment.\n- Manuel uygulama kurulumu ve konfigürasyon yönetimi.\n- Linux systemd (systemctl) ile Java tabanlı servis yönetimi.\n- ROOT (WAR/JAR) dosyalarının deployment süreçleri.",
-                'monitoring': "[İzleme ve Loglama]\n- Prometheus & Grafana kurulum ve yönetimi.\n- Log analizi ve proaktif alarm takibi.",
-                'db_ops': "[Veritabanı]\n- SQL: PostgreSQL ve Oracle DB yönetimi.\n- Araçlar: Jira ve Confluence.",
+                'monitoring': "[İzleme ve Loglama]\n- Prometheus & Grafana kurulum ve yönetimi.\n- Log analizi ve proaktif alarm takibi.\n- Operasyonel süreçlerin verimlilik optimizasyonu.",
+                'db_ops': "[Veritabanı ve İş Yönetimi]\n- SQL: PostgreSQL ve Oracle DB operasyonları.\n- Araçlar: Jira ve Confluence ile dökümantasyon.",
                 'certifications': "[Sertifikalar]\n- HCCDA - Tech Essentials\n- RedHat Linux System Administration (RH124) - Eğitim\n- Ağ Temelleri & SQL - BTK Akademi",
                 'linkedin': "LinkedIn profili yeni sekmede açılıyor...",
-                'lang_switched': "Dil 'İngilizce' olarak değiştirildi.",
+                'lang_switched': "Dil 'İngilizce' olarak değiştirildi. Type 'help'",
                 'error': "Komut bulunamadı. Yardım için 'yardim' yazın."
             },
             'en': {
-                'header': '*** ATAKAN_SARIKAYA_OS [Version 1.6] - SYSTEM ADMIN CONSOLE ***',
+                'header': '*** ATAKAN_SARIKAYA_OS [Version 1.7] - LINUX SYSTEM ADMIN CONSOLE ***',
                 'welcome': "Authorized Access: guest. Type 'help' to see all commands. Türkçe? 'lang tr' yazın",
                 'help': "Commands: help, whoami, experience, orchestration, monitoring, db_ops, certifications, linkedin, lang [en/tr], clear",
-                'whoami': "Atakan Sarıkaya | 27 | System Administrator & App Ops Specialist\nCurrently managing Element Management Systems @ Turk Telekom",
-                'experience': "1. Turk Telekom: EMS / Application Operation Specialist\n2. Sekom: Software Support Specialist (DevSecOps Cloud Operations)",
+                'whoami': "Atakan Sarıkaya | 27\nLinux System Administrator\nApplication Operation Specialist @ Turk Telekom",
+                'experience': "1. Turk Telekom: Application Operation Specialist\n2. Sekom: Software Support Specialist (DevSecOps Cloud Operations)",
                 'orchestration': "[App Orchestration]\n- Deployment with Docker & RedHat OpenShift Platforms.\n- Manual provisioning and configuration management.\n- Java-based service management via Linux systemd.\n- ROOT (WAR/JAR) file deployment operations.",
-                'monitoring': "[Monitoring & Logging]\n- Stack: Prometheus & Grafana implementation.\n- Ops: Log analysis and alarm tracking.",
-                'db_ops': "[Database]\n- SQL Ops: PostgreSQL and Oracle DB management.\n- Workflow: Jira & Confluence.",
+                'monitoring': "[Monitoring & Logging]\n- Stack: Prometheus & Grafana implementation.\n- Ops: Log analysis and alarm tracking.\n- Reliability: Optimizing operational processes.",
+                'db_ops': "[Database & Task Management]\n- SQL Ops: PostgreSQL and Oracle DB management.\n- Workflow: Jira & Confluence documentation.",
                 'certifications': "[Certifications]\n- HCCDA - Tech Essentials\n- RedHat Linux System Administration (RH124) - Training\n- Network & SQL Essentials - BTK Akademi",
                 'linkedin': "Opening LinkedIn profile in a new tab...",
-                'lang_switched': "Language switched to 'English'.",
+                'lang_switched': "Language switched to 'English'. Type 'help'",
                 'error': "Command not found. Type 'help' for assistance."
             }
         };
@@ -71,15 +70,15 @@
 
                 if (fullCmd === 'clear') {
                     history.innerHTML = '';
-                } else if (fullCmd === 'lang en') {
+                } else if (fullCmd === 'lang en' || fullCmd === 'en') {
                     currentLang = 'en';
                     header.innerText = content['en'].header;
                     printOutput(content['en'].lang_switched);
-                } else if (fullCmd === 'lang tr') {
+                } else if (fullCmd === 'lang tr' || fullCmd === 'tr') {
                     currentLang = 'tr';
                     header.innerText = content['tr'].header;
-                    printOutput("Dil 'Türkçe' olarak değiştirildi.");
-                } else if (fullCmd === 'linkedin' || fullCmd === 'iletisim' || fullCmd === 'contact') {
+                    printOutput("Dil 'Türkçe' olarak değiştirildi. 'yardim' yazın.");
+                } else if (fullCmd === 'linkedin' || fullCmd === 'contact' || fullCmd === 'iletisim') {
                     printOutput(content[currentLang].linkedin);
                     window.open(linkedin_url, '_blank');
                 } else {
