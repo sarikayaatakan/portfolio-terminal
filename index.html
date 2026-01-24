@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <title>Atakan Sarıkaya | System & DevOps Engineer</title>
@@ -14,12 +14,12 @@
 </head>
 <body>
     <div id="terminal">
-        <div class="header">*** ATAKAN_SARIKAYA_OS [Version 1.4] - SYSTEM ADMINISTRATION CONSOLE ***</div>
+        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 1.5] - SISTEM YONETIM KONSOLU ***</div>
         <div id="history">
-            <div class="output">Welcome, Admin. Type 'help' to see all operational commands.</div>
+            <div class="output" id="welcome-msg">Hoş geldiniz, Admin. Tüm komutları görmek için 'yardim' yazın. English? Type 'lang en'</div>
         </div>
         <div class="input-line">
-            <span class="prompt">atakan@production:~$</span>
+            <span class="prompt" id="prompt-text">atakan@production:~$</span>
             <input type="text" id="command-input" class="command-input" autofocus autocomplete="off">
         </div>
     </div>
@@ -27,62 +27,86 @@
     <script>
         const input = document.getElementById('command-input');
         const history = document.getElementById('history');
+        const header = document.getElementById('terminal-header');
+        
+        let currentLang = 'tr';
 
-        const commands = {
-            'help': "Available commands: whoami, experience, orchestration, monitoring, db_ops, certifications, clear",
-            
-            'whoami': "Atakan Sarıkaya | 27 | System Administrator & App Ops Specialist\nCurrently managing Element Management Systems @ Turk Telekom",
-            
-            'experience': `1. Turk Telekom: EMS / Application Operation Specialist
-2. Sekom: Software Support Specialist (DevSecOps Cloud Operations / Software Support Specialist)`,
-
-            'orchestration': `[Application Orchestration & Deployment]
-- Deployment with Docker & RedHat OpenShift Platforms.
-- Manual app provisioning and configuration management.
-- Service Management: Linux systemctl / systemd for Java-based applications.
-- Java App Deployment: ROOT (WAR/JAR) file management.`,
-
-            'monitoring': `[Monitoring & Logging]
-- Solutions: Prometheus & Grafana implementation.
-- Ops: Log analysis, monitoring, and proactive alarm tracking.
-- Reliability: Optimizing operational processes for system efficiency.`,
-
-            'db_ops': `[Database & Task Management]
-- SQL Ops: Management of PostgreSQL and Oracle DB.
-- Workflow: Jira & Confluence for task tracking and documentation.`,
-
-            'certifications': `[Professional Certifications]
-- HCCDA - Tech Essentials
-- RedHat Linux System Administration (RH124) - Training
-- Network Essentials - BTK Akademi
-- SQL with Applications - BTK Akademi`,
-
-            'clear': ""
+        const content = {
+            'tr': {
+                'header': '*** ATAKAN_SARIKAYA_OS [Versiyon 1.5] - SISTEM YONETIM KONSOLU ***',
+                'welcome': "Hoş geldiniz, Admin. Tüm komutları görmek için 'yardim' yazın. English? Type 'lang en'",
+                'help': "Kullanılabilir komutlar: yardim, kimim, tecrube, orkestrasyon, izleme, veritabani, sertifikalar, lang [en/tr], clear",
+                'whoami': "Atakan Sarıkaya | 27 | Sistem Yöneticisi & Uygulama Operasyon Uzmanı\nŞu an: Turk Telekom bünyesinde Element Management Systems yönetimi.",
+                'experience': "1. Turk Telekom: EMS / Uygulama Operasyon Uzmanı\n2. Sekom: Yazılım Destek Uzmanı (DevSecOps Cloud Operations)",
+                'orchestration': "[Uygulama Orkestrasyonu ve Dağıtım]\n- Docker ve RedHat OpenShift platformları ile deployment.\n- Manuel uygulama kurulumu ve konfigürasyon yönetimi.\n- Linux systemd (systemctl) ile Java tabanlı servis yönetimi.\n- ROOT (WAR/JAR) dosyalarının deployment süreçleri.",
+                'monitoring': "[İzleme ve Loglama]\n- Çözümler: Prometheus & Grafana kurulum ve yönetimi.\n- Operasyon: Log analizi ve proaktif alarm takibi.\n- Verimlilik: Operasyonel süreçlerin optimizasyonu.",
+                'db_ops': "[Veritabanı ve İş Yönetimi]\n- SQL: PostgreSQL ve Oracle DB yönetimi.\n- Araçlar: Jira ve Confluence ile dökümantasyon ve iş takibi.",
+                'certifications': "[Sertifikalar]\n- HCCDA - Tech Essentials\n- RedHat Linux System Administration (RH124) - Eğitim\n- Ağ Temelleri - BTK Akademi\n- Uygulamalarla SQL - BTK Akademi",
+                'lang_switched': "Dil 'İngilizce' olarak değiştirildi. Type 'help'",
+                'error': "Komut bulunamadı. Yardım için 'yardim' yazın."
+            },
+            'en': {
+                'header': '*** ATAKAN_SARIKAYA_OS [Version 1.5] - SYSTEM ADMIN CONSOLE ***',
+                'welcome': "Welcome, Admin. Type 'help' to see all commands. Türkçe? 'lang tr' yazın",
+                'help': "Available commands: help, whoami, experience, orchestration, monitoring, db_ops, certifications, lang [en/tr], clear",
+                'whoami': "Atakan Sarıkaya | 27 | System Administrator & App Ops Specialist\nCurrently managing Element Management Systems @ Turk Telekom",
+                'experience': "1. Turk Telekom: EMS / Application Operation Specialist\n2. Sekom: Software Support Specialist (DevSecOps Cloud Operations)",
+                'orchestration': "[App Orchestration & Deployment]\n- Deployment with Docker & RedHat OpenShift Platforms.\n- Manual provisioning and configuration management.\n- Java-based service management via Linux systemd.\n- ROOT (WAR/JAR) file deployment operations.",
+                'monitoring': "[Monitoring & Logging]\n- Stack: Prometheus & Grafana implementation.\n- Ops: Log analysis, monitoring, and alarm tracking.\n- Reliability: Optimizing operational processes.",
+                'db_ops': "[DB & Task Management]\n- SQL Ops: PostgreSQL and Oracle DB management.\n- Workflow: Jira & Confluence documentation.",
+                'certifications': "[Certifications]\n- HCCDA - Tech Essentials\n- RedHat Linux System Administration (RH124) - Training\n- Network Essentials - BTK Akademi\n- SQL with Applications - BTK Akademi",
+                'lang_switched': "Language switched to 'English'. Type 'help'",
+                'error': "Command not found. Type 'help' for assistance."
+            }
         };
 
         input.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
-                const cmd = input.value.toLowerCase().trim();
+                const fullCmd = input.value.toLowerCase().trim();
                 const output = document.createElement('div');
-                output.innerHTML = `<span class="prompt">atakan@production:~$</span> <span style="color:white">${cmd}</span>`;
+                output.innerHTML = `<span class="prompt">atakan@production:~$</span> <span style="color:white">${fullCmd}</span>`;
                 history.appendChild(output);
 
-                if (cmd === 'clear') {
+                if (fullCmd === 'clear') {
                     history.innerHTML = '';
-                } else if (commands[cmd]) {
-                    const response = document.createElement('div');
-                    response.className = 'output';
-                    response.textContent = commands[cmd];
-                    history.appendChild(response);
-                } else if (cmd !== "") {
-                    const error = document.createElement('div');
-                    error.textContent = `-bash: ${cmd}: command not found. Reference 'help'.`;
-                    history.appendChild(error);
+                } else if (fullCmd === 'lang en') {
+                    currentLang = 'en';
+                    header.innerText = content['en'].header;
+                    printOutput(content['en'].lang_switched);
+                } else if (fullCmd === 'lang tr') {
+                    currentLang = 'tr';
+                    header.innerText = content['tr'].header;
+                    printOutput("Dil 'Türkçe' olarak değiştirildi.");
+                } else {
+                    // Komutları dile göre eşleştir
+                    const cmdMap = {
+                        'yardim': 'help', 'help': 'help',
+                        'kimim': 'whoami', 'whoami': 'whoami',
+                        'tecrube': 'experience', 'experience': 'experience',
+                        'orkestrasyon': 'orchestration', 'orchestration': 'orchestration',
+                        'izleme': 'monitoring', 'monitoring': 'monitoring',
+                        'veritabani': 'db_ops', 'db_ops': 'db_ops',
+                        'sertifikalar': 'certifications', 'certifications': 'certifications'
+                    };
+
+                    const logicalCmd = cmdMap[fullCmd];
+                    if (logicalCmd && content[currentLang][logicalCmd]) {
+                        printOutput(content[currentLang][logicalCmd]);
+                    } else if (fullCmd !== "") {
+                        printOutput(content[currentLang].error);
+                    }
                 }
                 input.value = '';
                 window.scrollTo(0, document.body.scrollHeight);
             }
         });
+
+        function printOutput(text) {
+            const response = document.createElement('div');
+            response.className = 'output';
+            response.textContent = text;
+            history.appendChild(response);
+        }
     </script>
 </body>
 </html>
