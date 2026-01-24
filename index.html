@@ -2,23 +2,25 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Atakan Sarıkaya | Linux System Administrator & DevOps Specialist</title>
+    <title>Atakan Sarıkaya | DevOps / Cloud & Linux System Specialist</title>
     <style>
         body { background-color: #0d0d0d; color: #00ff41; font-family: 'Consolas', 'Courier New', monospace; padding: 30px; line-height: 1.5; }
         #terminal { max-width: 1000px; margin: auto; }
         .prompt { color: #00aaff; }
         .command-input { background: transparent; border: none; color: #ffffff; font-family: inherit; font-size: inherit; outline: none; width: 60%; }
-        .header { color: #ffcc00; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #333; padding-bottom: 10px; }
+        .header { color: #ffcc00; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #333; padding-bottom: 10px; display: none; }
         .output { margin-bottom: 12px; white-space: pre-wrap; color: #d1d1d1; }
+        .input-line { display: none; }
+        .boot-log { color: #888; margin-bottom: 2px; font-size: 14px; }
+        .ok { color: #00ff41; font-weight: bold; }
     </style>
 </head>
 <body>
     <div id="terminal">
-        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 2.1] - DevOps / Cloud & Linux System Specialist ***</div>
-        <div id="history">
-            <div class="output" id="welcome-msg">Erişim yetkisi verildi: misafir. Yardım için 'yardim' yazın. English? Type 'en'</div>
-        </div>
-        <div class="input-line">
+        <div id="boot-container"></div>
+        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 2.3] - DevOps / Cloud & Linux System Specialist ***</div>
+        <div id="history"></div>
+        <div class="input-line" id="input-area">
             <span class="prompt">atakan@production:~$</span>
             <input type="text" id="command-input" class="command-input" autofocus autocomplete="off">
         </div>
@@ -28,16 +30,30 @@
         const input = document.getElementById('command-input');
         const history = document.getElementById('history');
         const header = document.getElementById('terminal-header');
+        const inputArea = document.getElementById('input-area');
+        const bootContainer = document.getElementById('boot-container');
         
         let currentLang = 'tr';
         const linkedin_url = "https://www.linkedin.com/in/atakansarikaya/";
 
+        // Boot Logları
+        const bootMessages = [
+            "Mounting /dev/sda1... [ OK ]",
+            "Initializing System Services... [ OK ]",
+            "Starting Docker Container Engine... [ OK ]",
+            "Connecting RedHat OpenShift Node... [ OK ]",
+            "Loading Huawei Cloud Certified Environment... [ OK ]",
+            "Fetching Application Operation Logs... [ OK ]",
+            "Checking PostgreSQL/Oracle Connection... [ OK ]",
+            "System is ready. Session authorized."
+        ];
+
         const content = {
             'tr': {
-                'header': '*** ATAKAN_SARIKAYA_OS [Versiyon 2.1] - CONSISTENCY CONSOLE ***',
+                'header': '*** ATAKAN_SARIKAYA_OS [Versiyon 2.3] - DevOps / Cloud & Linux System Specialist ***',
                 'welcome': "Erişim yetkisi verildi: misafir. Yardım için 'yardim' yazın. English? Type 'en'",
                 'help': "Komutlar: yardim, kimim, tecrube, orkestrasyon, izleme, veritabanı, sertifikalar, linkedin, en/tr, clear",
-                'whoami': "Atakan Sarıkaya | 27\nLinux Sistem Yöneticisi & DevOps Uzmanı\nTürk Telekom bünyesinde (Sekom aracılığıyla) Uygulama Operasyon Uzmanı olarak çalışıyor.",
+                'whoami': "Atakan Sarıkaya | 27\nDevOps / Cloud & Linux System Specialist\nTürk Telekom bünyesinde (Sekom aracılığıyla) Uygulama Operasyon Uzmanı olarak çalışıyor.",
                 'experience': "1. Türk Telekom (via Sekom): Uygulama Operasyon Uzmanı (6 Ay - Güncel)\n2. Sekom: Yazılım Destek Uzmanı / DevSecOps Cloud Operations (1 Yıl 3 Ay)",
                 'orchestration': "[Uygulama Dağıtımı ve Yönetimi]\n- Docker ve RedHat OpenShift platformları ile uygulama dağıtımı.\n- Docker üzerinde Python tabanlı uygulamaların deployment süreçleri.\n- Uçtan uca operasyonel yapılandırma ve konfigürasyon yönetimi.\n- Linux systemd (systemctl) ile Java tabanlı servis yönetimi.\n- Kritik uygulama bileşenlerinin (ROOT/WAR/JAR) yayına alınma süreçleri.",
                 'monitoring': "[İzleme ve Loglama]\n- Çözümler: Prometheus & Grafana entegrasyonu ve takibi.\n- Operasyon: Log analizi, proaktif alarm yönetimi ve sistem sağlığı denetimi.",
@@ -48,10 +64,10 @@
                 'error': "Komut bulunamadı. Yardım için 'yardim' yazın."
             },
             'en': {
-                'header': '*** ATAKAN_SARIKAYA_OS [Version 2.1] - CONSISTENCY CONSOLE ***',
+                'header': '*** ATAKAN_SARIKAYA_OS [Version 2.3] - DevOps / Cloud & Linux System Specialist ***',
                 'welcome': "Authorized Access: guest. Type 'help' to see all commands. Türkçe? 'tr' yazın",
                 'help': "Commands: help, whoami, experience, orchestration, monitoring, db_ops, certifications, linkedin, en/tr, clear",
-                'whoami': "Atakan Sarıkaya | 27\nLinux System Administrator & DevOps Specialist\nCurrently working as an Application Operation Specialist @ Turk Telekom (via Sekom).",
+                'whoami': "Atakan Sarıkaya | 27\nDevOps / Cloud & Linux System Specialist\nCurrently working as an Application Operation Specialist @ Turk Telekom (via Sekom).",
                 'orchestration': "[Application Deployment & Management]\n- Application deployment on Docker & RedHat OpenShift platforms.\n- Deployment processes of Python-based applications on Docker.\n- End-to-end operational configuration and environment management.\n- Java-based service management via Linux systemd (systemctl).\n- Lifecycle management of application components (ROOT/WAR/JAR).",
                 'monitoring': "[Monitoring & Logging]\n- Stack: Prometheus & Grafana implementation and tracking.\n- Ops: Log analysis, proactive alarm management, and health checks.",
                 'db_ops': "[Database & Workflow]\n- SQL Ops: Operational management of PostgreSQL and Oracle DB.\n- Workflow: Process documentation via Jira & Confluence.",
@@ -62,35 +78,65 @@
             }
         };
 
+        const cmdMap = {
+            'yardim': 'help', 'help': 'help',
+            'kimim': 'whoami', 'whoami': 'whoami',
+            'tecrube': 'experience', 'experience': 'experience',
+            'orkestrasyon': 'orchestration', 'orchestration': 'orchestration',
+            'izleme': 'monitoring', 'monitoring': 'monitoring',
+            'veritabanı': 'db_ops', 'veritabani': 'db_ops', 'db_ops': 'db_ops',
+            'sertifikalar': 'certifications', 'certifications': 'certifications',
+            'linkedin': 'linkedin', 'en': 'en', 'tr': 'tr', 'clear': 'clear'
+        };
+
+        // Boot Animasyonu Fonksiyonu
+        async function runBootSequence() {
+            for (let msg of bootMessages) {
+                const log = document.createElement('div');
+                log.className = 'boot-log';
+                log.innerHTML = msg.replace("[ OK ]", "<span class='ok'>[ OK ]</span>");
+                bootContainer.appendChild(log);
+                await new Promise(resolve => setTimeout(resolve, 300));
+            }
+            await new Promise(resolve => setTimeout(resolve, 500));
+            bootContainer.style.display = 'none';
+            header.style.display = 'block';
+            inputArea.style.display = 'flex';
+            printOutput(content[currentLang].welcome);
+            input.focus();
+        }
+
+        // Tab Tamamlama
         input.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                const currentVal = input.value.toLowerCase().trim();
+                if (!currentVal) return;
+
+                const matches = Object.keys(cmdMap).filter(c => c.startsWith(currentVal));
+                if (matches.length > 0) {
+                    input.value = matches[0];
+                }
+            }
+
             if (e.key === 'Enter') {
                 const fullCmd = input.value.toLowerCase().trim();
                 printOutput(`<span class="prompt">atakan@production:~$</span> <span style="color:white">${fullCmd}</span>`, true);
 
                 if (fullCmd === 'clear') {
                     history.innerHTML = '';
-                } else if (fullCmd === 'lang en' || fullCmd === 'en') {
+                } else if (fullCmd === 'en') {
                     currentLang = 'en';
                     header.innerText = content['en'].header;
                     printOutput(content['en'].lang_switched);
-                } else if (fullCmd === 'lang tr' || fullCmd === 'tr') {
+                } else if (fullCmd === 'tr') {
                     currentLang = 'tr';
                     header.innerText = content['tr'].header;
                     printOutput("Dil 'Türkçe' olarak değiştirildi.");
-                } else if (fullCmd === 'linkedin' || fullCmd === 'contact' || fullCmd === 'iletisim') {
+                } else if (fullCmd === 'linkedin') {
                     printOutput(content[currentLang].linkedin);
                     window.open(linkedin_url, '_blank');
                 } else {
-                    const cmdMap = {
-                        'yardim': 'help', 'help': 'help',
-                        'kimim': 'whoami', 'whoami': 'whoami',
-                        'tecrube': 'experience', 'experience': 'experience',
-                        'orkestrasyon': 'orchestration', 'orchestration': 'orchestration',
-                        'izleme': 'monitoring', 'monitoring': 'monitoring',
-                        'veritabanı': 'db_ops', 'veritabani': 'db_ops', 'db_ops': 'db_ops',
-                        'sertifikalar': 'certifications', 'certifications': 'certifications'
-                    };
-
                     const logicalCmd = cmdMap[fullCmd];
                     if (logicalCmd && content[currentLang][logicalCmd]) {
                         printOutput(content[currentLang][logicalCmd]);
@@ -113,6 +159,9 @@
             }
             history.appendChild(response);
         }
+
+        // Başlat
+        runBootSequence();
     </script>
 </body>
 </html>
