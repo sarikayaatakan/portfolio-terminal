@@ -8,7 +8,6 @@
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
       color: #00ff41;
@@ -18,7 +17,6 @@
       min-height: 100vh;
       cursor: text;
     }
-
     #terminal {
       max-width: 1100px;
       margin: 40px auto;
@@ -28,7 +26,6 @@
       overflow: hidden;
       border: 1px solid rgba(0, 255, 65, 0.2);
     }
-
     .terminal-header {
       background: linear-gradient(90deg, #1e1e1e 0%, #2d2d2d 100%);
       padding: 12px 20px;
@@ -38,34 +35,17 @@
       border-bottom: 1px solid rgba(0, 255, 65, 0.2);
       user-select: none;
     }
-
     .terminal-button { width: 12px; height: 12px; border-radius: 50%; }
     .btn-close { background: #ff5f57; }
     .btn-minimize { background: #ffbd2e; }
     .btn-maximize { background: #28ca42; }
-
-    .terminal-title {
-      flex: 1;
-      text-align: center;
-      color: #888;
-      font-size: 13px;
-      letter-spacing: 0.5px;
-    }
-
-    .terminal-body {
-      padding: 30px;
-      min-height: 500px;
-      max-height: 80vh;
-      overflow-y: auto;
-    }
-
+    .terminal-title { flex: 1; text-align: center; color: #888; font-size: 13px; letter-spacing: 0.5px; }
+    .terminal-body { padding: 30px; min-height: 500px; max-height: 80vh; overflow-y: auto; }
     .terminal-body::-webkit-scrollbar { width: 8px; }
     .terminal-body::-webkit-scrollbar-track { background: #1a1a1a; }
     .terminal-body::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-
     .prompt { color: #00aaff; font-weight: bold; }
     .prompt-path { color: #ffcc00; font-weight: normal; }
-
     .command-input {
       background: transparent;
       border: none;
@@ -77,53 +57,17 @@
       caret-color: #00ff41;
       margin-left: 8px;
     }
-
-    .output {
-      margin-bottom: 15px;
-      white-space: pre-wrap;
-      color: #d1d1d1;
-      animation: fadeIn 0.3s ease-in;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-5px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
+    .output { margin-bottom: 15px; white-space: pre-wrap; color: #d1d1d1; animation: fadeIn 0.3s ease-in; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
     .input-line { display: none; align-items: center; margin-top: 10px; }
-
     .error { color: #ff5f57; }
     .dir { color: #00aaff; font-weight: bold; margin-right: 15px; }
     .file { color: #aaa; margin-right: 15px; }
-
-    .section-header {
-      color: #ffcc00;
-      font-weight: bold;
-      margin: 20px 0 10px 0;
-      border-bottom: 1px solid rgba(255, 204, 0, 0.3);
-      padding-bottom: 5px;
-    }
-
+    .section-header { color: #ffcc00; font-weight: bold; margin: 20px 0 10px 0; border-bottom: 1px solid rgba(255, 204, 0, 0.3); padding-bottom: 5px; }
     .highlight { color: #00ff41; font-weight: bold; }
-
-    .info-box {
-      background: rgba(0, 170, 255, 0.05);
-      border-left: 3px solid #00aaff;
-      padding: 15px;
-      margin: 15px 0;
-      border-radius: 4px;
-    }
-
-    .loading {
-      color: #00ff41;
-      font-weight: bold;
-    }
-
-    @media (max-width: 768px) {
-      body { padding: 10px; }
-      #terminal { margin: 20px auto; }
-      .terminal-body { padding: 20px; font-size: 13px; }
-    }
+    .info-box { background: rgba(0, 170, 255, 0.05); border-left: 3px solid #00aaff; padding: 15px; margin: 15px 0; border-radius: 4px; }
+    .loading { color: #00ff41; font-weight: bold; }
+    @media (max-width: 768px) { body { padding: 10px; } #terminal { margin: 20px auto; } .terminal-body { padding: 20px; font-size: 13px; } }
   </style>
 </head>
 
@@ -161,13 +105,11 @@
     let commandHistory = [];
     let historyIndex = -1;
 
-    // CV dosyası (index.html ile aynı klasörde)
     const CV_FILE = "ATAKAN_SARIKAYA_DEVOPS_CV.pdf";
 
-    // Profil
     const profile = {
       name: "Atakan Sarıkaya",
-      role: "Application Operations Specialist",
+      role: "Application Operations Specialist at Türk Telekom (via Sekom A.Ş.)",
       location: "İstanbul, Türkiye",
       phone: "+90 552 922 52 77",
       email: "sarikayaatakan@gmail.com",
@@ -178,117 +120,40 @@
     const fs = {
       'home': {
         dirs: ['sertifikalar', 'deneyim', 'yetkinlikler', 'projeler', 'egitim'],
-        files: ['README.md', 'hakkimda.txt', 'iletisim.sh'],
+        files: ['readme.md', 'hakkimda.txt', 'iletisim.sh'],
         content: {
-          'README.md': `# ${profile.name}
+          'readme.md': `# ${profile.name}
 ## DevOps & Cloud Infrastructure Specialist
 
-👨‍💻 ${profile.role} (Türk Telekom - Sekom A.Ş.)
+👨‍💻 ${profile.role}
 📍 ${profile.location}
 🌐 ${profile.website}
 
 ### Hızlı Başlangıç
-• cat hakkimda.txt         - Profesyonel özet
-• cd yetkinlikler          - Teknik yetkinlikler
-• cd deneyim               - Profesyonel deneyim
-• cd sertifikalar          - Sertifikalar
-• cd projeler              - Projeler
-• cd egitim                - Eğitim
-• cat iletisim.sh          - İletişim bilgileri
-• linkedin                 - LinkedIn profilim
-
-### CV
-• cat cv                   - CV komutları / bilgi
-• open cv                  - CV görüntüle
-• wget cv                  - CV indir (mobilde görüntüler)
+• cat hakkimda.txt          - Profesyonel özet
+• cd yetkinlikler           - Teknik yetkinlikler
+• cd deneyim                - Profesyonel deneyim
+• cat iletisim.sh           - İletişim bilgileri
+• open cv                   - CV görüntüle
 
 Komutlar için 'help' yaz.`,
 
           'hakkimda.txt': `PROFESYONEL ÖZET
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 Yazılım Destek Uzmanı geçmişine sahip, DevOps ve Cloud altyapı alanında
-kendini profesyonel olarak geliştirmeye odaklanan bir Uygulama Operasyon
-Uzmanıyım.
+kendini profesyonel olarak geliştirmeye odaklanan bir Uygulama Operasyon Uzmanıyım.
 
-Linux (RHEL/CentOS) temelleri, container teknolojileri (Docker/OpenShift)
-ve izleme/alarmlama süreçlerine (Prometheus, Grafana, Alertmanager) hakimim.
-Günlük operasyonlarda incident response, deployment ve troubleshooting
-süreçlerinde aktif rol alıyorum.
-
-Huawei Cloud (HCCDA) sertifikasına sahibim ve bulut altyapı servisleri,
-DevOps süreçleri (CI/CD, otomasyon, IaC) ve operasyonel verimlilik
-konularında kendimi sürekli geliştiriyorum. Bash scripting ile tekrarlayan
-işleri otomatikleştirerek sistem stabilitesine katkı sağlıyorum.
-
-Şu anda Türk Telekom’da uygulama operasyon süreçlerinde görev alıyor,
-DevOps Engineer rollerine doğru planlı şekilde ilerliyorum.`,
+Şu anda Türk Telekom bünyesinde, Sekom A.Ş. aracılığıyla dedicated olarak 
+uygulama operasyon süreçlerinde görev alıyor, DevOps Engineer rollerine 
+doğru planlı şekilde ilerliyorum.`,
 
           'iletisim.sh': `#!/bin/bash
-# İletişim Bilgileri
-
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "  İLETİŞİM"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
 echo "Telefon  : ${profile.phone}"
 echo "E-posta  : ${profile.email}"
-echo "LinkedIn : ${profile.linkedin}"
-echo "Web      : ${profile.website}"
-echo "Konum    : ${profile.location}"
-echo ""
-echo "LinkedIn açılıyor..."`
-        }
-      },
-
-      'sertifikalar': {
-        dirs: [],
-        files: ['bulut.txt', 'linux.txt', 'veritabani.txt', 'liste.sh'],
-        content: {
-          'bulut.txt': `BULUT SERTİFİKASI
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-📜 HCCDA — Huawei Cloud Tech Essentials
-• Bulut altyapı & servisler
-• Temel bulut güvenliği
-• Bulut bileşenleri ve çalışma mantığı`,
-
-          'linux.txt': `LINUX EĞİTİM/SERTİFİKA
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-🐧 Red Hat System Administration 124 (RHEL)
-• Sistem yönetimi
-• Kullanıcı/izin yönetimi
-• Servis konfigürasyonu & troubleshooting
-• Depolama / dosya sistemi yönetimi`,
-
-          'veritabani.txt': `VERİTABANI
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-💾 Uygulamalarla SQL — BTK Akademi
-• İleri SQL sorguları
-• Veri analizi & raporlama temelleri
-
-Ek:
-• Network Temelleri — BTK Akademi`,
-
-          'liste.sh': `#!/bin/bash
-# Sertifika Listesi
-
-certs=(
-  "Red Hat System Administration 124 (RHEL)"
-  "HCCDA — Huawei Cloud Tech Essentials"
-  "Uygulamalarla SQL — BTK Akademi"
-  "Network Temelleri — BTK Akademi"
-)
-
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  SERTİFİKALAR"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
-for c in "\${certs[@]}"; do
-  echo "✓ \$c"
-done`
+echo "LinkedIn : ${profile.linkedin}"`
         }
       },
 
@@ -296,159 +161,28 @@ done`
         dirs: [],
         files: ['guncel.txt', 'onceki.txt', 'staj.txt', 'zaman-cizelgesi.sh'],
         content: {
-          'guncel.txt': `GÜNCEL POZİSYON
+          'guncel.txt': `GÜNCEL POZİSYON (DEDICATED)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-🏢 Türk Telekom (Sekom A.Ş.)
+🏢 Türk Telekom (via Sekom A.Ş.)
 📍 Application Operations Specialist
 🗓️ Ekim 2025 — Halen
 
 Sorumluluklar:
 • RHEL/CentOS tabanlı kurumsal sistemlerin operasyonel yönetimi
-• Incident response ve kök neden analizi (RCA)
 • Prometheus/Grafana ile sistem metrikleri ve uygulama sağlık izleme
-• Docker (container) ortamındaki Java/Python uygulamalarında deployment ve operasyonel destek
-• systemd servisleri olarak çalışan Java uygulamalarında dağıtım ve hata giderme
-• Bash scripting ile operasyonel görevlerin otomasyonu ve verimlilik artışı`,
-
-          'onceki.txt': `ÖNCEKİ DENEYİM
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-🏢 Sekom A.Ş.
-📍 DevSecOps Bulut Operasyonları / Yazılım Destek Uzmanı
-🗓️ Haziran 2024 — Ekim 2025
-
-Çalışmalar:
-• Docker ve OpenShift ortamlarında Java/Python uygulamalarının deployment süreçleri
-• Deployment config, environment değişkenleri ve operasyonel ayarların yönetimi
-• İzleme/alarmlama ve log analizi yapılandırmaları; SLA takibi
-• PostgreSQL/Oracle üzerinde SQL operasyonları; temel backup/restore
-• Linux ve systemd servis yönetimi süreçlerine destek
-• Jira/Confluence ile incident/change yönetimi ve teknik dokümantasyon`,
-
-          'staj.txt': `STAJ
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-🏢 İstanbul Büyükşehir Belediyesi
-📍 Software Developer Intern
-🗓️ Ağustos 2023 — Ekim 2023
-
-• Flask ile ToDo List web uygulaması (CRUD) geliştirme
-• SQLite entegrasyonu`,
-
-          'zaman-cizelgesi.sh': `#!/bin/bash
-# Kariyer Zaman Çizelgesi
-
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  ZAMAN ÇİZELGESİ"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
-echo "Ekim 2025 - Halen   │ Türk Telekom (Sekom A.Ş.)"
-echo "                    │ Application Operations Specialist"
-echo "                    │"
-echo "Haz 2024 - Eki 2025 │ Sekom A.Ş."
-echo "                    │ DevSecOps Cloud Ops / Support"
-echo "                    │"
-echo "Ağu 2023 - Eki 2023 │ İBB"
-echo "                    │ Software Developer Intern"
-echo ""`
+• Docker ortamındaki uygulamalarda deployment ve operasyonel destek`,
+          'onceki.txt': `ÖNCEKİ DENEYİM\n🏢 Sekom A.Ş.\n📍 Yazılım Destek Uzmanı\n🗓️ Haziran 2024 — Ekim 2025`,
+          'staj.txt': `STAJ\n🏢 İstanbul Büyükşehir Belediyesi\n📍 Software Developer Intern\n🗓️ Ağustos 2023 — Ekim 2023`,
+          'zaman-cizelgesi.sh': `echo "Eki 2025 - Halen | Türk Telekom (via Sekom A.Ş.)"`
         }
       },
-
-      'yetkinlikler': {
-        dirs: [],
-        files: ['ozet.txt', 'os-bulut.txt', 'container.txt', 'izleme.txt', 'otomasyon.txt', 'veritabani.txt'],
-        content: {
-          'ozet.txt': `TEKNİK YETKİNLİKLER (ÖZET)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-• OS & Cloud: RHEL, CentOS, Huawei Cloud (HCCDA)
-• Container: Docker, OpenShift, Kubernetes (Temel)
-• Monitoring: Prometheus, Grafana, Alertmanager, Log Analysis
-• Automation: Bash Scripting, Python (Temel)
-• Database: PostgreSQL, Oracle, SQLite
-• Tools: Jira, Confluence, DataGrip, Dbeaver, systemd`,
-
-          'os-bulut.txt': `OS & CLOUD
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-• RHEL / CentOS temelleri ve operasyonel süreçler
-• Temel performans ve servis troubleshooting
-• Huawei Cloud (HCCDA) — temel servis bilgisi`,
-
-          'container.txt': `CONTAINER & ORCHESTRATION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-• Docker: deployment, troubleshooting
-• OpenShift: uygulama dağıtımı, pod/service/route temelleri
-• Kubernetes: temel kavramlar (pod, service, deployment)`,
-
-          'izleme.txt': `MONITORING & OBSERVABILITY
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-• Prometheus: metrik toplama, temel sorgulama mantığı
-• Grafana: dashboard, görselleştirme, alarm entegrasyonu
-• Alertmanager: alert routing / bildirim akışları
-• Log analysis: olay analizi ve hata ayıklama`,
-
-          'otomasyon.txt': `OTOMASYON
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-• Bash scripting: operasyonel işleri otomatikleştirme
-• Python (temel): küçük otomasyon/yardımcı scriptler`,
-
-          'veritabani.txt': `VERİTABANI
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-• PostgreSQL: temel operasyonlar / sorgular
-• Oracle: temel SQL operasyonları
-• SQLite: küçük uygulama entegrasyonları`
-        }
-      },
-
-      'projeler': {
-        dirs: [],
-        files: ['terminal-portfolio.txt', 'todo.txt'],
-        content: {
-          'terminal-portfolio.txt': `PROJE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-İnteraktif Terminal Portfolio (HTML, CSS, JavaScript) — Ocak 2026
-
-• Linux terminal arayüzü simülasyonu (ls/cd/cat)
-• Tab completion ve komut geçmişi
-• Boot animasyonu
-• Yayın: atakansarikaya.info`,
-
-          'todo.txt': `PROJE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-ToDo List Web Application (Flask, SQLite) — Eylül 2023
-
-• CRUD (Create/Read/Update/Delete) operasyonları
-• Temel veri kalıcılığı ile görev yönetimi`
-        }
-      },
-
-      'egitim': {
-        dirs: [],
-        files: ['okul.txt'],
-        content: {
-          'okul.txt': `EĞİTİM
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-• Anadolu Üniversitesi — Yönetim Bilişim Sistemleri (Açıköğretim)
-  Eylül 2025 — Halen
-
-• İstanbul Beykent Üniversitesi — Bilgisayar Programcılığı (Önlisans)
-  Eylül 2021 — Ağustos 2023`
-        }
-      }
+      'sertifikalar': { dirs: [], files: ['bulut.txt'], content: { 'bulut.txt': 'Huawei Cloud (HCCDA)' } },
+      'yetkinlikler': { dirs: [], files: ['ozet.txt'], content: { 'ozet.txt': 'Linux, Docker, Prometheus, Bash' } },
+      'projeler': { dirs: [], files: ['portfolio.txt'], content: { 'portfolio.txt': 'Terminal Portfolio' } },
+      'egitim': { dirs: [], files: ['okul.txt'], content: { 'okul.txt': 'Yönetim Bilişim Sistemleri' } }
     };
 
-    function scrollToBottom() {
-      terminalBody.scrollTop = terminalBody.scrollHeight;
-    }
+    function scrollToBottom() { terminalBody.scrollTop = terminalBody.scrollHeight; }
 
     async function typeWriter(element, text, speed = 30) {
       for (let i = 0; i < text.length; i++) {
@@ -457,168 +191,41 @@ ToDo List Web Application (Flask, SQLite) — Eylül 2023
       }
     }
 
-    function isMobile() {
-      return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.matchMedia("(max-width: 768px)").matches;
-    }
+    function isMobile() { return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent); }
 
     function startGreenLoading(message, durationMs, doneCb) {
-      const id = `ld_${Date.now()}_${Math.floor(Math.random()*1000)}`;
+      const id = `ld_${Date.now()}`;
       const resp = document.createElement('div');
       resp.className = 'output';
       resp.innerHTML = `<span class="loading" id="${id}">${message}</span>`;
       history.appendChild(resp);
       scrollToBottom();
-
-      const el = document.getElementById(id);
-      let dots = 0;
-      const t = setInterval(() => {
-        dots = (dots + 1) % 4;
-        if (el) el.textContent = message + '.'.repeat(dots);
-      }, 180);
-
       setTimeout(() => {
-        clearInterval(t);
-        if (el) el.textContent = message + " ✓";
-        scrollToBottom();
-        if (typeof doneCb === "function") doneCb();
+        document.getElementById(id).textContent = message + " ✓";
+        if (doneCb) doneCb();
       }, durationMs);
-    }
-
-    function cvHelpText() {
-      return `CV KOMUTLARI
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-cat cv        - CV komutları ve dosya bilgisi
-open cv       - CV'yi yeni sekmede aç
-wget cv       - CV'yi indir (mobilde görüntüleme moduna geçer)
-
-Alternatif:
-cv            - yardım
-cv view       - görüntüle
-cv download   - indir
-
-Dosya: ${CV_FILE}`;
-    }
-
-    function cvOpen() {
-      startGreenLoading("CV hazırlanıyor", 900, () => {
-        window.open(CV_FILE, "_blank");
-      });
-    }
-
-    function cvDownloadDesktop() {
-      const a = document.createElement('a');
-      a.href = CV_FILE;
-      a.download = CV_FILE;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
     }
 
     async function showIntro() {
       const welcomeLine = document.createElement('div');
       welcomeLine.className = 'output';
       welcomeLine.style.color = '#00aaff';
-      welcomeLine.style.marginBottom = '20px';
       introContainer.appendChild(welcomeLine);
-
       await typeWriter(welcomeLine, '> Portföy sistemi başlatılıyor...', 40);
-      await new Promise(r => setTimeout(r, 400));
-
-      printOutput(
-        `<div class="info-box">
-╔════════════════════════════════════════════════════════════╗
-║   ${profile.name} — İnteraktif Terminal Portföy            ║
-║   Linux / DevOps / Cloud Odaklı Operasyon                  ║
-║   🎯 DevOps fırsatlarına açık                              ║
-╚════════════════════════════════════════════════════════════╝
-
-Komutlar:
-• <span class="highlight">help</span>               Komut listesini gösterir
-• <span class="highlight">cat README.md</span>      Hızlı özet
-• <span class="highlight">cat hakkimda.txt</span>   Profesyonel özet
-• <span class="highlight">linkedin</span>           LinkedIn profilini açar
-• <span class="highlight">cat cv</span>             CV komutları / bilgi
-• <span class="highlight">open cv</span>            CV'yi görüntüler
-• <span class="highlight">wget cv</span>            CV'yi indirir (mobilde görüntüler)
-• <span class="highlight">cd deneyim</span>         Deneyimler
-• <span class="highlight">cd yetkinlikler</span>    Teknik yetkinlikler
-</div>`,
-        true
-      );
-
+      printOutput(`<div class="info-box">╔════════════════════════════════════════════════════════════╗\n║   ${profile.name} — Dedicated Operations Specialist       ║\n╚════════════════════════════════════════════════════════════╝\n\nKomutlar: help, ls, cd, cat, whoami, open cv</div>`, true);
       inputArea.style.display = 'flex';
       input.focus();
-      scrollToBottom();
     }
 
-    document.addEventListener('click', () => input.focus());
-
     input.addEventListener('keydown', function(e) {
-      if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        if (historyIndex < commandHistory.length - 1) {
-          historyIndex++;
-          input.value = commandHistory[historyIndex];
-        }
-        return;
-      }
-
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        if (historyIndex > 0) {
-          historyIndex--;
-          input.value = commandHistory[historyIndex];
-        } else if (historyIndex === 0) {
-          historyIndex = -1;
-          input.value = '';
-        }
-        return;
-      }
-
-      if (e.key === 'Tab') {
-        e.preventDefault();
-        const words = input.value.trim().split(' ');
-        const lastWord = words[words.length - 1].toLowerCase();
-        if (!lastWord) return;
-
-        const commands = ['help', 'clear', 'pwd', 'ls', 'cd', 'cat', 'whoami', 'linkedin', 'tree', 'cv', 'open', 'wget'];
-        const currentItems = [...fs[currentPath].files, ...fs[currentPath].dirs, 'cv'];
-        const allPossible = words.length === 1 ? commands : currentItems;
-
-        const matches = allPossible.filter(item => item.toLowerCase().startsWith(lastWord));
-
-        if (matches.length === 1) {
-          words[words.length - 1] = matches[0];
-          input.value = words.join(' ');
-        } else if (matches.length > 1) {
-          printOutput(`\nOlası eşleşmeler: ${matches.join('  ')}`, false);
-          printPrompt(input.value);
-          scrollToBottom();
-        }
-        return;
-      }
-
       if (e.key === 'Enter') {
-        e.preventDefault();
-
         const rawInput = input.value.trim();
-        if (!rawInput) {
-          printPrompt();
-          input.value = '';
-          scrollToBottom();
-          return;
-        }
-
-        commandHistory.unshift(rawInput);
-        historyIndex = -1;
-
         const args = rawInput.split(' ');
         const cmd = args[0].toLowerCase();
         const target = args.slice(1).join(' ').trim().toLowerCase();
 
         printPrompt(rawInput);
         executeCommand(cmd, target);
-
         input.value = '';
         scrollToBottom();
       }
@@ -626,155 +233,35 @@ Komutlar:
 
     function executeCommand(cmd, target) {
       switch(cmd) {
-        case 'clear':
-          history.innerHTML = '';
-          break;
-
         case 'help':
-          printOutput(
-            `<div class="section-header">Komutlar</div>
-<span class="highlight">Gezinme:</span>
-  ls               - Dizin içeriğini listeler
-  cd [dir]         - Dizine geçiş (cd .. veya cd ~ ile geri)
-  pwd              - Bulunduğun dizini gösterir
-  tree             - Klasör yapısını gösterir
-
-<span class="highlight">Dosya:</span>
-  cat [file]       - Dosya içeriğini gösterir
-  cat cv           - CV komutları / bilgi
-
-<span class="highlight">CV:</span>
-  open cv          - CV'yi görüntüle
-  wget cv          - CV'yi indir (mobilde görüntüler)
-  cv               - yardım
-  cv view          - görüntüle
-  cv download      - indir
-
-<span class="highlight">Bilgi:</span>
-  whoami           - Kısa profil
-  linkedin         - LinkedIn profilini açar
-
-<span class="highlight">Sistem:</span>
-  clear            - Ekranı temizler
-  help             - Bu mesaj`,
-            true
-          );
+          printOutput(`Komutlar: ls, cd [dizin], cat [dosya], whoami, clear, open cv, linkedin`, true);
           break;
-
-        case 'pwd':
-          printOutput(currentPath === 'home' ? '/home/atakan' : `/home/atakan/${currentPath}`);
-          break;
-
-        case 'ls': {
+        case 'ls':
           let output = '';
-          if (fs[currentPath].dirs.length > 0) {
-            fs[currentPath].dirs.forEach(d => output += `<span class="dir">${d}/</span>`);
-            output += '\n';
-          }
-          if (fs[currentPath].files.length > 0) {
-            fs[currentPath].files.forEach(f => output += `<span class="file">${f}</span>`);
-          }
+          fs[currentPath].dirs.forEach(d => output += `<span class="dir">${d}/</span>`);
+          fs[currentPath].files.forEach(f => output += `<span class="file">${f}</span>`);
           printOutput(output, true);
           break;
-        }
-
-        case 'tree': {
-          let tree = '<span class="highlight">/home/atakan</span>\n';
-          fs['home'].dirs.forEach(d => tree += `├── <span class="dir">${d}/</span>\n`);
-          fs['home'].files.forEach(f => tree += `├── ${f}\n`);
-          printOutput(tree, true);
-          break;
-        }
-
         case 'cd':
-          if (!target || target === '~' || target === '..') {
-            currentPath = 'home';
-          } else if (fs[currentPath].dirs.includes(target)) {
-            currentPath = target;
-          } else {
-            printOutput(`<span class="error">bash: cd: ${target}: Böyle bir dizin yok</span>`, true);
-          }
+          if (!target || target === '~' || target === '..') currentPath = 'home';
+          else if (fs[currentPath].dirs.includes(target)) currentPath = target;
+          else printOutput(`<span class="error">Dizin bulunamadı</span>`, true);
           updatePrompt();
           break;
-
         case 'cat':
-          if (!target) {
-            printOutput(`<span class="error">Kullanım: cat [dosya]</span>`, true);
-            break;
-          }
-          if (target === 'cv') {
-            printOutput(cvHelpText(), false);
-            break;
-          }
           if (fs[currentPath].content && fs[currentPath].content[target]) {
             printOutput(fs[currentPath].content[target], false);
           } else {
-            printOutput(`<span class="error">bash: cat: ${target}: Böyle bir dosya yok</span>`, true);
+            printOutput(`<span class="error">Dosya bulunamadı. (cat readme.md yazmayı dene)</span>`, true);
           }
           break;
-
         case 'whoami':
-          printOutput(
-            `<div class="info-box">${profile.name} — ${profile.role}
-Türk Telekom (Sekom A.Ş.) | ${profile.location}
-
-🎯 DevOps Engineer rollerine açık
-• İzleme: Prometheus / Grafana / Alertmanager
-• Container: Docker / OpenShift
-• Linux: RHEL / CentOS
-• Otomasyon: Bash (Python temel)
-
-Detay: 'cat hakkimda.txt'</div>`,
-            true
-          );
+          printOutput(`<div class="info-box"><span class="highlight">${profile.role}</span>\nŞu anda Türk Telekom bünyesinde Sekom A.Ş. üzerinden dedicated olarak çalışıyorum.</div>`, true);
           break;
-
-        case 'linkedin':
-          printOutput('LinkedIn profili açılıyor...', false);
-          window.open(profile.linkedin, '_blank');
-          break;
-
-        case 'open':
-          if (target === 'cv') cvOpen();
-          else printOutput(`<span class="error">Kullanım: open cv</span>`, true);
-          break;
-
-        case 'wget':
-          if (target === 'cv') {
-            if (isMobile()) {
-              printOutput("Mobil cihaz tespit edildi. İndirmek yerine CV görüntüleniyor...", false);
-              cvOpen();
-            } else {
-              startGreenLoading("CV indiriliyor", 700, () => cvDownloadDesktop());
-            }
-          } else {
-            printOutput(`<span class="error">Kullanım: wget cv</span>`, true);
-          }
-          break;
-
-        case 'cv':
-          if (!target) { printOutput(cvHelpText(), false); break; }
-          if (target === 'view') { cvOpen(); break; }
-          if (target === 'download') {
-            if (isMobile()) {
-              printOutput("Mobil cihaz tespit edildi. İndirmek yerine CV görüntüleniyor...", false);
-              cvOpen();
-            } else {
-              startGreenLoading("CV indiriliyor", 700, () => cvDownloadDesktop());
-            }
-            break;
-          }
-          printOutput(`<span class="error">Kullanım: cv | cv view | cv download</span>`, true);
-          break;
-
-        default:
-          if (cmd !== '') {
-            printOutput(
-              `<span class="error">bash: ${cmd}: komut bulunamadı</span>
-Komutlar için 'help' yaz.`,
-              true
-            );
-          }
+        case 'clear': history.innerHTML = ''; break;
+        case 'open': if (target === 'cv') window.open(CV_FILE, "_blank"); break;
+        case 'linkedin': window.open(profile.linkedin, '_blank'); break;
+        default: if (cmd) printOutput(`<span class="error">Komut bulunamadı: ${cmd}</span>`, true);
       }
     }
 
@@ -782,19 +269,14 @@ Komutlar için 'help' yaz.`,
       const path = currentPath === 'home' ? '~' : `~/${currentPath}`;
       const resp = document.createElement('div');
       resp.className = 'output';
-      resp.innerHTML =
-        `<span class="prompt">atakan@production</span>` +
-        `<span class="prompt-path">:${path}</span>` +
-        `<span class="prompt">$</span> ` +
-        `<span style="color:white">${escapeHtml(command)}</span>`;
+      resp.innerHTML = `<span class="prompt">atakan@production</span><span class="prompt-path">:${path}</span><span class="prompt">$</span> <span style="color:white">${command}</span>`;
       history.appendChild(resp);
     }
 
     function printOutput(text, isHTML = false) {
       const resp = document.createElement('div');
       resp.className = 'output';
-      if (isHTML) resp.innerHTML = text;
-      else resp.textContent = text;
+      if (isHTML) resp.innerHTML = text; else resp.textContent = text;
       history.appendChild(resp);
     }
 
@@ -803,47 +285,7 @@ Komutlar için 'help' yaz.`,
       promptPath.textContent = `:${path}`;
     }
 
-    function escapeHtml(str) {
-      return String(str)
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#039;');
-    }
-
-    // ==========================
-    // SADECE "KAYNAK KODU GÖRÜNTÜLEMEYİ ZORLAŞTIRMA" (bypass edilebilir)
-    // ==========================
-    document.addEventListener('contextmenu', (e) => e.preventDefault(), { passive: false });
-
-    document.addEventListener('keydown', (e) => {
-      const k = (e.key || '').toLowerCase();
-      const ctrl = e.ctrlKey || e.metaKey;
-
-      if (e.key === 'F12') { e.preventDefault(); e.stopPropagation(); return; }
-      if (ctrl && (k === 'u' || k === 's')) { e.preventDefault(); e.stopPropagation(); return; }
-      if (ctrl && e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) { e.preventDefault(); e.stopPropagation(); return; }
-    }, true);
-
-    (function devtoolsTrap(){
-      const threshold = 160;
-      let tripped = false;
-
-      function check() {
-        const w = window.outerWidth - window.innerWidth;
-        const h = window.outerHeight - window.innerHeight;
-
-        if (!tripped && (w > threshold || h > threshold)) {
-          tripped = true;
-          printOutput(`<span class="error">[SECURITY] DevTools tespit edildi. Lütfen geliştirici araçlarını kapatın.</span>`, true);
-          scrollToBottom();
-        }
-        requestAnimationFrame(check);
-      }
-      requestAnimationFrame(check);
-    })();
-
+    document.addEventListener('click', () => input.focus());
     showIntro();
   </script>
 </body>
