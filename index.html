@@ -1,199 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="Tux.png" type="image/png">
-    <title>Atakan Sarıkaya | DevOps & Cloud Infrastructure Specialist</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-            color: #00ff41; 
-            font-family: 'Fira Code', 'Consolas', 'Courier New', monospace; 
-            padding: 20px; 
-            line-height: 1.6; 
-            min-height: 100vh;
-            cursor: text;
-        }
-        
-        #terminal { 
-            max-width: 1100px; 
-            margin: 40px auto;
-            background: rgba(13, 13, 13, 0.95);
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 255, 65, 0.15);
-            overflow: hidden;
-            border: 1px solid rgba(0, 255, 65, 0.2);
-        }
-        
-        .terminal-header {
-            background: linear-gradient(90deg, #1e1e1e 0%, #2d2d2d 100%);
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
-        }
-        
-        .terminal-button {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-        
-        .btn-close { background: #ff5f57; }
-        .btn-minimize { background: #ffbd2e; }
-        .btn-maximize { background: #28ca42; }
-        
-        .terminal-title {
-            flex: 1;
-            text-align: center;
-            color: #888;
-            font-size: 13px;
-            letter-spacing: 0.5px;
-        }
-        
-        .terminal-body {
-            padding: 30px;
-            min-height: 500px;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        
-        .terminal-body::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        .terminal-body::-webkit-scrollbar-track {
-            background: #1a1a1a;
-        }
-        
-        .terminal-body::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 4px;
-        }
-        
-        .prompt { 
-            color: #00aaff; 
-            font-weight: bold;
-        }
-        
-        .prompt-path {
-            color: #ffcc00;
-            font-weight: normal;
-        }
-        
-        .command-input { 
-            background: transparent; 
-            border: none; 
-            color: #ffffff; 
-            font-family: inherit; 
-            font-size: 15px; 
-            outline: none; 
-            width: 70%; 
-            caret-color: #00ff41;
-            margin-left: 8px;
-        }
-        
-        .output { 
-            margin-bottom: 15px; 
-            white-space: pre-wrap; 
-            color: #d1d1d1;
-            animation: fadeIn 0.3s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .input-line { 
-            display: none;
-            align-items: center;
-            margin-top: 10px;
-        }
-        
-        .error {
-            color: #ff5f57;
-        }
-        
-        .dir { 
-            color: #00aaff; 
-            font-weight: bold; 
-            margin-right: 15px;
-        }
-        
-        .file {
-            color: #aaa;
-            margin-right: 15px;
-        }
-        
-        .section-header {
-            color: #ffcc00;
-            font-weight: bold;
-            margin: 20px 0 10px 0;
-            border-bottom: 1px solid rgba(255, 204, 0, 0.3);
-            padding-bottom: 5px;
-        }
-        
-        .highlight {
-            color: #00ff41;
-            font-weight: bold;
-        }
-        
-        .info-box {
-            background: rgba(0, 170, 255, 0.05);
-            border-left: 3px solid #00aaff;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 4px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="Tux.png" type="image/png" />
+  <title>Atakan Sarıkaya | DevOps & Cloud Infrastructure Specialist</title>
 
-        @media (max-width: 768px) {
-            body { padding: 10px; }
-            #terminal { margin: 20px auto; }
-            .terminal-body { padding: 20px; font-size: 13px; }
-        }
-    </style>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+      color: #00ff41;
+      font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
+      padding: 20px;
+      line-height: 1.6;
+      min-height: 100vh;
+      cursor: text;
+    }
+
+    #terminal {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: rgba(13, 13, 13, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 255, 65, 0.15);
+      overflow: hidden;
+      border: 1px solid rgba(0, 255, 65, 0.2);
+    }
+
+    .terminal-header {
+      background: linear-gradient(90deg, #1e1e1e 0%, #2d2d2d 100%);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+      user-select: none;
+    }
+
+    .terminal-button {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .btn-close { background: #ff5f57; }
+    .btn-minimize { background: #ffbd2e; }
+    .btn-maximize { background: #28ca42; }
+
+    .terminal-title {
+      flex: 1;
+      text-align: center;
+      color: #888;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+    }
+
+    .terminal-body {
+      padding: 30px;
+      min-height: 500px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .terminal-body::-webkit-scrollbar { width: 8px; }
+    .terminal-body::-webkit-scrollbar-track { background: #1a1a1a; }
+    .terminal-body::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+
+    .prompt {
+      color: #00aaff;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    .prompt-path {
+      color: #ffcc00;
+      font-weight: normal;
+      user-select: none;
+    }
+
+    /* textarea terminal input */
+    .command-input {
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 15px;
+      outline: none;
+      width: 70%;
+      caret-color: #00ff41;
+      margin-left: 8px;
+
+      resize: none;       /* disable manual resize */
+      overflow: hidden;   /* auto-resize handled in JS */
+      line-height: 1.4;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      min-height: 22px;
+    }
+
+    .output {
+      margin-bottom: 15px;
+      white-space: pre-wrap;
+      color: #d1d1d1;
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .input-line {
+      display: none;
+      align-items: flex-start; /* allow textarea to grow */
+      gap: 0;
+      margin-top: 10px;
+    }
+
+    .error { color: #ff5f57; }
+
+    .dir {
+      color: #00aaff;
+      font-weight: bold;
+      margin-right: 15px;
+    }
+
+    .file {
+      color: #aaa;
+      margin-right: 15px;
+    }
+
+    .section-header {
+      color: #ffcc00;
+      font-weight: bold;
+      margin: 20px 0 10px 0;
+      border-bottom: 1px solid rgba(255, 204, 0, 0.3);
+      padding-bottom: 5px;
+    }
+
+    .highlight {
+      color: #00ff41;
+      font-weight: bold;
+    }
+
+    .info-box {
+      background: rgba(0, 170, 255, 0.05);
+      border-left: 3px solid #00aaff;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 4px;
+    }
+
+    .hint {
+      color: #888;
+      font-size: 12px;
+      margin-top: 8px;
+      user-select: none;
+    }
+
+    @media (max-width: 768px) {
+      body { padding: 10px; }
+      #terminal { margin: 20px auto; }
+      .terminal-body { padding: 20px; font-size: 13px; }
+      .command-input { width: 65%; font-size: 14px; }
+    }
+  </style>
 </head>
+
 <body>
-    <div id="terminal">
-        <div class="terminal-header">
-            <div class="terminal-button btn-close"></div>
-            <div class="terminal-button btn-minimize"></div>
-            <div class="terminal-button btn-maximize"></div>
-            <div class="terminal-title">atakan@devops-portfolio: ~</div>
-        </div>
-        <div class="terminal-body">
-            <div id="intro-container"></div>
-            <div id="history"></div>
-            <div class="input-line" id="input-area">
-                <span class="prompt">atakan@production</span><span class="prompt-path" id="prompt-path">:~</span><span class="prompt">$</span>
-                <input type="text" id="command-input" class="command-input" autofocus autocomplete="off" spellcheck="false">
-            </div>
-        </div>
+  <div id="terminal">
+    <div class="terminal-header">
+      <div class="terminal-button btn-close"></div>
+      <div class="terminal-button btn-minimize"></div>
+      <div class="terminal-button btn-maximize"></div>
+      <div class="terminal-title">atakan@devops-portfolio: ~</div>
     </div>
 
-    <script>
-        const input = document.getElementById('command-input');
-        const history = document.getElementById('history');
-        const inputArea = document.getElementById('input-area');
-        const introContainer = document.getElementById('intro-container');
-        const promptPath = document.getElementById('prompt-path');
-        
-        let currentPath = 'home';
-        let commandHistory = [];
-        let historyIndex = -1;
-        const linkedin_url = "https://www.linkedin.com/in/atakansarikaya/";
+    <div class="terminal-body" id="terminal-body">
+      <div id="intro-container"></div>
+      <div id="history"></div>
 
-        const fs = {
-            'home': {
-                dirs: ['certifications', 'experience', 'skills'],
-                files: ['README.md', 'contact.sh', 'about.txt'],
-                content: {
-                    'README.md': `# Atakan Sarıkaya
+      <div class="input-line" id="input-area">
+        <span class="prompt">atakan@production</span>
+        <span class="prompt-path" id="prompt-path">:~</span>
+        <span class="prompt">$</span>
+
+        <!-- textarea: Enter new line, Ctrl+Enter executes -->
+        <textarea id="command-input" class="command-input" autofocus autocomplete="off"
+          spellcheck="false" rows="1" aria-label="terminal input"></textarea>
+      </div>
+
+      <div class="hint" id="hint" style="display:none;">
+        Enter = yeni satır • Ctrl+Enter = komutu çalıştır • Tab = tamamlama • ↑↓ = geçmiş (tek satırdayken)
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const input = document.getElementById('command-input');
+    const history = document.getElementById('history');
+    const inputArea = document.getElementById('input-area');
+    const introContainer = document.getElementById('intro-container');
+    const promptPath = document.getElementById('prompt-path');
+    const terminalBody = document.getElementById('terminal-body');
+    const hint = document.getElementById('hint');
+
+    let currentPath = 'home';
+    let commandHistory = [];
+    let historyIndex = -1;
+    const linkedin_url = "https://www.linkedin.com/in/atakansarikaya/";
+
+    // Simple in-memory filesystem
+    const fs = {
+      'home': {
+        dirs: ['certifications', 'experience', 'skills'],
+        files: ['README.md', 'contact.sh', 'about.txt'],
+        content: {
+          'README.md': `# Atakan Sarıkaya
 ## DevOps & Cloud Infrastructure Specialist
 
 👨‍💻 Application Operations Specialist @ Türk Telekom
@@ -208,8 +233,8 @@
 • cat contact.sh     - Connect with me
 
 Type 'help' for available commands.`,
-                    
-                    'about.txt': `PROFESSIONAL SUMMARY
+
+          'about.txt': `PROFESSIONAL SUMMARY
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Linux system administrator transitioning to DevOps with hands-on
@@ -236,8 +261,8 @@ automating manual tasks with Bash scripts, and building
 highly available infrastructure.
 
 🎯 CAREER STATUS: Actively seeking DevOps Engineer positions`,
-                    
-                    'contact.sh': `#!/bin/bash
+
+          'contact.sh': `#!/bin/bash
 # Contact Information
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -252,22 +277,22 @@ echo ""
 echo "Opening LinkedIn profile..."
 
 # Redirecting to LinkedIn...`
-                }
-            },
-            
-            'certifications': {
-                dirs: [],
-                files: ['cloud.txt', 'linux.txt', 'database.txt', 'list.sh'],
-                content: {
-                    'cloud.txt': `CLOUD CERTIFICATION
+        }
+      },
+
+      'certifications': {
+        dirs: [],
+        files: ['cloud.txt', 'linux.txt', 'database.txt', 'list.sh'],
+        content: {
+          'cloud.txt': `CLOUD CERTIFICATION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 📜 Huawei Cloud Certified Associate (HCCDA)
    • Cloud Computing Tech Essentials
    • Cloud Infrastructure & Services
    • Cloud Security Fundamentals`,
-                    
-                    'linux.txt': `LINUX CERTIFICATION
+
+          'linux.txt': `LINUX CERTIFICATION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🐧 Red Hat System Administration (RH124)
@@ -275,16 +300,16 @@ echo "Opening LinkedIn profile..."
    • User & Permission Management
    • Service Configuration & Troubleshooting
    • Storage & File System Management`,
-                    
-                    'database.txt': `DATABASE CERTIFICATION
+
+          'database.txt': `DATABASE CERTIFICATION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 💾 SQL Database Management - BTK Academy
    • Advanced SQL Queries
    • Database Design & Optimization
    • Data Analysis & Reporting`,
-                    
-                    'list.sh': `#!/bin/bash
+
+          'list.sh': `#!/bin/bash
 # All Certifications
 
 certifications=(
@@ -301,14 +326,14 @@ echo ""
 for cert in "\${certifications[@]}"; do
     echo "✓ $cert"
 done`
-                }
-            },
-            
-            'experience': {
-                dirs: [],
-                files: ['current.txt', 'previous.txt', 'timeline.sh'],
-                content: {
-                    'current.txt': `CURRENT POSITION
+        }
+      },
+
+      'experience': {
+        dirs: [],
+        files: ['current.txt', 'previous.txt', 'timeline.sh'],
+        content: {
+          'current.txt': `CURRENT POSITION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🏢 Türk Telekom
@@ -325,8 +350,8 @@ KEY RESPONSIBILITIES:
 TECHNOLOGIES:
 Docker, OpenShift, Linux (RHEL), Bash Scripting,
 Monitoring Tools (Prometheus, Grafana)`,
-                    
-                    'previous.txt': `PREVIOUS EXPERIENCE
+
+          'previous.txt': `PREVIOUS EXPERIENCE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🏢 Sekom
@@ -343,8 +368,8 @@ ACHIEVEMENTS:
 TECHNOLOGIES:
 Huawei Cloud, Docker, GitLab, Bash Scripting,
 Linux System Administration, Application Deployment`,
-                    
-                    'timeline.sh': `#!/bin/bash
+
+          'timeline.sh': `#!/bin/bash
 # Career Timeline
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -360,14 +385,14 @@ echo "                 │"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 echo "Total Experience: 1 Year 9+ Months"`
-                }
-            },
-            
-            'skills': {
-                dirs: [],
-                files: ['orchestration.txt', 'systems.txt', 'monitoring.txt', 'automation.txt', 'summary.sh'],
-                content: {
-                    'orchestration.txt': `CONTAINER ORCHESTRATION
+        }
+      },
+
+      'skills': {
+        dirs: [],
+        files: ['orchestration.txt', 'systems.txt', 'monitoring.txt', 'automation.txt', 'summary.sh'],
+        content: {
+          'orchestration.txt': `CONTAINER ORCHESTRATION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🐳 Docker
@@ -381,8 +406,8 @@ echo "Total Experience: 1 Year 9+ Months"`
    • Pod autoscaling & resource optimization
    • Route & service configuration
    • Operator framework understanding`,
-                    
-                    'systems.txt': `LINUX SYSTEM ADMINISTRATION
+
+          'systems.txt': `LINUX SYSTEM ADMINISTRATION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🐧 Operating Systems
@@ -397,8 +422,8 @@ echo "Total Experience: 1 Year 9+ Months"`
    • Network configuration & troubleshooting
    • Performance tuning & optimization
    • Bash scripting for automation`,
-                    
-                    'monitoring.txt': `MONITORING & OBSERVABILITY
+
+          'monitoring.txt': `MONITORING & OBSERVABILITY
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 📊 Prometheus
@@ -415,8 +440,8 @@ echo "Total Experience: 1 Year 9+ Months"`
    • Log aggregation & analysis
    • Troubleshooting & root cause analysis
    • Performance monitoring`,
-                    
-                    'automation.txt': `AUTOMATION & DEPLOYMENT
+
+          'automation.txt': `AUTOMATION & DEPLOYMENT
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 💻 Bash Scripting
@@ -434,8 +459,8 @@ echo "Total Experience: 1 Year 9+ Months"`
 📚 Currently Learning
    • CI/CD Integration (GitLab CI, Jenkins)
    • Infrastructure as Code (Terraform, Ansible)`,
-                    
-                    'summary.sh': `#!/bin/bash
+
+          'summary.sh': `#!/bin/bash
 # Technical Skills Summary
 
 categories=(
@@ -461,28 +486,78 @@ for category in "\${categories[@]}"; do
 done
 
 echo "🎯 Currently expanding skills in CI/CD and IaC"`
-                }
-            }
-        };
-
-        async function typeWriter(element, text, speed = 30) {
-            for (let i = 0; i < text.length; i++) {
-                element.textContent += text.charAt(i);
-                await new Promise(resolve => setTimeout(resolve, speed));
-            }
         }
+      }
+    };
 
-        async function showIntro() {
-            const welcomeLine = document.createElement('div');
-            welcomeLine.className = 'output';
-            welcomeLine.style.color = '#00aaff';
-            welcomeLine.style.marginBottom = '20px';
-            introContainer.appendChild(welcomeLine);
-            
-            await typeWriter(welcomeLine, '> Initializing DevOps Portfolio System...', 40);
-            await new Promise(r => setTimeout(r, 400));
-            
-            printOutput(`<div class="info-box">
+    // ---- UX helpers ----
+    function scrollToBottom() {
+      // terminal-body is scroll container
+      terminalBody.scrollTop = terminalBody.scrollHeight;
+    }
+
+    function autoResizeTextarea(el) {
+      el.style.height = 'auto';
+      el.style.height = (el.scrollHeight) + 'px';
+    }
+
+    function typeWriter(element, text, speed = 30) {
+      return new Promise(async (resolve) => {
+        for (let i = 0; i < text.length; i++) {
+          element.textContent += text.charAt(i);
+          await new Promise(r => setTimeout(r, speed));
+        }
+        resolve();
+      });
+    }
+
+    function printPrompt(command = '') {
+      const path = currentPath === 'home' ? '~' : `~/${currentPath}`;
+      const resp = document.createElement('div');
+      resp.className = 'output';
+      resp.innerHTML =
+        `<span class="prompt">atakan@production</span>` +
+        `<span class="prompt-path">:${path}</span>` +
+        `<span class="prompt">$</span> ` +
+        `<span style="color:white">${escapeHtml(command)}</span>`;
+      history.appendChild(resp);
+    }
+
+    function printOutput(text, isHTML = false) {
+      const resp = document.createElement('div');
+      resp.className = 'output';
+      if (isHTML) resp.innerHTML = text;
+      else resp.textContent = text;
+      history.appendChild(resp);
+    }
+
+    function updatePrompt() {
+      const path = currentPath === 'home' ? '~' : `~/${currentPath}`;
+      promptPath.textContent = `:${path}`;
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    // ---- Intro ----
+    async function showIntro() {
+      const welcomeLine = document.createElement('div');
+      welcomeLine.className = 'output';
+      welcomeLine.style.color = '#00aaff';
+      welcomeLine.style.marginBottom = '20px';
+      introContainer.appendChild(welcomeLine);
+
+      await typeWriter(welcomeLine, '> Initializing DevOps Portfolio System...', 40);
+      await new Promise(r => setTimeout(r, 350));
+
+      printOutput(
+        `<div class="info-box">
 ╔════════════════════════════════════════════════════════════╗
 ║   Welcome to Atakan Sarıkaya's Interactive Portfolio      ║
 ║   Linux System Admin & DevOps Engineer                    ║
@@ -493,83 +568,43 @@ Type <span class="highlight">help</span> to see available commands
 Type <span class="highlight">cat README.md</span> for quick start guide
 Use <span class="highlight">Tab</span> key for auto-completion
 Use <span class="highlight">↑↓</span> arrow keys for command history
-</div>`, true);
-            
-            inputArea.style.display = 'flex';
-            input.focus();
-        }
+<span class="highlight">Enter</span> = new line • <span class="highlight">Ctrl+Enter</span> = execute
+</div>`,
+        true
+      );
 
-        document.addEventListener('click', () => input.focus());
+      inputArea.style.display = 'flex';
+      hint.style.display = 'block';
+      input.focus();
+      autoResizeTextarea(input);
+      scrollToBottom();
+    }
 
-        input.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                if (historyIndex < commandHistory.length - 1) {
-                    historyIndex++;
-                    input.value = commandHistory[historyIndex];
-                }
-            } else if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                if (historyIndex > 0) {
-                    historyIndex--;
-                    input.value = commandHistory[historyIndex];
-                } else if (historyIndex === 0) {
-                    historyIndex = -1;
-                    input.value = '';
-                }
-            } else if (e.key === 'Tab') {
-                e.preventDefault();
-                const words = input.value.trim().split(' ');
-                const lastWord = words[words.length - 1].toLowerCase();
-                
-                if (!lastWord) return;
-                
-                const commands = ['help', 'clear', 'pwd', 'ls', 'cd', 'cat', 'whoami', 'linkedin', 'tree'];
-                const currentItems = [...fs[currentPath].files, ...fs[currentPath].dirs];
-                const allPossible = words.length === 1 ? commands : currentItems;
-                
-                const matches = allPossible.filter(item => item.toLowerCase().startsWith(lastWord));
-                
-                if (matches.length === 1) {
-                    words[words.length - 1] = matches[0];
-                    input.value = words.join(' ');
-                } else if (matches.length > 1) {
-                    printOutput(`\nPossible matches: ${matches.join('  ')}`, false);
-                    printPrompt(input.value);
-                }
-            }
-            
-            if (e.key === 'Enter') {
-                const rawInput = input.value.trim();
-                if (!rawInput) {
-                    printPrompt();
-                    input.value = '';
-                    return;
-                }
-                
-                commandHistory.unshift(rawInput);
-                historyIndex = -1;
-                
-                const args = rawInput.split(' ');
-                const cmd = args[0].toLowerCase();
-                const target = args.slice(1).join(' ');
+    // focus input on click
+    document.addEventListener('click', () => input.focus());
 
-                printPrompt(rawInput);
-                executeCommand(cmd, target);
-                
-                input.value = '';
-                window.scrollTo(0, document.body.scrollHeight);
-            }
-        });
+    // ---- "source code hide" (NOT bulletproof) ----
+    // Right-click disable
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
 
-        function executeCommand(cmd, target) {
-            switch(cmd) {
-                case 'clear':
-                    history.innerHTML = '';
-                    break;
-                    
-                case 'help':
-                    printOutput(`<div class="section-header">Available Commands</div>
+    // Prevent common shortcuts (bypassable)
+    document.addEventListener('keydown', (e) => {
+      const k = e.key.toLowerCase();
+      if (e.key === 'F12') e.preventDefault();
+      if (e.ctrlKey && (k === 'u' || k === 's')) e.preventDefault(); // view-source/save
+      if (e.ctrlKey && e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) e.preventDefault(); // devtools
+    });
+
+    // ---- terminal commands ----
+    function executeCommand(cmd, target) {
+      switch (cmd) {
+        case 'clear':
+          history.innerHTML = '';
+          break;
+
+        case 'help':
+          printOutput(
+            `<div class="section-header">Available Commands</div>
 <span class="highlight">Navigation:</span>
   ls               - List directory contents
   cd [dir]         - Change directory (use 'cd ..' or 'cd ~' to go back)
@@ -587,109 +622,191 @@ Use <span class="highlight">↑↓</span> arrow keys for command history
   clear            - Clear terminal screen
   help             - Show this help message
 
-<span class="highlight">Tip:</span> Use Tab for auto-completion, ↑↓ for command history`, true);
-                    break;
-                    
-                case 'pwd':
-                    printOutput(currentPath === 'home' ? '/home/atakan' : `/home/atakan/${currentPath}`);
-                    break;
-                    
-                case 'ls':
-                    let output = '';
-                    if (fs[currentPath].dirs.length > 0) {
-                        fs[currentPath].dirs.forEach(d => output += `<span class="dir">${d}/</span>`);
-                        output += '\n';
-                    }
-                    if (fs[currentPath].files.length > 0) {
-                        fs[currentPath].files.forEach(f => output += `<span class="file">${f}</span>`);
-                    }
-                    printOutput(output, true);
-                    break;
-                    
-                case 'tree':
-                    let tree = '<span class="highlight">/home/atakan</span>\n';
-                    Object.keys(fs).forEach(dir => {
-                        if (dir === 'home') {
-                            fs[dir].dirs.forEach(d => tree += `├── <span class="dir">${d}/</span>\n`);
-                            fs[dir].files.forEach((f, i) => {
-                                const prefix = i === fs[dir].files.length - 1 && fs[dir].dirs.length === 0 ? '└──' : '├──';
-                                tree += `${prefix} ${f}\n`;
-                            });
-                        }
-                    });
-                    printOutput(tree, true);
-                    break;
-                    
-                case 'cd':
-                    if (!target || target === '~' || target === '..') {
-                        currentPath = 'home';
-                    } else if (fs[currentPath].dirs.includes(target)) {
-                        currentPath = target;
-                    } else {
-                        printOutput(`<span class="error">bash: cd: ${target}: No such directory</span>`, true);
-                    }
-                    updatePrompt();
-                    break;
-                    
-                case 'cat':
-                    if (fs[currentPath].content && fs[currentPath].content[target]) {
-                        printOutput(fs[currentPath].content[target]);
-                        if (target === 'contact.sh') {
-                            setTimeout(() => window.open(linkedin_url, '_blank'), 1000);
-                        }
-                    } else {
-                        printOutput(`<span class="error">bash: cat: ${target}: No such file</span>`, true);
-                    }
-                    break;
-                    
-                case 'whoami':
-                    printOutput(`<div class="info-box">atakan - Application Operations Specialist
+<span class="highlight">Multi-line:</span>
+  Enter            - New line
+  Ctrl+Enter       - Execute command
+
+<span class="highlight">Tip:</span> Use Tab for auto-completion, ↑↓ for command history (single-line only)`,
+            true
+          );
+          break;
+
+        case 'pwd':
+          printOutput(currentPath === 'home' ? '/home/atakan' : `/home/atakan/${currentPath}`);
+          break;
+
+        case 'ls': {
+          let output = '';
+          if (fs[currentPath].dirs.length > 0) {
+            fs[currentPath].dirs.forEach(d => output += `<span class="dir">${d}/</span>`);
+            output += '\n';
+          }
+          if (fs[currentPath].files.length > 0) {
+            fs[currentPath].files.forEach(f => output += `<span class="file">${f}</span>`);
+          }
+          printOutput(output, true);
+          break;
+        }
+
+        case 'tree': {
+          let tree = '<span class="highlight">/home/atakan</span>\n';
+          // show only root, like you did
+          Object.keys(fs).forEach(dir => {
+            if (dir === 'home') {
+              fs[dir].dirs.forEach(d => tree += `├── <span class="dir">${d}/</span>\n`);
+              fs[dir].files.forEach((f, i) => {
+                const prefix = '├──';
+                tree += `${prefix} ${f}\n`;
+              });
+            }
+          });
+          printOutput(tree, true);
+          break;
+        }
+
+        case 'cd':
+          if (!target || target === '~' || target === '..') {
+            currentPath = 'home';
+          } else if (fs[currentPath].dirs.includes(target)) {
+            currentPath = target;
+          } else {
+            printOutput(`<span class="error">bash: cd: ${escapeHtml(target)}: No such directory</span>`, true);
+          }
+          updatePrompt();
+          break;
+
+        case 'cat':
+          if (fs[currentPath].content && fs[currentPath].content[target]) {
+            printOutput(fs[currentPath].content[target], false);
+            if (target === 'contact.sh') {
+              setTimeout(() => window.open(linkedin_url, '_blank'), 900);
+            }
+          } else {
+            printOutput(`<span class="error">bash: cat: ${escapeHtml(target)}: No such file</span>`, true);
+          }
+          break;
+
+        case 'whoami':
+          printOutput(
+            `<div class="info-box">atakan - Application Operations Specialist
 Currently working at Türk Telekom
 DevOps enthusiast focusing on cloud infrastructure and automation
 
 🎯 Open to DevOps opportunities
 
-Use 'cat about.txt' for detailed information</div>`, true);
-                    break;
-                    
-                case 'linkedin':
-                    printOutput('Opening LinkedIn profile...', false);
-                    window.open(linkedin_url, '_blank');
-                    break;
-                    
-                default:
-                    if (cmd !== '') {
-                        printOutput(`<span class="error">bash: ${cmd}: command not found</span>
-Type 'help' to see available commands`, true);
-                    }
-            }
+Use 'cat about.txt' for detailed information</div>`,
+            true
+          );
+          break;
+
+        case 'linkedin':
+          printOutput('Opening LinkedIn profile...', false);
+          window.open(linkedin_url, '_blank');
+          break;
+
+        default:
+          if (cmd !== '') {
+            printOutput(
+              `<span class="error">bash: ${escapeHtml(cmd)}: command not found</span>
+Type 'help' to see available commands`,
+              true
+            );
+          }
+      }
+    }
+
+    // ---- input behavior (multi-line) ----
+    input.addEventListener('input', () => autoResizeTextarea(input));
+
+    input.addEventListener('keydown', function (e) {
+      // Arrow history: only when single-line
+      if (e.key === 'ArrowUp') {
+        if (input.value.includes('\n')) return;
+        e.preventDefault();
+        if (historyIndex < commandHistory.length - 1) {
+          historyIndex++;
+          input.value = commandHistory[historyIndex];
+          autoResizeTextarea(input);
+        }
+        return;
+      }
+
+      if (e.key === 'ArrowDown') {
+        if (input.value.includes('\n')) return;
+        e.preventDefault();
+        if (historyIndex > 0) {
+          historyIndex--;
+          input.value = commandHistory[historyIndex];
+        } else if (historyIndex === 0) {
+          historyIndex = -1;
+          input.value = '';
+        }
+        autoResizeTextarea(input);
+        return;
+      }
+
+      // Tab completion (works with multiline too; it completes last "word")
+      if (e.key === 'Tab') {
+        e.preventDefault();
+
+        const words = input.value.trim().split(' ');
+        const lastWord = words[words.length - 1]?.toLowerCase();
+        if (!lastWord) return;
+
+        const commands = ['help', 'clear', 'pwd', 'ls', 'cd', 'cat', 'whoami', 'linkedin', 'tree'];
+        const currentItems = [...fs[currentPath].files, ...fs[currentPath].dirs];
+        const allPossible = words.length === 1 ? commands : currentItems;
+
+        const matches = allPossible.filter(item => item.toLowerCase().startsWith(lastWord));
+
+        if (matches.length === 1) {
+          words[words.length - 1] = matches[0];
+          input.value = words.join(' ');
+          autoResizeTextarea(input);
+        } else if (matches.length > 1) {
+          printOutput(`\nPossible matches: ${matches.join('  ')}`, false);
+          printPrompt(input.value);
+          scrollToBottom();
+        }
+        return;
+      }
+
+      // Enter = newline (default textarea behavior)
+      // Ctrl+Enter = execute command
+      if (e.key === 'Enter' && e.ctrlKey) {
+        e.preventDefault();
+
+        const rawInput = input.value.trim();
+        if (!rawInput) {
+          printPrompt();
+          input.value = '';
+          autoResizeTextarea(input);
+          scrollToBottom();
+          return;
         }
 
-        function printPrompt(command = '') {
-            const path = currentPath === 'home' ? '~' : `~/${currentPath}`;
-            const resp = document.createElement('div');
-            resp.className = 'output';
-            resp.innerHTML = `<span class="prompt">atakan@production</span><span class="prompt-path">:${path}</span><span class="prompt">$</span> <span style="color:white">${command}</span>`;
-            history.appendChild(resp);
-        }
+        commandHistory.unshift(rawInput);
+        historyIndex = -1;
 
-        function printOutput(text, isHTML = false) {
-            const resp = document.createElement('div');
-            resp.className = 'output';
-            if (isHTML) {
-                resp.innerHTML = text;
-            } else {
-                resp.textContent = text;
-            }
-            history.appendChild(resp);
-        }
+        // normalize multiline into one command line
+        const normalized = rawInput.replace(/\n+/g, ' ').trim();
 
-        function updatePrompt() {
-            const path = currentPath === 'home' ? '~' : `~/${currentPath}`;
-            promptPath.textContent = `:${path}`;
-        }
+        const args = normalized.split(' ');
+        const cmd = args[0].toLowerCase();
+        const target = args.slice(1).join(' ');
 
-        showIntro();
-    </script>
+        printPrompt(normalized);
+        executeCommand(cmd, target);
+
+        input.value = '';
+        autoResizeTextarea(input);
+        scrollToBottom();
+        return;
+      }
+    });
+
+    // start
+    showIntro();
+  </script>
 </body>
 </html>
