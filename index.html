@@ -20,7 +20,7 @@
 <body>
     <div id="terminal">
         <div id="boot-container"></div>
-        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 3.5] - THE SPECIALIST ***</div>
+        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 3.6] - MASTER NAVIGATOR ***</div>
         <div id="history"></div>
         <div class="input-line" id="input-area">
             <span class="prompt" id="prompt-label">atakan@production:~$</span>
@@ -39,7 +39,6 @@
         let currentPath = 'home';
         const linkedin_url = "https://www.linkedin.com/in/atakansarikaya/";
 
-        // GÜVENLİK ÖNLEMLERİ
         document.addEventListener('contextmenu', (e) => e.preventDefault());
         document.onkeydown = (e) => { 
             if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && [73, 74, 67].includes(e.keyCode)) || (e.ctrlKey && e.keyCode == 85)) return false; 
@@ -106,9 +105,13 @@
             printOutput("-----------------------");
             printOutput("Türk Telekom bünyesinde Uygulama Operasyon Uzmanı olarak görev almaktayım.");
             printOutput("DevOps, Cloud ve Linux alanlarında kendimi geliştirmeye devam ediyorum.");
-            printOutput("\n* Özgeçmişim için: cat ozgecmis.txt");
-            printOutput("* Becerilerim için: cd beceriler");
-            printOutput("* Sertifikalarım için: cd sertifikalar");
+            printOutput("\nSistemde gezinebilmek için 'yardim' komutunu kullanarak tüm kullanılabilir");
+            printOutput("komutları listeleyebilir; kariyer yolculuğuma göz atmak için ise");
+            printOutput("aşağıdaki komutları kullanabilirsiniz:");
+            printOutput("\n* Özgeçmiş özeti: cat ozgecmis.txt");
+            printOutput("* Becerilerim: cd beceriler (ardından 'ls' ve 'cat')");
+            printOutput("* Deneyimlerim: cd tecrube");
+            printOutput("* Sertifikalarım: cd sertifikalar");
             printOutput("\nKeşfetmek için 'ls' yazabilir veya Tab tuşunu kullanabilirsiniz.");
             
             input.focus();
@@ -119,11 +122,11 @@
         input.addEventListener('keydown', function(e) {
             if (e.key === 'Tab') {
                 e.preventDefault();
-                const currentVal = input.value.toLowerCase().trim().split(' ').pop();
-                if (!currentVal) return;
+                const val = input.value.toLowerCase().trim().split(' ').pop();
+                if (!val) return;
                 const commands = ['yardim', 'help', 'clear', 'pwd', 'ls', 'cd', 'cat', 'linkedin'];
                 const allPossible = [...commands, ...fs[currentPath].files, ...fs[currentPath].dirs];
-                const match = allPossible.find(c => c.startsWith(currentVal));
+                const match = allPossible.find(c => c.startsWith(val));
                 if (match) {
                     const words = input.value.split(' ');
                     words[words.length - 1] = match;
@@ -139,7 +142,7 @@
                 printOutput(`<span class="prompt">atakan@production:${currentPath === 'home' ? '~' : '~/' + currentPath}$</span> <span style="color:white">${rawInput}</span>`, true);
 
                 if (cmd === 'clear') { history.innerHTML = ''; }
-                else if (cmd === 'yardim' || cmd === 'help') { printOutput("Komutlar: ls, cd, cat, pwd, clear, linkedin"); }
+                else if (cmd === 'yardim' || cmd === 'help') { printOutput("Komutlar: ls, cd, cat, pwd, clear, linkedin, tr/en"); }
                 else if (cmd === 'pwd') { printOutput(currentPath === 'home' ? "/home/atakan" : "/home/atakan/" + currentPath); }
                 else if (cmd === 'ls') {
                     let output = "";
