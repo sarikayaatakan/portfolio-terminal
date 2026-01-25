@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="Tux.png" type="image/png" />
   <title>Atakan Sarıkaya | DevOps & Cloud Infrastructure Specialist</title>
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -39,12 +40,15 @@
     .btn-minimize { background: #ffbd2e; }
     .btn-maximize { background: #28ca42; }
     .terminal-title { flex: 1; text-align: center; color: #888; font-size: 13px; letter-spacing: 0.5px; }
+
     .terminal-body { padding: 30px; min-height: 500px; max-height: 80vh; overflow-y: auto; }
     .terminal-body::-webkit-scrollbar { width: 8px; }
     .terminal-body::-webkit-scrollbar-track { background: #1a1a1a; }
     .terminal-body::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+
     .prompt { color: #00aaff; font-weight: bold; }
     .prompt-path { color: #ffcc00; font-weight: normal; }
+
     .command-input {
       background: transparent;
       border: none;
@@ -56,19 +60,37 @@
       caret-color: #00ff41;
       margin-left: 8px;
     }
-    .output { margin-bottom: 15px; white-space: pre-wrap; color: #d1d1d1; animation: fadeIn 0.3s ease-in; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+    .output { margin-bottom: 12px; white-space: pre-wrap; color: #d1d1d1; animation: fadeIn 0.2s ease-in; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
     .input-line { display: none; align-items: center; margin-top: 10px; }
+
     .error { color: #ff5f57; }
     .dir { color: #00aaff; font-weight: bold; margin-right: 15px; }
     .file { color: #aaa; margin-right: 15px; }
-    .section-header { color: #ffcc00; font-weight: bold; margin: 20px 0 10px 0; border-bottom: 1px solid rgba(255, 204, 0, 0.3); padding-bottom: 5px; }
+
+    .section-header { color: #ffcc00; font-weight: bold; margin: 18px 0 10px 0; border-bottom: 1px solid rgba(255, 204, 0, 0.3); padding-bottom: 5px; }
     .highlight { color: #00ff41; font-weight: bold; }
-    .info-box { background: rgba(0, 170, 255, 0.05); border-left: 3px solid #00aaff; padding: 15px; margin: 15px 0; border-radius: 4px; }
+
+    .info-box {
+      background: rgba(0, 170, 255, 0.05);
+      border-left: 3px solid #00aaff;
+      padding: 15px;
+      margin: 12px 0;
+      border-radius: 4px;
+    }
+
     .loading { color: #00ff41; font-weight: bold; }
-    @media (max-width: 768px) { body { padding: 10px; } #terminal { margin: 20px auto; } .terminal-body { padding: 20px; font-size: 13px; } }
+
+    @media (max-width: 768px) {
+      body { padding: 10px; }
+      #terminal { margin: 20px auto; }
+      .terminal-body { padding: 20px; font-size: 13px; }
+    }
   </style>
 </head>
+
 <body>
   <div id="terminal">
     <div class="terminal-header">
@@ -77,9 +99,11 @@
       <div class="terminal-button btn-maximize"></div>
       <div class="terminal-title">atakan@devops-portfolio: ~</div>
     </div>
+
     <div class="terminal-body" id="terminal-body">
       <div id="intro-container"></div>
       <div id="history"></div>
+
       <div class="input-line" id="input-area">
         <span class="prompt">atakan@production</span>
         <span class="prompt-path" id="prompt-path">:~</span>
@@ -88,6 +112,7 @@
       </div>
     </div>
   </div>
+
   <script>
     const input = document.getElementById('command-input');
     const history = document.getElementById('history');
@@ -95,155 +120,536 @@
     const introContainer = document.getElementById('intro-container');
     const promptPath = document.getElementById('prompt-path');
     const terminalBody = document.getElementById('terminal-body');
+
     let currentPath = 'home';
     let commandHistory = [];
     let historyIndex = -1;
+
+    // CV dosyası (index.html ile aynı klasörde)
     const CV_FILE = "ATAKAN_SARIKAYA_DEVOPS_CV.pdf";
+
+    // Profil (metinleri buradan yönetebilirsin)
     const profile = {
       name: "Atakan Sarıkaya",
-      age: 27,
-      role: "Application Operations Specialist at Türk Telekom (via Sekom A.Ş.)",
+      roleShort: "Application Operations Specialist",
+      roleLong: "Application Operations Specialist (Türk Telekom via Sekom A.Ş.)",
       location: "İstanbul, Türkiye",
+      phone: "+90 552 922 52 77",
+      email: "sarikayaatakan@gmail.com",
       linkedin: "https://www.linkedin.com/in/atakansarikaya/",
-      website: "atakansarikaya.info"
+      website: "atakansarikaya.info",
+      bioShort: "Merhaba, ben Atakan. 27 yaşındayım. Yaklaşık 1,5 senedir Sekom A.Ş. bünyesinde; son 4 aydır da Türk Telekom’da (via Sekom A.Ş.) dedicated olarak uygulama operasyon süreçlerinde çalışıyorum."
     };
 
-    const bioText = `Merhaba, ben Atakan. ${profile.age} yaşındayım. 1 buçuk senedir Sekom A.Ş. bünyesindeyim ve son 4 aydır Türk Telekom'da dedicated Application Operations Specialist olarak görev alıyorum. Linux sistem yönetimi, container teknolojileri ve izleme araçları üzerine uzmanlaşıyorum.`;
-
+    // "dosya sistemi"
     const fs = {
       'home': {
         dirs: ['sertifikalar', 'deneyim', 'yetkinlikler', 'projeler', 'egitim'],
         files: ['readme.md', 'hakkimda.txt', 'iletisim.sh'],
         content: {
-          'readme.md': `# ${profile.name}\n## DevOps & Cloud Infrastructure Specialist\n\n${bioText}\n\n📍 ${profile.location}\n🌐 ${profile.website}\n\nHızlı Başlangıç için 'help' yazabilirsin.`,
-          'hakkimda.txt': `PROFESYONEL ÖZET\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n${bioText}\n\nŞu anda operasyonel süreçlerin otomasyonu, incident response ve monitoring altyapıları üzerine dedicated olarak çalışmaktayım.`,
-          'iletisim.sh': `echo "LinkedIn : ${profile.linkedin}\nWeb      : ${profile.website}"`
+          'readme.md': `# ${profile.name}
+## DevOps & Cloud Infrastructure Specialist
+
+👨‍💻 ${profile.roleLong}
+📍 ${profile.location}
+🌐 ${profile.website}
+
+${profile.bioShort}
+
+Hızlı Başlangıç:
+• help                Komut listesi
+• ls                  İçerik listele
+• cd deneyim          Deneyim dosyaları
+• cat hakkimda.txt    Profesyonel özet
+• cat readme.md       Bu sayfa
+• open cv             CV görüntüle
+• wget cv             CV indir (mobilde görüntüler)
+`,
+          'hakkimda.txt': `PROFESYONEL ÖZET
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${profile.bioShort}
+
+Linux (RHEL/CentOS) ve container teknolojileri (Docker/OpenShift) ile üretim ortamı operasyonlarında çalışıyorum.
+Günlük işlerde deployment düzenlemeleri (deployment config, environment değişkenleri), incident response ve troubleshooting süreçlerinde aktif rol alıyorum.
+İzleme/alarmlama tarafında Prometheus, Grafana ve Alertmanager ile metrik takibi ve alarm süreçlerine destek veriyorum.
+
+Hedefim: DevOps Engineer rollerine doğru planlı şekilde ilerlemek ve operasyonel süreçleri otomasyonla daha verimli hale getirmek.
+`,
+          'iletisim.sh': `#!/bin/bash
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "  İLETİŞİM"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo "Telefon  : ${profile.phone}"
+echo "E-posta  : ${profile.email}"
+echo "LinkedIn : ${profile.linkedin}"
+echo "Web      : ${profile.website}"
+echo "Konum    : ${profile.location}"
+`
         }
       },
+
       'deneyim': {
         dirs: [],
         files: ['guncel.txt', 'onceki.txt', 'staj.txt'],
         content: {
-          'guncel.txt': `🏢 Türk Telekom (via Sekom A.Ş.)\n📍 Application Operations Specialist (Dedicated)\n🗓️ Ekim 2025 — Halen (Son 4 aydır dedicated)`,
-          'onceki.txt': `🏢 Sekom A.Ş.\n📍 Yazılım Destek Uzmanı\n🗓️ Haziran 2024 — Ekim 2025 (1.5 sene)`,
-          'staj.txt': `🏢 İBB\n📍 Software Developer Intern\n🗓️ Ağustos 2023 — Ekim 2023`
+          'guncel.txt': `🏢 Türk Telekom via Sekom A.Ş.
+📍 ${profile.roleShort} (Dedicated)
+🗓️ Ekim 2025 — Halen
+
+• RHEL/CentOS tabanlı sistemlerde operasyonel süreçler
+• Deployment düzenlemeleri (config/env) ve troubleshooting
+• Prometheus/Grafana ile izleme ve alarm süreçlerine destek
+`,
+          'onceki.txt': `🏢 Sekom A.Ş.
+📍 Yazılım Destek / Operasyon
+🗓️ Haziran 2024 — Ekim 2025
+
+• Docker/OpenShift ortamlarında uygulama deployment süreçleri
+• Deployment config, environment değişkenleri ve operasyonel ayarlar
+• Log analizi, izleme/alarmlama ve SLA takibi süreçlerine destek
+`,
+          'staj.txt': `🏢 İstanbul Büyükşehir Belediyesi
+📍 Software Development Intern
+🗓️ Ağustos 2023 — Ekim 2023
+
+• Flask ile ToDo List web uygulaması geliştirme
+• SQLite entegrasyonu
+`
         }
       },
-      'yetkinlikler': { dirs: [], files: ['ozet.txt'], content: { 'ozet.txt': 'Linux, Docker, OpenShift, Prometheus, Grafana, Bash Scripting' } },
-      'sertifikalar': { dirs: [], files: ['liste.txt'], content: { 'liste.txt': 'HCCDA - Huawei Cloud, Red Hat System Admin 124' } },
-      'projeler': { dirs: [], files: ['portfolio.txt'], content: { 'portfolio.txt': 'Interaktif Terminal Portfolio (JS/HTML/CSS)' } },
-      'egitim': { dirs: [], files: ['okul.txt'], content: { 'okul.txt': 'Anadolu Üni - YBS / Beykent Üni - Bilgisayar Programcılığı' } }
+
+      'yetkinlikler': {
+        dirs: [],
+        files: ['ozet.txt'],
+        content: {
+          'ozet.txt': `TEKNİK YETKİNLİKLER (ÖZET)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Linux: RHEL / CentOS
+• Container: Docker, OpenShift (temel operasyon)
+• İzleme: Prometheus, Grafana, Alertmanager
+• Otomasyon: Bash (temel), Python (temel)
+• Veritabanı: PostgreSQL, Oracle, SQLite
+`
+        }
+      },
+
+      'sertifikalar': {
+        dirs: [],
+        files: ['liste.txt'],
+        content: {
+          'liste.txt': `SERTİFİKALAR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• HCCDA — Huawei Cloud Tech Essentials
+• Red Hat System Administration 124 (RHEL)
+• Uygulamalarla SQL — BTK Akademi
+• Network Temelleri — BTK Akademi
+`
+        }
+      },
+
+      'projeler': {
+        dirs: [],
+        files: ['portfolio.txt'],
+        content: {
+          'portfolio.txt': `PROJELER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• İnteraktif Terminal Portfolyosu (HTML/CSS/JS)
+  - ls/cd/cat simülasyonu
+  - Tab tamamlama + komut geçmişi
+  - open cv / wget cv ile CV deneyimi
+`
+        }
+      },
+
+      'egitim': {
+        dirs: [],
+        files: ['okul.txt'],
+        content: {
+          'okul.txt': `EĞİTİM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• İstanbul Beykent Üniversitesi — Bilgisayar Programcılığı (Önlisans)
+• Anadolu Üniversitesi — Yönetim Bilişim Sistemleri (Açıköğretim)
+`
+        }
+      }
     };
-    
-    const commands = ['help', 'ls', 'cd', 'cat', 'whoami', 'pwd', 'clear', 'linkedin', 'tree', 'open', 'wget'];
 
-    function scrollToBottom() { terminalBody.scrollTop = terminalBody.scrollHeight; }
+    // Komut listesi
+    const commands = ['help', 'ls', 'cd', 'cat', 'whoami', 'clear', 'linkedin', 'tree', 'open', 'wget', 'pwd', 'cv'];
 
-    async function showIntro() {
-      const welcomeLine = document.createElement('div');
-      welcomeLine.className = 'output';
-      welcomeLine.style.color = '#00aaff';
-      introContainer.appendChild(welcomeLine);
-      await new Promise(r => setTimeout(r, 400));
-      welcomeLine.textContent = '> Portföy sistemi başlatılıyor...';
-      printOutput(`<div class="info-box">╔════════════════════════════════════════════════════════════╗\n║   ${profile.name} — Dedicated Operations Specialist       ║\n╚════════════════════════════════════════════════════════════╝\n\nKomutlar için 'help' yaz. Tab tuşu ile tamamlayabilirsin.</div>`, true);
-      inputArea.style.display = 'flex';
-      input.focus();
+    function scrollToBottom() {
+      terminalBody.scrollTop = terminalBody.scrollHeight;
     }
 
-    function handleTab(e) {
-      e.preventDefault();
-      const val = input.value.trim();
-      const parts = val.split(' ');
-      const currentWord = parts[parts.length - 1].toLowerCase();
-      if (!currentWord) return;
-      let matches = [];
-      if (parts.length === 1) {
-        matches = commands.filter(c => c.startsWith(currentWord));
-      } else {
-        const options = [...fs[currentPath].dirs, ...fs[currentPath].files];
-        matches = options.filter(o => o.toLowerCase().startsWith(currentWord));
-      }
-      if (matches.length === 1) {
-        parts[parts.length - 1] = matches[0];
-        input.value = parts.join(' ') + (parts.length === 1 ? ' ' : '');
-      } else if (matches.length > 1) {
-        printOutput(`\n${matches.join('  ')}`, true);
-        printPrompt(val);
-        scrollToBottom();
-      }
-    }
-
-    input.addEventListener('keydown', function(e) {
-      if (e.key === 'Tab') handleTab(e);
-      if (e.key === 'Enter') {
-        const rawInput = input.value.trim();
-        const args = rawInput.split(' ');
-        const cmd = args[0].toLowerCase();
-        const target = args.slice(1).join(' ').trim().toLowerCase();
-        printPrompt(rawInput);
-        executeCommand(cmd, target);
-        input.value = '';
-        scrollToBottom();
-      }
-    });
-
-    function executeCommand(cmd, target) {
-      switch(cmd) {
-        case 'help': printOutput(`Gezinme: ls, cd [dizin], tree, pwd\nDosya: cat [dosya]\nSistem: whoami, clear, linkedin, open cv`, true); break;
-        case 'ls':
-          let out = '';
-          fs[currentPath].dirs.forEach(d => out += `<span class="dir">${d}/</span>`);
-          fs[currentPath].files.forEach(f => out += `<span class="file">${f}</span>`);
-          printOutput(out, true);
-          break;
-        case 'pwd':
-          printOutput(currentPath === 'home' ? '/home/atakan' : `/home/atakan/${currentPath}`);
-          break;
-        case 'cd':
-          if (!target || target === '~' || target === '..') currentPath = 'home';
-          else if (fs[currentPath].dirs.includes(target)) currentPath = target;
-          else printOutput(`<span class="error">Dizin bulunamadı</span>`, true);
-          updatePrompt();
-          break;
-        case 'cat':
-          if (fs[currentPath].content && fs[currentPath].content[target]) printOutput(fs[currentPath].content[target]);
-          else printOutput(`<span class="error">Dosya bulunamadı. (Örn: cat readme.md)</span>`, true);
-          break;
-        case 'whoami':
-          printOutput(`<div class="info-box"><span class="highlight">${profile.role}</span>\n${bioText}</div>`, true);
-          break;
-        case 'tree':
-          let tree = '<span class="highlight">/home/atakan</span>\n';
-          fs['home'].dirs.forEach(d => tree += `├── <span class="dir">${d}/</span>\n`);
-          fs['home'].files.forEach(f => tree += `├── ${f}\n`);
-          printOutput(tree, true);
-          break;
-        case 'clear': history.innerHTML = ''; break;
-        case 'linkedin': window.open(profile.linkedin, '_blank'); break;
-        case 'open': if (target === 'cv') window.open(CV_FILE, "_blank"); break;
-        default: if (cmd) printOutput(`<span class="error">bash: ${cmd}: komut bulunamadı</span>`, true);
-      }
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
     }
 
     function printPrompt(command = '') {
       const path = currentPath === 'home' ? '~' : `~/${currentPath}`;
       const resp = document.createElement('div');
       resp.className = 'output';
-      resp.innerHTML = `<span class="prompt">atakan@production</span><span class="prompt-path">:${path}</span><span class="prompt">$</span> <span style="color:white">${command}</span>`;
+      resp.innerHTML =
+        `<span class="prompt">atakan@production</span>` +
+        `<span class="prompt-path">:${path}</span>` +
+        `<span class="prompt">$</span> ` +
+        `<span style="color:white">${escapeHtml(command)}</span>`;
       history.appendChild(resp);
     }
+
     function printOutput(text, isHTML = false) {
       const resp = document.createElement('div');
       resp.className = 'output';
-      if (isHTML) resp.innerHTML = text; else resp.textContent = text;
+      if (isHTML) resp.innerHTML = text;
+      else resp.textContent = text;
       history.appendChild(resp);
     }
+
     function updatePrompt() {
       const path = currentPath === 'home' ? '~' : `~/${currentPath}`;
       promptPath.textContent = `:${path}`;
     }
+
+    function isMobile() {
+      return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.matchMedia("(max-width: 768px)").matches;
+    }
+
+    function startGreenLoading(message, durationMs, doneCb) {
+      const id = `ld_${Date.now()}_${Math.floor(Math.random()*1000)}`;
+      const resp = document.createElement('div');
+      resp.className = 'output';
+      resp.innerHTML = `<span class="loading" id="${id}">${message}</span>`;
+      history.appendChild(resp);
+      scrollToBottom();
+
+      const el = document.getElementById(id);
+      let dots = 0;
+      const t = setInterval(() => {
+        dots = (dots + 1) % 4;
+        if (el) el.textContent = message + '.'.repeat(dots);
+      }, 180);
+
+      setTimeout(() => {
+        clearInterval(t);
+        if (el) el.textContent = message + " ✓";
+        scrollToBottom();
+        if (typeof doneCb === "function") doneCb();
+      }, durationMs);
+    }
+
+    // --- CV komutları ---
+    function cvHelpText() {
+      return `CV KOMUTLARI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+cat cv        - CV komutları ve dosya bilgisi
+open cv       - CV'yi yeni sekmede aç
+wget cv       - CV'yi indir (mobilde görüntüleme moduna geçer)
+
+Alternatif:
+cv            - yardım
+cv view       - görüntüle
+cv download   - indir
+
+Dosya: ${CV_FILE}`;
+    }
+
+    function cvOpen() {
+      startGreenLoading("CV hazırlanıyor", 900, () => window.open(CV_FILE, "_blank"));
+    }
+
+    function cvDownloadDesktop() {
+      const a = document.createElement('a');
+      a.href = CV_FILE;
+      a.download = CV_FILE;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    async function showIntro() {
+      const welcomeLine = document.createElement('div');
+      welcomeLine.className = 'output';
+      welcomeLine.style.color = '#00aaff';
+      introContainer.appendChild(welcomeLine);
+
+      // küçük "boot" hissi
+      await new Promise(r => setTimeout(r, 350));
+      welcomeLine.textContent = '> Portföy sistemi başlatılıyor...';
+
+      printOutput(
+        `<div class="info-box">╔════════════════════════════════════════════════════════════╗
+║   ${profile.name} — İnteraktif Terminal Portföy            ║
+║   Türk Telekom via Sekom A.Ş. (Dedicated)                  ║
+╚════════════════════════════════════════════════════════════╝
+
+Komutlar:
+• <span class="highlight">help</span>               Komut listesini gösterir
+• <span class="highlight">cat readme.md</span>      Hızlı özet
+• <span class="highlight">cat hakkimda.txt</span>   Profesyonel özet
+• <span class="highlight">cd deneyim</span>         Deneyimler
+• <span class="highlight">open cv</span>            CV'yi görüntüler
+• <span class="highlight">wget cv</span>            CV'yi indirir (mobilde görüntüler)
+
+İpucu: Tab ile tamamlama, ↑↓ ile geçmiş.</div>`,
+        true
+      );
+
+      inputArea.style.display = 'flex';
+      input.focus();
+      updatePrompt();
+      scrollToBottom();
+    }
+
+    // ---- TAB tamamlama (cat readme.md çalışsın, "cat " durumunu da yakalasın) ----
+    function handleTab(e) {
+      e.preventDefault();
+
+      const raw = input.value;
+      const endsWithSpace = /\s$/.test(raw);
+
+      // tokens: fazla boşlukları normalize et
+      const tokens = raw.split(/\s+/).filter(Boolean);
+      if (endsWithSpace) tokens.push(''); // yeni argüman bekleniyor
+
+      const lastToken = (tokens[tokens.length - 1] || '').toLowerCase();
+
+      // 1 token: komut, 2+ token: hedef (dosya/dizin)
+      let candidates = [];
+      if (tokens.length <= 1) {
+        candidates = commands;
+      } else {
+        candidates = [...fs[currentPath].dirs, ...fs[currentPath].files, 'cv'];
+      }
+
+      const matches = candidates.filter(x => x.toLowerCase().startsWith(lastToken));
+
+      if (matches.length === 1) {
+        tokens[tokens.length - 1] = matches[0];
+
+        // input'u yeniden kur
+        const rebuilt = tokens.filter((t, i) => !(endsWithSpace && i === tokens.length - 1 && t === '')).join(' ');
+        input.value = rebuilt;
+
+        // komut tamamlandıysa (tek token), bir boşluk koy ki argümana geçsin
+        if (tokens.length === 1) input.value += ' ';
+      } else if (matches.length > 1) {
+        printOutput(`\n${matches.join('  ')}`, false);
+        printPrompt(raw.trim());
+        scrollToBottom();
+      }
+    }
+
+    // case-insensitive dosya çözümleme (cat README.md / cat readme.md)
+    function resolveContentKey(pathKey, targetLower) {
+      const contentMap = fs[pathKey] && fs[pathKey].content ? fs[pathKey].content : null;
+      if (!contentMap) return null;
+      const keys = Object.keys(contentMap);
+      return keys.find(k => k.toLowerCase() === targetLower) || null;
+    }
+
+    function executeCommand(cmd, target) {
+      switch (cmd) {
+        case 'help':
+          printOutput(
+`Komutlar:
+  ls                 - Dizin içeriğini listeler
+  cd [dizin]         - Dizine geçiş (cd .. / cd ~)
+  pwd                - Bulunduğun dizini gösterir
+  tree               - Klasör yapısını gösterir
+
+  cat [dosya]        - Dosya içeriğini gösterir
+  whoami             - Kısa profil
+  linkedin           - LinkedIn profilini açar
+
+  cat cv             - CV komutları
+  open cv            - CV görüntüle
+  wget cv            - CV indir (mobilde görüntüler)
+  cv                 - yardım (cv view / cv download)
+
+  clear              - Ekranı temizler`, false);
+          break;
+
+        case 'pwd':
+          printOutput(currentPath === 'home' ? '/home/atakan' : `/home/atakan/${currentPath}`, false);
+          break;
+
+        case 'ls': {
+          let out = '';
+          if (fs[currentPath].dirs.length) {
+            fs[currentPath].dirs.forEach(d => out += `<span class="dir">${d}/</span>`);
+            out += '\n';
+          }
+          if (fs[currentPath].files.length) {
+            fs[currentPath].files.forEach(f => out += `<span class="file">${f}</span>`);
+          }
+          printOutput(out, true);
+          break;
+        }
+
+        case 'tree': {
+          let tree = '<span class="highlight">/home/atakan</span>\n';
+          fs['home'].dirs.forEach(d => tree += `├── <span class="dir">${d}/</span>\n`);
+          fs['home'].files.forEach(f => tree += `├── ${f}\n`);
+          tree += `└── ${CV_FILE}\n`;
+          printOutput(tree, true);
+          break;
+        }
+
+        case 'cd':
+          if (!target || target === '~' || target === '..') {
+            currentPath = 'home';
+          } else if (fs[currentPath].dirs.includes(target)) {
+            currentPath = target;
+          } else {
+            printOutput(`<span class="error">bash: cd: ${escapeHtml(target)}: Böyle bir dizin yok</span>`, true);
+          }
+          updatePrompt();
+          break;
+
+        case 'cat': {
+          if (!target) {
+            printOutput(`<span class="error">Kullanım: cat [dosya]</span>`, true);
+            break;
+          }
+
+          // cat cv özel
+          if (target === 'cv') {
+            printOutput(cvHelpText(), false);
+            break;
+          }
+
+          const key = resolveContentKey(currentPath, target);
+          if (key) {
+            printOutput(fs[currentPath].content[key], false);
+          } else {
+            printOutput(`<span class="error">bash: cat: ${escapeHtml(target)}: Böyle bir dosya yok</span>`, true);
+          }
+          break;
+        }
+
+        case 'whoami':
+          printOutput(
+            `<div class="info-box"><span class="highlight">${profile.name}</span>
+${profile.roleLong} | ${profile.location}
+
+${profile.bioShort}
+
+İpucu: detay için <span class="highlight">cat hakkimda.txt</span></div>`,
+            true
+          );
+          break;
+
+        case 'linkedin':
+          printOutput('LinkedIn profili açılıyor...', false);
+          window.open(profile.linkedin, '_blank');
+          break;
+
+        case 'open':
+          if (target === 'cv') cvOpen();
+          else printOutput(`<span class="error">Kullanım: open cv</span>`, true);
+          break;
+
+        case 'wget':
+          if (target === 'cv') {
+            if (isMobile()) {
+              printOutput("Mobil cihaz tespit edildi. İndirmek yerine CV görüntüleniyor...", false);
+              cvOpen();
+            } else {
+              startGreenLoading("CV indiriliyor", 700, () => cvDownloadDesktop());
+            }
+          } else {
+            printOutput(`<span class="error">Kullanım: wget cv</span>`, true);
+          }
+          break;
+
+        case 'cv':
+          if (!target) { printOutput(cvHelpText(), false); break; }
+          if (target === 'view') { cvOpen(); break; }
+          if (target === 'download') {
+            if (isMobile()) {
+              printOutput("Mobil cihaz tespit edildi. İndirmek yerine CV görüntüleniyor...", false);
+              cvOpen();
+            } else {
+              startGreenLoading("CV indiriliyor", 700, () => cvDownloadDesktop());
+            }
+            break;
+          }
+          printOutput(`<span class="error">Kullanım: cv | cv view | cv download</span>`, true);
+          break;
+
+        case 'clear':
+          history.innerHTML = '';
+          break;
+
+        default:
+          if (cmd) {
+            printOutput(
+              `<span class="error">bash: ${escapeHtml(cmd)}: komut bulunamadı</span>
+Komutlar için 'help' yaz.`,
+              true
+            );
+          }
+      }
+    }
+
+    // input eventleri
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Tab') return handleTab(e);
+
+      // geçmiş (↑↓)
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (historyIndex < commandHistory.length - 1) {
+          historyIndex++;
+          input.value = commandHistory[historyIndex];
+        }
+        return;
+      }
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (historyIndex > 0) {
+          historyIndex--;
+          input.value = commandHistory[historyIndex];
+        } else if (historyIndex === 0) {
+          historyIndex = -1;
+          input.value = '';
+        }
+        return;
+      }
+
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const rawInput = input.value.trim();
+        if (!rawInput) {
+          printPrompt('');
+          scrollToBottom();
+          input.value = '';
+          return;
+        }
+
+        commandHistory.unshift(rawInput);
+        historyIndex = -1;
+
+        const parts = rawInput.split(/\s+/);
+        const cmd = parts[0].toLowerCase();
+        const target = parts.slice(1).join(' ').trim().toLowerCase();
+
+        printPrompt(rawInput);
+        executeCommand(cmd, target);
+
+        input.value = '';
+        scrollToBottom();
+      }
+    });
+
     document.addEventListener('click', () => input.focus());
+
     showIntro();
   </script>
 </body>
