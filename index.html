@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -39,12 +39,7 @@
       user-select: none;
     }
 
-    .terminal-button {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-    }
-
+    .terminal-button { width: 12px; height: 12px; border-radius: 50%; }
     .btn-close { background: #ff5f57; }
     .btn-minimize { background: #ffbd2e; }
     .btn-maximize { background: #28ca42; }
@@ -95,14 +90,9 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .input-line {
-      display: none;
-      align-items: center;
-      margin-top: 10px;
-    }
+    .input-line { display: none; align-items: center; margin-top: 10px; }
 
     .error { color: #ff5f57; }
-
     .dir { color: #00aaff; font-weight: bold; margin-right: 15px; }
     .file { color: #aaa; margin-right: 15px; }
 
@@ -165,281 +155,278 @@
     let currentPath = 'home';
     let commandHistory = [];
     let historyIndex = -1;
-    const linkedin_url = "https://www.linkedin.com/in/atakansarikaya/";
+
+    // CV bilgileri (Türkçe)
+    const profile = {
+      name: "Atakan Sarıkaya",
+      role: "Application Operations Specialist",
+      location: "İstanbul, Türkiye",
+      phone: "+90 552 922 52 77",
+      email: "sarikayaatakan@gmail.com",
+      linkedin: "https://www.linkedin.com/in/atakansarikaya/",
+      website: "atakansarikaya.info"
+    };
 
     const fs = {
       'home': {
-        dirs: ['certifications', 'experience', 'skills'],
-        files: ['README.md', 'contact.sh', 'about.txt'],
+        dirs: ['sertifikalar', 'deneyim', 'yetkinlikler', 'projeler', 'egitim'],
+        files: ['README.md', 'hakkimda.txt', 'iletisim.sh'],
         content: {
-          'README.md': `# Atakan Sarıkaya
+          'README.md': `# ${profile.name}
 ## DevOps & Cloud Infrastructure Specialist
 
-👨‍💻 Application Operations Specialist @ Türk Telekom
-🎯 Specializing in DevOps, Cloud Computing & Linux System Administration
-📍 Istanbul, Turkey | 27 years old
+👨‍💻 ${profile.role} (Türk Telekom - Sekom A.Ş.)
+📍 ${profile.location}
+🌐 ${profile.website}
 
-### Quick Start
-• cat about.txt       - Detailed bio
-• cd skills          - Technical competencies
-• cd experience      - Professional background
-• cd certifications  - Credentials & training
-• cat contact.sh     - Connect with me
+### Hızlı Başlangıç
+• cat hakkimda.txt         - Profesyonel özet
+• cd yetkinlikler          - Teknik yetkinlikler
+• cd deneyim               - Profesyonel deneyim
+• cd sertifikalar          - Sertifikalar
+• cd projeler              - Projeler
+• cd egitim                - Eğitim
+• cat iletisim.sh          - İletişim bilgileri
 
-Type 'help' for available commands.`,
+Komutlar için 'help' yaz.`,
 
-          'about.txt': `PROFESSIONAL SUMMARY
+          'hakkimda.txt': `PROFESYONEL ÖZET
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Linux system administrator transitioning to DevOps with hands-on
-experience in container orchestration and application operations.
-Currently working at Türk Telekom and actively seeking DevOps
-opportunities to grow and contribute.
+Linux sistem yöneticiliğinden DevOps alanına geçiş yapan; container
+orkestrasyonu ve uygulama operasyonlarında sahada aktif deneyime sahip
+bir Application Operations Specialist.
 
-HOBBYIST LAB & HARDWARE:
-├── OS: RHEL / Ubuntu Server
-├── CPU: Ryzen 5 7500X3D
-├── GPU: RTX 5070
-└── Local AI: Running local LLM models and infrastructure testing
+Kurumsal sistemlerde incident response, monitoring/alerting, deployment
+ve troubleshooting süreçlerinde görev alıyorum. Operasyonel işleri Bash
+ile otomatikleştirerek verimlilik artırmayı seviyorum.
 
-CORE COMPETENCIES:
-├── Container Orchestration (Docker, OpenShift)
-├── Cloud Platform (Huawei Cloud - Certified)
-├── Linux System Administration (RHEL, CentOS)
-├── Continuous Deployment & Automation
-└── Monitoring & Observability (Prometheus, Grafana)
+ODAK ALANLARIM
+• RHEL/CentOS tabanlı Linux sistem yönetimi
+• Docker / OpenShift ortamlarında uygulama operasyonları
+• Prometheus / Grafana ile izleme ve alarm yönetimi
+• Log analizi, kök neden analizi (RCA) ve SLA takibi
 
-APPROACH:
-Solving complex system problems through root-cause analysis,
-automating manual tasks with Bash scripts, and building
-highly available infrastructure.
+HEDEF
+• DevOps Engineer rollerinde büyümek ve katkı sağlamak.`,
 
-🎯 CAREER STATUS: Actively seeking DevOps Engineer positions`,
-
-          'contact.sh': `#!/bin/bash
-# Contact Information
+          'iletisim.sh': `#!/bin/bash
+# İletişim Bilgileri
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  PROFESSIONAL CONTACT"
+echo "  İLETİŞİM"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
-echo "LinkedIn: ${linkedin_url}"
-echo "Location: Istanbul, Turkey"
-echo "Role: Application Operations Specialist"
-echo "Company: Türk Telekom"
+echo "Telefon  : ${profile.phone}"
+echo "E-posta  : ${profile.email}"
+echo "LinkedIn : ${profile.linkedin}"
+echo "Web      : ${profile.website}"
+echo "Konum    : ${profile.location}"
 echo ""
-echo "Opening LinkedIn profile..."
+echo "LinkedIn açılıyor..."`
 
-# Redirecting to LinkedIn...`
         }
       },
 
-      'certifications': {
+      'sertifikalar': {
         dirs: [],
-        files: ['cloud.txt', 'linux.txt', 'database.txt', 'list.sh'],
+        files: ['bulut.txt', 'linux.txt', 'veritabani.txt', 'liste.sh'],
         content: {
-          'cloud.txt': `CLOUD CERTIFICATION
+          'bulut.txt': `BULUT SERTİFİKASI
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-📜 Huawei Cloud Certified Associate (HCCDA)
-   • Cloud Computing Tech Essentials
-   • Cloud Infrastructure & Services
-   • Cloud Security Fundamentals`,
+📜 HCCDA — Huawei Cloud Tech Essentials
+• Bulut altyapı & servisler
+• Temel bulut güvenliği
+• Bulut bileşenleri ve çalışma mantığı`,
 
-          'linux.txt': `LINUX CERTIFICATION
+          'linux.txt': `LINUX EĞİTİM/SERTİFİKA
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-🐧 Red Hat System Administration (RH124)
-   • RHEL System Management
-   • User & Permission Management
-   • Service Configuration & Troubleshooting
-   • Storage & File System Management`,
+🐧 Red Hat System Administration 124 (RHEL)
+• Sistem yönetimi
+• Kullanıcı/izin yönetimi
+• Servis konfigürasyonu & troubleshooting
+• Depolama / dosya sistemi yönetimi`,
 
-          'database.txt': `DATABASE CERTIFICATION
+          'veritabani.txt': `VERİTABANI
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-💾 SQL Database Management - BTK Academy
-   • Advanced SQL Queries
-   • Database Design & Optimization
-   • Data Analysis & Reporting`,
+💾 Uygulamalarla SQL — BTK Akademi
+• İleri SQL sorguları
+• Veri analizi & raporlama temelleri
 
-          'list.sh': `#!/bin/bash
-# All Certifications
+Ek:
+• Network Temelleri — BTK Akademi`,
 
-certifications=(
-    "Huawei Cloud Certified Associate (HCCDA)"
-    "Red Hat Linux System Administration (RH124)"
-    "SQL Database Management - BTK Academy"
+          'liste.sh': `#!/bin/bash
+# Sertifika Listesi
+
+certs=(
+  "Red Hat System Administration 124 (RHEL)"
+  "HCCDA — Huawei Cloud Tech Essentials"
+  "Uygulamalarla SQL — BTK Akademi"
+  "Network Temelleri — BTK Akademi"
 )
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  PROFESSIONAL CERTIFICATIONS"
+echo "  SERTİFİKALAR"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
-
-for cert in "\${certifications[@]}"; do
-    echo "✓ $cert"
+for c in "\${certs[@]}"; do
+  echo "✓ \$c"
 done`
         }
       },
 
-      'experience': {
+      'deneyim': {
         dirs: [],
-        files: ['current.txt', 'previous.txt', 'timeline.sh'],
+        files: ['guncel.txt', 'onceki.txt', 'staj.txt', 'zaman-cizelgesi.sh'],
         content: {
-          'current.txt': `CURRENT POSITION
+          'guncel.txt': `GÜNCEL POZİSYON
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-🏢 Türk Telekom
+🏢 Türk Telekom (Sekom A.Ş.)
 📍 Application Operations Specialist
-⏱️  6+ Months (Current)
+🗓️ Ekim 2025 — Halen
 
-KEY RESPONSIBILITIES:
-• Managing enterprise-level application infrastructure
-• Implementing DevOps best practices and automation
-• Monitoring and optimizing system performance
-• Ensuring high availability and disaster recovery
-• Collaborating with development teams for seamless deployments
+Sorumluluklar:
+• RHEL/CentOS tabanlı kurumsal sistemlerin operasyonel yönetimi
+• Incident response süreçleri ve kök neden analizi (RCA)
+• Prometheus/Grafana ile sistem metrikleri ve uygulama health monitoring
+• Docker ve Java uygulamalarında deployment, troubleshooting ve operasyonel destek
+• Bash scripting ile operasyonel görevlerin otomasyonu ve verimlilik artışı`,
 
-TECHNOLOGIES:
-Docker, OpenShift, Linux (RHEL), Bash Scripting,
-Monitoring Tools (Prometheus, Grafana)`,
-
-          'previous.txt': `PREVIOUS EXPERIENCE
+          'onceki.txt': `ÖNCEKİ DENEYİM
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-🏢 Sekom
-📍 Software Support Specialist / Cloud Operations
-⏱️  1 Year 3 Months
+🏢 Sekom A.Ş.
+📍 DevSecOps Cloud Operations / Software Support Specialist
+🗓️ Haziran 2024 — Ekim 2025
 
-ACHIEVEMENTS:
-• Managed deployment processes and application operations
-• Implemented containerization with Docker
-• Enhanced operational efficiency through automation
-• Managed cloud infrastructure on Huawei Cloud
-• Led incident response and system troubleshooting initiatives
+Çalışmalar:
+• Docker/OpenShift ortamlarında Java/Python uygulamalarının deployment, scaling ve lifecycle yönetimi
+• Monitoring & alerting konfigürasyonu; log analizi ve SLA takibi
+• PostgreSQL/Oracle üzerinde SQL operasyonları; temel backup/restore süreçleri
+• Linux sunucu yönetimi ve systemd servis yönetimi; web servisleri monitoring ve patching
+• Jira/Confluence ile incident/change yönetimi ve teknik dokümantasyon`,
 
-TECHNOLOGIES:
-Huawei Cloud, Docker, GitLab, Bash Scripting,
-Linux System Administration, Application Deployment`,
+          'staj.txt': `STAJ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-          'timeline.sh': `#!/bin/bash
-# Career Timeline
+🏢 İstanbul Büyükşehir Belediyesi
+📍 Software Developer Intern
+🗓️ Ağustos 2023 — Ekim 2023
+
+• Flask ile CRUD tabanlı ToDo List web uygulaması
+• SQLite entegrasyonu`,
+
+          'zaman-cizelgesi.sh': `#!/bin/bash
+# Kariyer Zaman Çizelgesi
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  PROFESSIONAL TIMELINE"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
-echo "2024 - Present   │ Türk Telekom"
-echo "                 │ Application Operations Specialist"
-echo "                 │"
-echo "2023 - 2024      │ Sekom"
-echo "                 │ Cloud Operations"
-echo "                 │"
+echo "  ZAMAN ÇİZELGESİ"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
-echo "Total Experience: 1 Year 9+ Months"`
+echo "Ekim 2025 - Halen   │ Türk Telekom (Sekom A.Ş.)"
+echo "                    │ Application Operations Specialist"
+echo "                    │"
+echo "Haz 2024 - Eki 2025 │ Sekom A.Ş."
+echo "                    │ DevSecOps Cloud Ops / Support"
+echo "                    │"
+echo "Ağu 2023 - Eki 2023 │ İBB"
+echo "                    │ Software Developer Intern"
+echo ""`
         }
       },
 
-      'skills': {
+      'yetkinlikler': {
         dirs: [],
-        files: ['orchestration.txt', 'systems.txt', 'monitoring.txt', 'automation.txt', 'summary.sh'],
+        files: ['ozet.txt', 'os-bulut.txt', 'container.txt', 'izleme.txt', 'otomasyon.txt', 'veritabani.txt'],
         content: {
-          'orchestration.txt': `CONTAINER ORCHESTRATION
+          'ozet.txt': `TEKNİK YETKİNLİKLER (ÖZET)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-🐳 Docker
-   • Multi-stage builds & optimization
-   • Docker Compose for local development
-   • Container security best practices
-   • Registry management
+• OS & Cloud: RHEL, CentOS, Huawei Cloud (HCCDA)
+• Container & Orchestration: Docker, OpenShift, Kubernetes (Temel)
+• Monitoring: Prometheus, Grafana, Alertmanager, Log Analysis
+• Automation: Bash Scripting, Python (Temel)
+• Database: PostgreSQL, Oracle, SQLite
+• Tools: Jira, Confluence, DataGrip, systemd (servis yönetimi)`,
 
-☸️  Red Hat OpenShift
-   • Application deployment & management
-   • Pod autoscaling & resource optimization
-   • Route & service configuration
-   • Operator framework understanding`,
-
-          'systems.txt': `LINUX SYSTEM ADMINISTRATION
+          'os-bulut.txt': `OS & CLOUD
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-🐧 Operating Systems
-   • Red Hat Enterprise Linux (RHEL)
-   • CentOS / Rocky Linux
-   • Ubuntu Server
+• RHEL / CentOS yönetimi
+• Temel performans ve servis troubleshooting
+• Huawei Cloud (HCCDA) — temel servis bilgisi`,
 
-⚙️  System Management
-   • Systemd service management
-   • User & permission administration
-   • Storage configuration & management
-   • Network configuration & troubleshooting
-   • Performance tuning & optimization
-   • Bash scripting for automation`,
-
-          'monitoring.txt': `MONITORING & OBSERVABILITY
+          'container.txt': `CONTAINER & ORCHESTRATION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-📊 Prometheus
-   • Metric collection & aggregation
-   • Alert rule configuration
-   • Service discovery setup
+• Docker: deployment, troubleshooting, temel lifecycle
+• OpenShift: uygulama dağıtımı, pod/service/route temelleri
+• Kubernetes: temel kavramlar (pod, service, deployment)`,
 
-📈 Grafana
-   • Custom dashboard creation
-   • Data visualization & analysis
-   • Alert integration
-
-🔍 Log Management
-   • Log aggregation & analysis
-   • Troubleshooting & root cause analysis
-   • Performance monitoring`,
-
-          'automation.txt': `AUTOMATION & DEPLOYMENT
+          'izleme.txt': `MONITORING & OBSERVABILITY
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-💻 Bash Scripting
-   • Automation of routine tasks
-   • System administration scripts
-   • Deployment automation
-   • Backup & recovery scripts
+• Prometheus: metrik toplama, temel query mantığı
+• Grafana: dashboard, görselleştirme, alarm entegrasyonu
+• Alertmanager: alert routing / bildirim akışları
+• Log analysis: olay analizi ve hata ayıklama`,
 
-🔄 Continuous Deployment
-   • Application deployment processes
-   • Automated rollout strategies
-   • Environment provisioning
-   • Deployment pipeline understanding
+          'otomasyon.txt': `OTOMASYON
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-📚 Currently Learning
-   • CI/CD Integration (GitLab CI, Jenkins)
-   • Infrastructure as Code (Terraform, Ansible)`,
+• Bash scripting: operasyonel işleri otomatikleştirme
+• Python (temel): küçük otomasyon/yardımcı scriptler`,
 
-          'summary.sh': `#!/bin/bash
-# Technical Skills Summary
+          'veritabani.txt': `VERİTABANI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-categories=(
-    "Container Orchestration:Docker,OpenShift"
-    "Operating Systems:RHEL,CentOS,Ubuntu"
-    "Monitoring:Prometheus,Grafana"
-    "Scripting:Bash,Shell"
-    "Cloud Platform:Huawei Cloud (Certified)"
-    "Version Control:Git,GitLab"
-    "Deployment:CD Processes,Automation"
-)
+• PostgreSQL: temel operasyonlar / sorgular
+• Oracle: temel SQL operasyonları
+• SQLite: küçük uygulama entegrasyonları`
+        }
+      },
 
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  TECHNICAL COMPETENCIES"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
+      'projeler': {
+        dirs: [],
+        files: ['terminal-portfolio.txt', 'todo.txt'],
+        content: {
+          'terminal-portfolio.txt': `PROJE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-for category in "\${categories[@]}"; do
-    IFS=':' read -r name skills <<< "$category"
-    echo "▸ $name"
-    echo "  └─ $skills"
-    echo ""
-done
+İnteraktif Terminal Portfolio (HTML, CSS, JavaScript) — Ocak 2026
 
-echo "🎯 Currently expanding skills in CI/CD and IaC"`
+• Linux terminal arayüzü simülasyonu (ls/cd/cat)
+• Tab completion ve komut geçmişi
+• Boot animasyonu
+• Yayın: atakansarikaya.info`,
+
+          'todo.txt': `PROJE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ToDo List Web Application (Flask, SQLite) — Eylül 2023
+
+• CRUD operasyonları
+• Temel veri kalıcılığı ile görev yönetimi`
+        }
+      },
+
+      'egitim': {
+        dirs: [],
+        files: ['okul.txt'],
+        content: {
+          'okul.txt': `EĞİTİM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• Anadolu Üniversitesi — Yönetim Bilişim Sistemleri (Açıköğretim)
+  Eylül 2025 — Halen
+
+• İstanbul Beykent Üniversitesi — Bilgisayar Programcılığı (Önlisans)
+  Eylül 2021 — Ağustos 2023`
         }
       }
     };
@@ -462,21 +449,26 @@ echo "🎯 Currently expanding skills in CI/CD and IaC"`
       welcomeLine.style.marginBottom = '20px';
       introContainer.appendChild(welcomeLine);
 
-      await typeWriter(welcomeLine, '> Initializing DevOps Portfolio System...', 40);
+      await typeWriter(welcomeLine, '> Portföy sistemi başlatılıyor...', 40);
       await new Promise(r => setTimeout(r, 400));
 
       printOutput(
         `<div class="info-box">
 ╔════════════════════════════════════════════════════════════╗
-║   Welcome to Atakan Sarıkaya's Interactive Portfolio      ║
-║   Linux System Admin & DevOps Engineer                    ║
-║   🎯 Currently seeking DevOps opportunities                ║
+║   ${profile.name} — İnteraktif Terminal Portföy            ║
+║   Linux / DevOps / Cloud Odaklı Operasyon                  ║
+║   🎯 DevOps fırsatlarına açık                              ║
 ╚════════════════════════════════════════════════════════════╝
 
-Type <span class="highlight">help</span> to see available commands
-Type <span class="highlight">cat README.md</span> for quick start guide
-Use <span class="highlight">Tab</span> key for auto-completion
-Use <span class="highlight">↑↓</span> arrow keys for command history
+Komutlar:
+• <span class="highlight">help</span>               Komut listesini gösterir
+• <span class="highlight">cat README.md</span>      Hızlı özet
+• <span class="highlight">cat hakkimda.txt</span>   Profesyonel özet
+• <span class="highlight">cd deneyim</span>         Deneyimler
+• <span class="highlight">cd yetkinlikler</span>    Teknik yetkinlikler
+• <span class="highlight">cd sertifikalar</span>    Sertifikalar
+• <span class="highlight">cd projeler</span>        Projeler
+• <span class="highlight">cd egitim</span>          Eğitim
 </div>`,
         true
       );
@@ -526,7 +518,7 @@ Use <span class="highlight">↑↓</span> arrow keys for command history
           words[words.length - 1] = matches[0];
           input.value = words.join(' ');
         } else if (matches.length > 1) {
-          printOutput(`\nPossible matches: ${matches.join('  ')}`, false);
+          printOutput(`\nOlası eşleşmeler: ${matches.join('  ')}`, false);
           printPrompt(input.value);
           scrollToBottom();
         }
@@ -567,25 +559,23 @@ Use <span class="highlight">↑↓</span> arrow keys for command history
 
         case 'help':
           printOutput(
-            `<div class="section-header">Available Commands</div>
-<span class="highlight">Navigation:</span>
-  ls               - List directory contents
-  cd [dir]         - Change directory (use 'cd ..' or 'cd ~' to go back)
-  pwd              - Print working directory
-  tree             - Display directory structure
+            `<div class="section-header">Komutlar</div>
+<span class="highlight">Gezinme:</span>
+  ls               - Dizin içeriğini listeler
+  cd [dir]         - Dizine geçiş (cd .. veya cd ~ ile geri)
+  pwd              - Bulunduğun dizini gösterir
+  tree             - Klasör yapısını gösterir
 
-<span class="highlight">File Operations:</span>
-  cat [file]       - Display file contents
+<span class="highlight">Dosya:</span>
+  cat [file]       - Dosya içeriğini gösterir
 
-<span class="highlight">Information:</span>
-  whoami           - Display current user info
-  linkedin         - Open LinkedIn profile
+<span class="highlight">Bilgi:</span>
+  whoami           - Kısa profil
+  linkedin         - LinkedIn profilini açar
 
-<span class="highlight">System:</span>
-  clear            - Clear terminal screen
-  help             - Show this help message
-
-<span class="highlight">Tip:</span> Use Tab for auto-completion, ↑↓ for command history`,
+<span class="highlight">Sistem:</span>
+  clear            - Ekranı temizler
+  help             - Bu mesaj`,
             true
           );
           break;
@@ -609,9 +599,8 @@ Use <span class="highlight">↑↓</span> arrow keys for command history
 
         case 'tree': {
           let tree = '<span class="highlight">/home/atakan</span>\n';
-          // show only root like before
           fs['home'].dirs.forEach(d => tree += `├── <span class="dir">${d}/</span>\n`);
-          fs['home'].files.forEach((f) => { tree += `├── ${f}\n`; });
+          fs['home'].files.forEach(f => tree += `├── ${f}\n`);
           printOutput(tree, true);
           break;
         }
@@ -622,7 +611,7 @@ Use <span class="highlight">↑↓</span> arrow keys for command history
           } else if (fs[currentPath].dirs.includes(target)) {
             currentPath = target;
           } else {
-            printOutput(`<span class="error">bash: cd: ${target}: No such directory</span>`, true);
+            printOutput(`<span class="error">bash: cd: ${target}: Böyle bir dizin yok</span>`, true);
           }
           updatePrompt();
           break;
@@ -630,37 +619,40 @@ Use <span class="highlight">↑↓</span> arrow keys for command history
         case 'cat':
           if (fs[currentPath].content && fs[currentPath].content[target]) {
             printOutput(fs[currentPath].content[target], false);
-            if (target === 'contact.sh') {
-              setTimeout(() => window.open(linkedin_url, '_blank'), 1000);
+            if (target === 'iletisim.sh') {
+              // İstersen otomatik LinkedIn açtırabiliriz; şimdilik sadece çıktı.
             }
           } else {
-            printOutput(`<span class="error">bash: cat: ${target}: No such file</span>`, true);
+            printOutput(`<span class="error">bash: cat: ${target}: Böyle bir dosya yok</span>`, true);
           }
           break;
 
         case 'whoami':
           printOutput(
-            `<div class="info-box">atakan - Application Operations Specialist
-Currently working at Türk Telekom
-DevOps enthusiast focusing on cloud infrastructure and automation
+            `<div class="info-box">${profile.name} — ${profile.role}
+Türk Telekom (Sekom A.Ş.) | ${profile.location}
 
-🎯 Open to DevOps opportunities
+🎯 DevOps Engineer rollerine açık
+• İzleme: Prometheus / Grafana / Alertmanager
+• Container: Docker / OpenShift
+• Linux: RHEL / CentOS
+• Otomasyon: Bash (Python temel)
 
-Use 'cat about.txt' for detailed information</div>`,
+Detay: 'cat hakkimda.txt'</div>`,
             true
           );
           break;
 
         case 'linkedin':
-          printOutput('Opening LinkedIn profile...', false);
-          window.open(linkedin_url, '_blank');
+          printOutput('LinkedIn profili açılıyor...', false);
+          window.open(profile.linkedin, '_blank');
           break;
 
         default:
           if (cmd !== '') {
             printOutput(
-              `<span class="error">bash: ${cmd}: command not found</span>
-Type 'help' to see available commands`,
+              `<span class="error">bash: ${cmd}: komut bulunamadı</span>
+Komutlar için 'help' yaz.`,
               true
             );
           }
@@ -705,27 +697,17 @@ Type 'help' to see available commands`,
     // SADECE "KAYNAK KODU GÖRÜNTÜLEMEYİ ZORLAŞTIRMA"
     // (bypass edilebilir)
     // ==========================
-
-    // sağ tık kapat
     document.addEventListener('contextmenu', (e) => e.preventDefault(), { passive: false });
 
-    // yaygın kısayolları engelle
     document.addEventListener('keydown', (e) => {
       const k = (e.key || '').toLowerCase();
-      const ctrl = e.ctrlKey || e.metaKey; // mac için
+      const ctrl = e.ctrlKey || e.metaKey;
 
-      if (e.key === 'F12') {
-        e.preventDefault(); e.stopPropagation(); return;
-      }
-      if (ctrl && (k === 'u' || k === 's')) { // view-source / save
-        e.preventDefault(); e.stopPropagation(); return;
-      }
-      if (ctrl && e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) { // devtools
-        e.preventDefault(); e.stopPropagation(); return;
-      }
+      if (e.key === 'F12') { e.preventDefault(); e.stopPropagation(); return; }
+      if (ctrl && (k === 'u' || k === 's')) { e.preventDefault(); e.stopPropagation(); return; }
+      if (ctrl && e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) { e.preventDefault(); e.stopPropagation(); return; }
     }, true);
 
-    // devtools tespiti (yaklaşık) - istersen kaldırabilirsin
     (function devtoolsTrap(){
       const threshold = 160;
       let tripped = false;
@@ -736,12 +718,7 @@ Type 'help' to see available commands`,
 
         if (!tripped && (w > threshold || h > threshold)) {
           tripped = true;
-
-          // terminal içine uyarı bas (sayfayı bozmaz)
-          printOutput(
-            `<span class="error">[SECURITY] DevTools detected. Please close developer tools.</span>`,
-            true
-          );
+          printOutput(`<span class="error">[SECURITY] DevTools tespit edildi. Lütfen geliştirici araçlarını kapatın.</span>`, true);
           scrollToBottom();
         }
         requestAnimationFrame(check);
