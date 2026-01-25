@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atakan Sarıkaya | DevOps Engineer Candidate</title>
     <style>
-        /* CSS ve Tema - Görsellik Korundu */
+        /* CSS Kısmı - Görsellik Sabit Tutuldu */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
@@ -14,7 +14,6 @@
             padding: 20px; 
             line-height: 1.6; 
             min-height: 100vh;
-            cursor: text;
         }
         #terminal { 
             max-width: 1100px; 
@@ -57,7 +56,6 @@
         .section-header { color: #ffcc00; font-weight: bold; margin: 20px 0 10px 0; border-bottom: 1px solid rgba(255, 204, 0, 0.3); padding-bottom: 5px; }
         .highlight { color: #00ff41; font-weight: bold; }
         .info-box { background: rgba(0, 170, 255, 0.05); border-left: 3px solid #00aaff; padding: 15px; margin: 15px 0; border-radius: 4px; }
-        .career-alert { color: #00aaff; border: 1px dashed #00aaff; padding: 10px; margin: 10px 0; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -98,32 +96,29 @@
                     'README.md': `# Atakan Sarıkaya
 ## Linux System Admin & DevOps Engineer Candidate
 
-🚀 **Aktif olarak DevOps ve Cloud Operations pozisyonları için fırsatlara açığım.**
+🚀 **DURUM: Aktif olarak DevOps / Cloud Operations rollerinde yeni fırsatlara açığım.**
 
 👨‍💻 Uygulama Operasyon Uzmanı @ Türk Telekom
-🐧 Odak: Linux, Docker, OpenShift ve Otomasyon
+🐧 Odak: Linux (RHEL), Konteyner Teknolojileri ve Otomasyon
 
-### Hızlı Komutlar
-• cat about.txt       - Profil ve Kariyer Hedefim
+### Başlangıç Kılavuzu
+• cat about.txt       - Kariyer özeti ve hedefim
 • ls experience/      - İş tecrübem
 • ls skills/          - Teknik yetkinliklerim
 • cat contact.sh      - İletişim & LinkedIn
 
-'help' yazarak tüm komutları görebilirsin.`,
+Komutları listelemek için 'help' yazabilirsin.`,
                     
-                    'about.txt': `KARİYER HEDEFİ VE ÖZET
+                    'about.txt': `KARİYER ÖZETİ & HEDEF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Sistem yönetimi temelinden gelerek, uygulama operasyonlarında 
+uzmanlaşmış bir profesyonelim. Mevcut tecrübelerimi modern 
+DevOps pratikleri (CI/CD, IaC) ile birleştirerek bulut tabanlı 
+çözümler üretmeyi hedefliyorum.
 
-Sistem adminliği kökenli, uygulama operasyonlarında uzmanlaşmış 
-bir profesyonel olarak; süreçleri otomatize etmeye ve bulut 
-yerli (cloud-native) mimarilere tutkuyla bağlıyım.
+Şu an aktif olarak DevOps pozisyonları için görüşmelere açığım.
 
-Şu an DevOps dünyasına tam geçiş yapmak için CI/CD ve IaC 
-konularında kendimi geliştiriyorum. Büyük ölçekli sistemlerin 
-stabil kalmasını sağlarken, geliştirme süreçlerini hızlandıracak 
-DevOps kültürünü benimseyen ekiplerde yer almayı hedefliyorum.
-
-LAB & DONANIM:
+LAB DONANIMI:
 ├── CPU: Ryzen 5 7500X3D
 ├── GPU: RTX 5070
 └── OS: RHEL / Ubuntu Server`,
@@ -131,45 +126,39 @@ LAB & DONANIM:
                     'contact.sh': `#!/bin/bash
 echo "LinkedIn: ${linkedin_url}"
 echo "Konum: İstanbul"
-echo "Durum: Kariyer fırsatlarına açık (DevOps / Cloud)"`
+echo "Rol: Uygulama Operasyon Uzmanı"
+echo "Kariyer Durumu: DevOps fırsatlarına açık"`
                 }
             },
-            
             'experience': {
                 dirs: [],
                 files: ['turk_telekom.txt', 'sekom.txt'],
                 content: {
-                    'turk_telekom.txt': `TÜRK TELEKOM (Netaş)
+                    'turk_telekom.txt': `TÜRK TELEKOM (Netaş Outsource)
 📍 Uygulama Operasyon Uzmanı (Haziran 2024 - Günümüz)
-• RHEL tabanlı sistem yönetimi ve troubleshooting.
-• Uygulama altyapılarının 7/24 operasyonel takibi.
-• Monitoring sistemleri ile proaktif hata tespiti.`,
+• Enterprise sistemlerin operasyonel yönetimi ve izlenmesi.
+• RHEL sistemlerde sorun giderme ve performans takibi.`,
                     'sekom.txt': `SEKOM
-📍 Yazılım Destek / Cloud Ops (1 Yıl 3 Ay)
-• Müşteri sistemlerinde Docker tabanlı yapıların takibi.
-• Bulut altyapılarında (AWS/Huawei) temel operasyonlar.`
+📍 Yazılım Destek / Cloud Operations (1 Yıl 3 Ay)
+• Docker tabanlı uygulama takibi ve bulut operasyonları.`
                 }
             },
-            
             'skills': {
                 dirs: [],
-                files: ['linux.txt', 'containers.txt', 'monitoring.txt', 'roadmap.txt'],
+                files: ['linux.txt', 'containers.txt', 'roadmap.txt'],
                 content: {
-                    'linux.txt': `LINUX & OTOMASYON
-• Red Hat Enterprise Linux (RHEL), CentOS, Rocky Linux
+                    'linux.txt': `LINUX & SYSTEMS
+• Red Hat Enterprise Linux (RHEL) & CentOS
 • Systemd, Service Management, Network Troubleshooting
-• Bash Scripting (Manuel işlerin kodla otomatize edilmesi)`,
+• Bash Scripting ve Sistem Otomasyonu`,
                     'containers.txt': `CONTAINERS
-• Docker (Container lifecycle, Image management)
-• OpenShift (Deployment, Pod monitoring, Route management)`,
-                    'monitoring.txt': `MONITORING
-• Prometheus, Grafana, Log Analizi`,
-                    'roadmap.txt': `ÖĞRENİM SÜRECİ (ROADMAPPED)
-• CI/CD Pipelines (Jenkins, GitLab CI) - Teorik/Pratik aşamada
-• Infrastructure as Code (Terraform) - Mantık ve giriş aşamasında`
+• Docker (Container yönetimi ve optimizasyon)
+• OpenShift (Uygulama dağıtımı ve izleme)`,
+                    'roadmap.txt': `ÖĞRENİM SÜRECİ
+• CI/CD Pipelines (Jenkins, GitLab CI)
+• Infrastructure as Code (Terraform)`
                 }
             },
-
             'certifications': {
                 dirs: [],
                 files: ['hccda.txt', 'rh124.txt'],
@@ -181,12 +170,12 @@ echo "Durum: Kariyer fırsatlarına açık (DevOps / Cloud)"`
         };
 
         const bootMessages = [
-            "[  0.000000] Initializing Atakan's Linux Environment...",
-            "[  0.512344] Scanning for DevOps opportunities...",
-            "[  OK  ] Career mode: ACTIVE",
+            "[  0.000000] Initializing Atakan's Portfolio...",
+            "[  0.452312] Scanning for DevOps opportunities...",
+            "[  OK  ] Career Mode: Enabled",
             "[  OK  ] Systems ready.",
             "",
-            "Hoş geldin Atakan. Sistem başarıyla başlatıldı.",
+            "Sistem başarıyla yüklendi. Hoş geldin, Atakan.",
             ""
         ];
 
@@ -196,27 +185,28 @@ echo "Durum: Kariyer fırsatlarına açık (DevOps / Cloud)"`
                 log.className = 'boot-log';
                 log.innerHTML = msg.replace(/\[ OK \]/g, "<span class='ok'>[ OK ]</span>");
                 bootContainer.appendChild(log);
-                await new Promise(r => setTimeout(r, 50));
+                await new Promise(r => setTimeout(r, 40));
             }
             inputArea.style.display = 'flex';
             input.focus();
         }
 
-        // TAB TAMAMLAMA VE NAVİGASYON MANTIĞI (GÜNCELLENDİ)
+        // DÜZELTİLMİŞ TAB VE NAVİGASYON MANTIĞI
         input.addEventListener('keydown', function(e) {
             if (e.key === 'Tab') {
                 e.preventDefault();
-                const parts = input.value.trim().split(/\s+/);
-                const lastPart = parts[parts.length - 1].toLowerCase();
-                if (!lastPart) return;
+                const currentVal = input.value.trim().toLowerCase();
+                if (!currentVal) return;
 
-                const commands = ['ls', 'cd', 'cat', 'help', 'clear', 'whoami', 'tree', 'linkedin'];
-                const currentFiles = fs[currentPath].files;
-                const currentDirs = fs[currentPath].dirs;
-                const pool = [...commands, ...currentFiles, ...currentDirs];
+                const pool = [
+                    'ls', 'cd', 'cat', 'help', 'clear', 'whoami', 'tree', 'linkedin',
+                    ...fs[currentPath].files, 
+                    ...fs[currentPath].dirs
+                ];
 
-                const match = pool.find(item => item.startsWith(lastPart));
+                const match = pool.find(cmd => cmd.startsWith(currentVal.split(' ').pop()));
                 if (match) {
+                    const parts = input.value.split(' ');
                     parts[parts.length - 1] = match;
                     input.value = parts.join(' ');
                 }
@@ -239,16 +229,8 @@ echo "Durum: Kariyer fırsatlarına açık (DevOps / Cloud)"`
             switch(cmd) {
                 case 'ls':
                     let output = '';
-                    if (target && fs[currentPath].dirs.includes(target)) {
-                        // "ls skills" gibi alt klasör içeriğini görme
-                        const sub = fs[target];
-                        sub.dirs.forEach(d => output += `<span class="dir">${d}/</span>`);
-                        sub.files.forEach(f => output += `<span class="file">${f}</span>`);
-                    } else {
-                        // Mevcut klasör içeriği
-                        fs[currentPath].dirs.forEach(d => output += `<span class="dir">${d}/</span>`);
-                        fs[currentPath].files.forEach(f => output += `<span class="file">${f}</span>`);
-                    }
+                    fs[currentPath].dirs.forEach(d => output += `<span class="dir">${d}/</span>`);
+                    fs[currentPath].files.forEach(f => output += `<span class="file">${f}</span>`);
                     printOutput(output || 'Klasör boş', true);
                     break;
                 case 'cd':
@@ -264,22 +246,18 @@ echo "Durum: Kariyer fırsatlarına açık (DevOps / Cloud)"`
                     } else { printOutput(`<span class="error">Dosya bulunamadı: ${target}</span>`, true); }
                     break;
                 case 'help':
-                    printOutput(`<div class="section-header">Komutlar</div>ls, cd, cat, tree, clear, linkedin, whoami`, true);
+                    printOutput("Komutlar: ls, cd [dizin], cat [dosya], tree, clear, linkedin, whoami");
                     break;
                 case 'tree':
                     let tree = '<span class="highlight">/home/atakan</span>\n';
-                    Object.keys(fs).forEach(dir => {
-                        if (dir === 'home') {
-                            fs[dir].dirs.forEach(d => tree += `├── <span class="dir">${d}/</span>\n`);
-                            fs[dir].files.forEach(f => tree += `├── ${f}\n`);
-                        }
-                    });
+                    fs['home'].dirs.forEach(d => tree += `├── <span class="dir">${d}/</span>\n`);
+                    fs['home'].files.forEach(f => tree += `├── ${f}\n`);
                     printOutput(tree, true);
                     break;
                 case 'clear': history.innerHTML = ''; break;
                 case 'whoami': printOutput("atakan - Application Operations Specialist & DevOps Candidate"); break;
                 case 'linkedin': window.open(linkedin_url, '_blank'); break;
-                default: printOutput(`<span class="error">Bilinmeyen komut: ${cmd}</span>`, true);
+                default: printOutput(`<span class="error">Komut bulunamadı: ${cmd}</span>`, true);
             }
         }
 
