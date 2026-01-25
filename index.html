@@ -164,7 +164,7 @@
     // CV dosyası (index.html ile aynı klasörde)
     const CV_FILE = "ATAKAN_SARIKAYA_DEVOPS_CV.pdf";
 
-    // CV bilgileri (Türkçe)
+    // Profil
     const profile = {
       name: "Atakan Sarıkaya",
       role: "Application Operations Specialist",
@@ -195,33 +195,34 @@
 • cd projeler              - Projeler
 • cd egitim                - Eğitim
 • cat iletisim.sh          - İletişim bilgileri
-• linkedin                 - Linkedin profilim
-• cv / open cv / wget cv   - CV işlemleri
+• linkedin                 - LinkedIn profilim
+
+### CV
+• cat cv                   - CV komutları / bilgi
+• open cv                  - CV görüntüle
+• wget cv                  - CV indir (mobilde görüntüler)
 
 Komutlar için 'help' yaz.`,
 
           'hakkimda.txt': `PROFESYONEL ÖZET
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Yazılım Destek Uzmanı geçmişine sahip, DevOps ve Cloud altyapı
-alanında kendini profesyonel olarak geliştirmeye odaklanan bir
-Uygulama Operasyon Uzmanıyım.
+Yazılım Destek Uzmanı geçmişine sahip, DevOps ve Cloud altyapı alanında
+kendini profesyonel olarak geliştirmeye odaklanan bir Uygulama Operasyon
+Uzmanıyım.
 
-Linux (RHEL/CentOS) temellerine, container teknolojilerine
-(Docker/OpenShift) ve izleme/alarmlama süreçlerine
-(Prometheus, Grafana, Alertmanager) hakimim. Günlük operasyonlarda
-uzaktan sistem yönetimi, incident response, deployment ve
-troubleshooting süreçlerinde aktif rol alıyorum.
+Linux (RHEL/CentOS) temelleri, container teknolojileri (Docker/OpenShift)
+ve izleme/alarmlama süreçlerine (Prometheus, Grafana, Alertmanager) hakimim.
+Günlük operasyonlarda incident response, deployment ve troubleshooting
+süreçlerinde aktif rol alıyorum.
 
 Huawei Cloud (HCCDA) sertifikasına sahibim ve bulut altyapı servisleri,
 DevOps süreçleri (CI/CD, otomasyon, IaC) ve operasyonel verimlilik
-konularında kendimi sürekli geliştiriyorum. Bash scripting ile
-tekrarlayan operasyonel işleri otomatikleştirerek sistem
-stabilitesine katkı sağlıyorum.
+konularında kendimi sürekli geliştiriyorum. Bash scripting ile tekrarlayan
+işleri otomatikleştirerek sistem stabilitesine katkı sağlıyorum.
 
 Şu anda Türk Telekom’da uygulama operasyon süreçlerinde görev alıyor,
-DevOps Engineer rollerine doğru yetkinliklerimi planlı ve disiplinli
-şekilde ilerletiyorum.`,
+DevOps Engineer rollerine doğru planlı şekilde ilerliyorum.`,
 
           'iletisim.sh': `#!/bin/bash
 # İletişim Bilgileri
@@ -237,7 +238,6 @@ echo "Web      : ${profile.website}"
 echo "Konum    : ${profile.location}"
 echo ""
 echo "LinkedIn açılıyor..."`
-
         }
       },
 
@@ -305,23 +305,25 @@ done`
 
 Sorumluluklar:
 • RHEL/CentOS tabanlı kurumsal sistemlerin operasyonel yönetimi
-• Incident response süreçleri ve kök neden analizi (RCA)
-• Prometheus/Grafana ile sistem metrikleri ve uygulama health monitoring
-• Docker ve Java uygulamalarında deployment, troubleshooting ve operasyonel destek
+• Incident response ve kök neden analizi (RCA)
+• Prometheus/Grafana ile sistem metrikleri ve uygulama sağlık izleme
+• Docker (container) ortamındaki Java/Python uygulamalarında deployment ve operasyonel destek
+• systemd servisleri olarak çalışan Java uygulamalarında dağıtım ve hata giderme
 • Bash scripting ile operasyonel görevlerin otomasyonu ve verimlilik artışı`,
 
           'onceki.txt': `ÖNCEKİ DENEYİM
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🏢 Sekom A.Ş.
-📍 DevSecOps Cloud Operations / Software Support Specialist
+📍 DevSecOps Bulut Operasyonları / Yazılım Destek Uzmanı
 🗓️ Haziran 2024 — Ekim 2025
 
 Çalışmalar:
-• Docker/OpenShift ortamlarında Java/Python uygulamalarının deployment, scaling ve lifecycle yönetimi
-• Monitoring & alerting konfigürasyonu; log analizi ve SLA takibi
-• PostgreSQL/Oracle üzerinde SQL operasyonları; temel backup/restore süreçleri
-• Linux sunucu yönetimi ve systemd servis yönetimi; web servisleri monitoring ve patching
+• Docker ve OpenShift ortamlarında Java/Python uygulamalarının deployment süreçleri
+• Deployment config, environment değişkenleri ve operasyonel ayarların yönetimi
+• İzleme/alarmlama ve log analizi yapılandırmaları; SLA takibi
+• PostgreSQL/Oracle üzerinde SQL operasyonları; temel backup/restore
+• Linux ve systemd servis yönetimi süreçlerine destek
 • Jira/Confluence ile incident/change yönetimi ve teknik dokümantasyon`,
 
           'staj.txt': `STAJ
@@ -331,7 +333,7 @@ Sorumluluklar:
 📍 Software Developer Intern
 🗓️ Ağustos 2023 — Ekim 2023
 
-• Flask ile CRUD tabanlı ToDo List web uygulaması
+• Flask ile ToDo List web uygulaması (CRUD) geliştirme
 • SQLite entegrasyonu`,
 
           'zaman-cizelgesi.sh': `#!/bin/bash
@@ -361,30 +363,30 @@ echo ""`
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 • OS & Cloud: RHEL, CentOS, Huawei Cloud (HCCDA)
-• Container & Orchestration: Docker, OpenShift, Kubernetes (Temel)
+• Container: Docker, OpenShift, Kubernetes (Temel)
 • Monitoring: Prometheus, Grafana, Alertmanager, Log Analysis
 • Automation: Bash Scripting, Python (Temel)
 • Database: PostgreSQL, Oracle, SQLite
-• Tools: Jira, Confluence, DataGrip, systemd (servis yönetimi)`,
+• Tools: Jira, Confluence, DataGrip, Dbeaver, systemd`,
 
           'os-bulut.txt': `OS & CLOUD
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-• RHEL / CentOS yönetimi
+• RHEL / CentOS temelleri ve operasyonel süreçler
 • Temel performans ve servis troubleshooting
 • Huawei Cloud (HCCDA) — temel servis bilgisi`,
 
           'container.txt': `CONTAINER & ORCHESTRATION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-• Docker: deployment, troubleshooting, temel lifecycle
+• Docker: deployment, troubleshooting
 • OpenShift: uygulama dağıtımı, pod/service/route temelleri
 • Kubernetes: temel kavramlar (pod, service, deployment)`,
 
           'izleme.txt': `MONITORING & OBSERVABILITY
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-• Prometheus: metrik toplama, temel query mantığı
+• Prometheus: metrik toplama, temel sorgulama mantığı
 • Grafana: dashboard, görselleştirme, alarm entegrasyonu
 • Alertmanager: alert routing / bildirim akışları
 • Log analysis: olay analizi ve hata ayıklama`,
@@ -423,7 +425,7 @@ echo ""`
 
 ToDo List Web Application (Flask, SQLite) — Eylül 2023
 
-• CRUD operasyonları
+• CRUD (Create/Read/Update/Delete) operasyonları
 • Temel veri kalıcılığı ile görev yönetimi`
         }
       },
@@ -456,7 +458,6 @@ ToDo List Web Application (Flask, SQLite) — Eylül 2023
     }
 
     function isMobile() {
-      // basit + güvenli bir mobile tespiti
       return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.matchMedia("(max-width: 768px)").matches;
     }
 
@@ -536,6 +537,7 @@ Komutlar:
 • <span class="highlight">cat README.md</span>      Hızlı özet
 • <span class="highlight">cat hakkimda.txt</span>   Profesyonel özet
 • <span class="highlight">linkedin</span>           LinkedIn profilini açar
+• <span class="highlight">cat cv</span>             CV komutları / bilgi
 • <span class="highlight">open cv</span>            CV'yi görüntüler
 • <span class="highlight">wget cv</span>            CV'yi indirir (mobilde görüntüler)
 • <span class="highlight">cd deneyim</span>         Deneyimler
@@ -639,7 +641,7 @@ Komutlar:
 
 <span class="highlight">Dosya:</span>
   cat [file]       - Dosya içeriğini gösterir
-  cat cv           - CV komutları
+  cat cv           - CV komutları / bilgi
 
 <span class="highlight">CV:</span>
   open cv          - CV'yi görüntüle
@@ -696,7 +698,10 @@ Komutlar:
           break;
 
         case 'cat':
-          // cat cv özel davranış
+          if (!target) {
+            printOutput(`<span class="error">Kullanım: cat [dosya]</span>`, true);
+            break;
+          }
           if (target === 'cv') {
             printOutput(cvHelpText(), false);
             break;
@@ -729,13 +734,9 @@ Detay: 'cat hakkimda.txt'</div>`,
           window.open(profile.linkedin, '_blank');
           break;
 
-        // ---- CV komutları (profesyonel dokunuş) ----
         case 'open':
-          if (target === 'cv') {
-            cvOpen();
-          } else {
-            printOutput(`<span class="error">Kullanım: open cv</span>`, true);
-          }
+          if (target === 'cv') cvOpen();
+          else printOutput(`<span class="error">Kullanım: open cv</span>`, true);
           break;
 
         case 'wget':
@@ -744,9 +745,7 @@ Detay: 'cat hakkimda.txt'</div>`,
               printOutput("Mobil cihaz tespit edildi. İndirmek yerine CV görüntüleniyor...", false);
               cvOpen();
             } else {
-              startGreenLoading("CV indiriliyor", 700, () => {
-                cvDownloadDesktop();
-              });
+              startGreenLoading("CV indiriliyor", 700, () => cvDownloadDesktop());
             }
           } else {
             printOutput(`<span class="error">Kullanım: wget cv</span>`, true);
@@ -754,14 +753,8 @@ Detay: 'cat hakkimda.txt'</div>`,
           break;
 
         case 'cv':
-          if (!target) {
-            printOutput(cvHelpText(), false);
-            break;
-          }
-          if (target === 'view') {
-            cvOpen();
-            break;
-          }
+          if (!target) { printOutput(cvHelpText(), false); break; }
+          if (target === 'view') { cvOpen(); break; }
           if (target === 'download') {
             if (isMobile()) {
               printOutput("Mobil cihaz tespit edildi. İndirmek yerine CV görüntüleniyor...", false);
@@ -820,8 +813,7 @@ Komutlar için 'help' yaz.`,
     }
 
     // ==========================
-    // SADECE "KAYNAK KODU GÖRÜNTÜLEMEYİ ZORLAŞTIRMA"
-    // (bypass edilebilir)
+    // SADECE "KAYNAK KODU GÖRÜNTÜLEMEYİ ZORLAŞTIRMA" (bypass edilebilir)
     // ==========================
     document.addEventListener('contextmenu', (e) => e.preventDefault(), { passive: false });
 
