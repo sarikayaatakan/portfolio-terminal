@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="Tux.png" type="image/png">
-    <title>Atakan Sarıkaya | Linux System Admin & DevOps Engineer</title>
+    <title>Atakan Sarıkaya | DevOps Engineer Candidate</title>
     <style>
-        /* CSS Kısmı Aynı Kalıyor - Görselliği Korumak İçin */
+        /* CSS ve Tema - Görsellik Korundu */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
@@ -58,6 +57,7 @@
         .section-header { color: #ffcc00; font-weight: bold; margin: 20px 0 10px 0; border-bottom: 1px solid rgba(255, 204, 0, 0.3); padding-bottom: 5px; }
         .highlight { color: #00ff41; font-weight: bold; }
         .info-box { background: rgba(0, 170, 255, 0.05); border-left: 3px solid #00aaff; padding: 15px; margin: 15px 0; border-radius: 4px; }
+        .career-alert { color: #00aaff; border: 1px dashed #00aaff; padding: 10px; margin: 10px 0; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -90,61 +90,48 @@
         let historyIndex = -1;
         const linkedin_url = "https://www.linkedin.com/in/atakansarikaya/";
 
-        // YETKİNLİKLERİNE GÖRE GÜNCELLENEN DOSYA SİSTEMİ
         const fs = {
             'home': {
                 dirs: ['experience', 'skills', 'certifications'],
                 files: ['README.md', 'about.txt', 'contact.sh'],
                 content: {
                     'README.md': `# Atakan Sarıkaya
-## Linux System Administrator & DevOps Aspirant
+## Linux System Admin & DevOps Engineer Candidate
+
+🚀 **Aktif olarak DevOps ve Cloud Operations pozisyonları için fırsatlara açığım.**
 
 👨‍💻 Uygulama Operasyon Uzmanı @ Türk Telekom
-🐧 Linux (RHEL/CentOS) & Konteyner Teknolojileri meraklısı
-📍 İstanbul, Türkiye
+🐧 Odak: Linux, Docker, OpenShift ve Otomasyon
 
-### Hızlı Başlangıç
-• cat about.txt       - Detaylı profil ve ilgi alanları
-• cd skills           - Teknik yetkinlikler (Docker, OpenShift, Linux)
-• cd experience       - İş tecrübesi
-• cat contact.sh      - İletişim bilgileri
+### Hızlı Komutlar
+• cat about.txt       - Profil ve Kariyer Hedefim
+• ls experience/      - İş tecrübem
+• ls skills/          - Teknik yetkinliklerim
+• cat contact.sh      - İletişim & LinkedIn
 
-Yardım için 'help' yazabilirsin.`,
+'help' yazarak tüm komutları görebilirsin.`,
                     
-                    'about.txt': `PROFESYONEL ÖZET
+                    'about.txt': `KARİYER HEDEFİ VE ÖZET
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Sistem yönetimi ve uygulama operasyonları konusunda deneyimli,
-Linux ekosistemine hakim ve altyapı otomasyonu konularında 
-kendini geliştirmeye odaklı bir sistemciyim. 
+Sistem adminliği kökenli, uygulama operasyonlarında uzmanlaşmış 
+bir profesyonel olarak; süreçleri otomatize etmeye ve bulut 
+yerli (cloud-native) mimarilere tutkuyla bağlıyım.
 
-Şu an Türk Telekom bünyesinde büyük ölçekli uygulama 
-altyapılarının operasyonel süreçlerini yönetiyorum.
+Şu an DevOps dünyasına tam geçiş yapmak için CI/CD ve IaC 
+konularında kendimi geliştiriyorum. Büyük ölçekli sistemlerin 
+stabil kalmasını sağlarken, geliştirme süreçlerini hızlandıracak 
+DevOps kültürünü benimseyen ekiplerde yer almayı hedefliyorum.
 
-HOBBYIST LAB & HARDWARE:
-├── OS: RHEL / Ubuntu Server
+LAB & DONANIM:
 ├── CPU: Ryzen 5 7500X3D
 ├── GPU: RTX 5070
-└── Local AI: Yerel LLM modelleri ve sistem mimarisi testleri.
-
-TEMEL YAKLAŞIM:
-Karmaşık sistem sorunlarını root-cause analizi ile çözmek, 
-manuel işleri Bash scriptleri ile otomatize etmek ve yüksek 
-erişilebilirlikli altyapılar inşa etmek.`,
+└── OS: RHEL / Ubuntu Server`,
                     
                     'contact.sh': `#!/bin/bash
-# İletişim Bilgileri
-
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "    PROFESYONEL İLETİŞİM"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
 echo "LinkedIn: ${linkedin_url}"
-echo "Konum: İstanbul, Türkiye"
-echo "Rol: Uygulama Operasyon Uzmanı"
-echo "Şirket: Türk Telekom"
-echo ""
-echo "LinkedIn profili açılıyor..."`
+echo "Konum: İstanbul"
+echo "Durum: Kariyer fırsatlarına açık (DevOps / Cloud)"`
                 }
             },
             
@@ -152,53 +139,34 @@ echo "LinkedIn profili açılıyor..."`
                 dirs: [],
                 files: ['turk_telekom.txt', 'sekom.txt'],
                 content: {
-                    'turk_telekom.txt': `TÜRK TELEKOM (Netaş Outsource)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📍 Uygulama Operasyon Uzmanı
-⏱️  Haziran 2024 - Günümüz
-
-• Kurumsal seviyedeki uygulama altyapılarının yönetimi.
-• Linux (RHEL) tabanlı sistemlerin operasyonel takibi ve sorun giderme.
-• Monitoring araçları ile sistem sağlığının izlenmesi.
-• Deployment süreçlerinde teknik destek ve operasyonel verimlilik.`,
-                    
+                    'turk_telekom.txt': `TÜRK TELEKOM (Netaş)
+📍 Uygulama Operasyon Uzmanı (Haziran 2024 - Günümüz)
+• RHEL tabanlı sistem yönetimi ve troubleshooting.
+• Uygulama altyapılarının 7/24 operasyonel takibi.
+• Monitoring sistemleri ile proaktif hata tespiti.`,
                     'sekom.txt': `SEKOM
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📍 Yazılım Destek Uzmanı / Cloud Operations
-⏱️  1 Yıl 3 Ay
-
-• Müşteri ortamlarındaki uygulama sorunlarının çözümü ve destek süreçleri.
-• Cloud altyapıları (AWS, Huawei Cloud) üzerinde temel operasyonlar.
-• Konteynerize (Docker) ortamların izlenmesi ve yönetimi.
-• Altyapı iyileştirme ve güvenlik süreçlerine katkı.`
+📍 Yazılım Destek / Cloud Ops (1 Yıl 3 Ay)
+• Müşteri sistemlerinde Docker tabanlı yapıların takibi.
+• Bulut altyapılarında (AWS/Huawei) temel operasyonlar.`
                 }
             },
             
             'skills': {
                 dirs: [],
-                files: ['linux.txt', 'containers.txt', 'monitoring.txt', 'learning.txt'],
+                files: ['linux.txt', 'containers.txt', 'monitoring.txt', 'roadmap.txt'],
                 content: {
-                    'linux.txt': `LINUX & SYSTEMS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• Red Hat Enterprise Linux (RHEL) / CentOS / Rocky Linux
-• Systemd, LVM, Network Conf & Troubleshooting
-• Bash Scripting (Otomasyon ve rutin işlerin hızlandırılması)
-• User & Permission Management`,
-                    
-                    'containers.txt': `ORCHESTRATION & CONTAINERS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• Docker (Konteyner yönetimi, imaj optimizasyonu)
-• Red Hat OpenShift (Uygulama dağıtımı ve pod yönetimi)
-• Kubernetes temelleri`,
-                    'monitoring.txt': `MONITORING & OBSERVABILITY
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• Prometheus (Metrik toplama)
-• Grafana (Dashboard yönetimi ve veri görselleştirme)
-• Log Analizi ve Sorun Giderme`,
-                    'learning.txt': `ROADMAP / CURRENTLY LEARNING
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• Infrastructure as Code (Terraform, Ansible) - [Ne olduğunu ve nasıl otomatize edildiğini öğreniyorum]
-• CI/CD Pipelines (Jenkins, GitLab CI) - [Konsept ve işleyiş üzerine çalışıyorum]`
+                    'linux.txt': `LINUX & OTOMASYON
+• Red Hat Enterprise Linux (RHEL), CentOS, Rocky Linux
+• Systemd, Service Management, Network Troubleshooting
+• Bash Scripting (Manuel işlerin kodla otomatize edilmesi)`,
+                    'containers.txt': `CONTAINERS
+• Docker (Container lifecycle, Image management)
+• OpenShift (Deployment, Pod monitoring, Route management)`,
+                    'monitoring.txt': `MONITORING
+• Prometheus, Grafana, Log Analizi`,
+                    'roadmap.txt': `ÖĞRENİM SÜRECİ (ROADMAPPED)
+• CI/CD Pipelines (Jenkins, GitLab CI) - Teorik/Pratik aşamada
+• Infrastructure as Code (Terraform) - Mantık ve giriş aşamasında`
                 }
             },
 
@@ -212,57 +180,54 @@ echo "LinkedIn profili açılıyor..."`
             }
         };
 
-        // Boot mesajları aynı kalabilir, sadece ufak güncellemeler yapıldı
         const bootMessages = [
-            "[  0.000000] Initializing Atakan's Portfolio System...",
-            "[  0.123456] Loading Linux Kernel Modules...",
-            "[  OK  ] Mounted /home/atakan",
-            "[  OK  ] Started Docker Engine",
-            "[  OK  ] OpenShift Service Active",
-            "[  OK  ] RTX 5070 Drivers Loaded",
+            "[  0.000000] Initializing Atakan's Linux Environment...",
+            "[  0.512344] Scanning for DevOps opportunities...",
+            "[  OK  ] Career mode: ACTIVE",
+            "[  OK  ] Systems ready.",
             "",
-            "Sistem başarıyla yüklendi. Hoş geldin, Atakan.",
+            "Hoş geldin Atakan. Sistem başarıyla başlatıldı.",
             ""
         ];
 
-        // Geri kalan JavaScript mantığı aynı kalacak (Navigation, executeCommand vb.)
-        // Kodun geri kalanını terminal işlevselliği için koruyorum...
-        
         async function runBootSequence() {
             for (let msg of bootMessages) {
                 const log = document.createElement('div');
                 log.className = 'boot-log';
                 log.innerHTML = msg.replace(/\[ OK \]/g, "<span class='ok'>[ OK ]</span>");
                 bootContainer.appendChild(log);
-                await new Promise(r => setTimeout(r, 60));
+                await new Promise(r => setTimeout(r, 50));
             }
-            
-            printOutput(`<div class="info-box">
-╔════════════════════════════════════════════════════════════╗
-║    Atakan Sarıkaya - İnteraktif Terminal Portfolyo         ║
-║    Linux System Admin & App Ops Specialist                 ║
-╚════════════════════════════════════════════════════════════╝
-
-Komutları görmek için <span class="highlight">help</span> yazın.
-Hızlı özet için <span class="highlight">cat README.md</span> kullanın.
-</div>`, true);
-            
             inputArea.style.display = 'flex';
             input.focus();
         }
 
-        // Click, keydown ve executeCommand fonksiyonlarını aynen bırak (önceki kodun devamı)
-        // (Burada yer kaplamaması için özet geçiyorum ama senin kodunda tüm JS logic çalışacaktır)
-        document.addEventListener('click', () => input.focus());
+        // TAB TAMAMLAMA VE NAVİGASYON MANTIĞI (GÜNCELLENDİ)
         input.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowUp') { /* ... */ }
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                const parts = input.value.trim().split(/\s+/);
+                const lastPart = parts[parts.length - 1].toLowerCase();
+                if (!lastPart) return;
+
+                const commands = ['ls', 'cd', 'cat', 'help', 'clear', 'whoami', 'tree', 'linkedin'];
+                const currentFiles = fs[currentPath].files;
+                const currentDirs = fs[currentPath].dirs;
+                const pool = [...commands, ...currentFiles, ...currentDirs];
+
+                const match = pool.find(item => item.startsWith(lastPart));
+                if (match) {
+                    parts[parts.length - 1] = match;
+                    input.value = parts.join(' ');
+                }
+            }
+            
             if (e.key === 'Enter') {
                 const rawInput = input.value.trim();
                 if (!rawInput) { printPrompt(); input.value = ''; return; }
                 commandHistory.unshift(rawInput);
-                const args = rawInput.split(' ');
-                const cmd = args[0].toLowerCase();
-                const target = args.slice(1).join(' ');
+                const [cmd, ...args] = rawInput.toLowerCase().split(/\s+/);
+                const target = args.join(' ');
                 printPrompt(rawInput);
                 executeCommand(cmd, target);
                 input.value = '';
@@ -272,34 +237,35 @@ Hızlı özet için <span class="highlight">cat README.md</span> kullanın.
 
         function executeCommand(cmd, target) {
             switch(cmd) {
-                case 'clear': history.innerHTML = ''; break;
-                case 'help': 
-                    printOutput(`<div class="section-header">Mevcut Komutlar</div>
-<span class="highlight">Navigasyon:</span> ls, cd [klasör], pwd, tree
-<span class="highlight">Dosya:</span> cat [dosya]
-<span class="highlight">Sistem:</span> whoami, clear, help, linkedin`, true);
-                    break;
                 case 'ls':
                     let output = '';
-                    fs[currentPath].dirs.forEach(d => output += `<span class="dir">${d}/</span>`);
-                    fs[currentPath].files.forEach(f => output += `<span class="file">${f}</span>`);
+                    if (target && fs[currentPath].dirs.includes(target)) {
+                        // "ls skills" gibi alt klasör içeriğini görme
+                        const sub = fs[target];
+                        sub.dirs.forEach(d => output += `<span class="dir">${d}/</span>`);
+                        sub.files.forEach(f => output += `<span class="file">${f}</span>`);
+                    } else {
+                        // Mevcut klasör içeriği
+                        fs[currentPath].dirs.forEach(d => output += `<span class="dir">${d}/</span>`);
+                        fs[currentPath].files.forEach(f => output += `<span class="file">${f}</span>`);
+                    }
                     printOutput(output || 'Klasör boş', true);
                     break;
                 case 'cd':
                     if (!target || target === '~' || target === '..') { currentPath = 'home'; }
                     else if (fs[currentPath].dirs.includes(target)) { currentPath = target; }
-                    else { printOutput(`<span class="error">Hata: ${target} dizini bulunamadı</span>`, true); }
+                    else { printOutput(`<span class="error">Dizin bulunamadı: ${target}</span>`, true); }
                     updatePrompt();
                     break;
                 case 'cat':
                     if (fs[currentPath].content && fs[currentPath].content[target]) {
                         printOutput(fs[currentPath].content[target]);
-                        if (target === 'contact.sh') { setTimeout(() => window.open(linkedin_url, '_blank'), 1500); }
-                    } else { printOutput(`<span class="error">Hata: ${target} dosyası bulunamadı</span>`, true); }
+                        if (target === 'contact.sh') setTimeout(() => window.open(linkedin_url, '_blank'), 1000);
+                    } else { printOutput(`<span class="error">Dosya bulunamadı: ${target}</span>`, true); }
                     break;
-                case 'whoami': printOutput("atakan - Uygulama Operasyon Uzmanı @ Türk Telekom"); break;
-                case 'pwd': printOutput(currentPath === 'home' ? '/home/atakan' : `/home/atakan/${currentPath}`); break;
-                case 'linkedin': window.open(linkedin_url, '_blank'); break;
+                case 'help':
+                    printOutput(`<div class="section-header">Komutlar</div>ls, cd, cat, tree, clear, linkedin, whoami`, true);
+                    break;
                 case 'tree':
                     let tree = '<span class="highlight">/home/atakan</span>\n';
                     Object.keys(fs).forEach(dir => {
@@ -310,7 +276,10 @@ Hızlı özet için <span class="highlight">cat README.md</span> kullanın.
                     });
                     printOutput(tree, true);
                     break;
-                default: printOutput(`<span class="error">komut bulunamadı: ${cmd}</span>`, true);
+                case 'clear': history.innerHTML = ''; break;
+                case 'whoami': printOutput("atakan - Application Operations Specialist & DevOps Candidate"); break;
+                case 'linkedin': window.open(linkedin_url, '_blank'); break;
+                default: printOutput(`<span class="error">Bilinmeyen komut: ${cmd}</span>`, true);
             }
         }
 
@@ -331,8 +300,7 @@ Hızlı özet için <span class="highlight">cat README.md</span> kullanın.
         }
 
         function updatePrompt() {
-            const path = currentPath === 'home' ? '~' : `~/${currentPath}`;
-            promptPath.textContent = `:${path}`;
+            promptPath.textContent = currentPath === 'home' ? ':~' : `:~/${currentPath}`;
         }
 
         runBootSequence();
