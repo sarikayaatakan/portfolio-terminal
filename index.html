@@ -20,7 +20,7 @@
 <body>
     <div id="terminal">
         <div id="boot-container"></div>
-        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 3.6] - MASTER NAVIGATOR ***</div>
+        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 3.8] - EXPERIENCE OPTIMIZED ***</div>
         <div id="history"></div>
         <div class="input-line" id="input-area">
             <span class="prompt" id="prompt-label">atakan@production:~$</span>
@@ -46,7 +46,7 @@
 
         const fs = {
             'home': {
-                dirs: ['sertifikalar', 'tecrube', 'beceriler'],
+                dirs: ['sertifikalar', 'deneyimler', 'beceriler'],
                 files: ['ozgecmis.txt', 'iletisim.sh'],
                 content: {
                     'ozgecmis.txt': "Atakan Sarıkaya | 27\n\nMerhaba, ben Atakan. Türk Telekom bünyesinde Uygulama Operasyon Uzmanı \nolarak görev almaktayım. DevOps, Cloud ve Linux teknolojileri üzerine \nderinleşerek, ölçeklenebilir ve dayanıklı sistem mimarileri inşa etmeye \nodaklanıyorum.",
@@ -62,7 +62,7 @@
                     'btk_sql.txt': "Uygulamalarla SQL - BTK Akademi"
                 }
             },
-            'tecrube': {
+            'deneyimler': {
                 dirs: [],
                 files: ['turk_telekom.txt', 'sekom.txt'],
                 content: {
@@ -84,7 +84,7 @@
         const bootMessages = [
             "[  0.000000] Linux version 5.14.0-70.13.1.el9_0.x86_64",
             "[  OK  ] Loading Atakan's Profile Core...",
-            "[  OK  ] Initializing Application Operation Environment...",
+            "[  OK  ] Mounting /home/atakan/deneyimler...",
             "[  OK  ] System Ready. Starting Interactive Shell...",
             "Session Authorized. Login: Atakan Sarıkaya"
         ];
@@ -109,9 +109,9 @@
             printOutput("komutları listeleyebilir; kariyer yolculuğuma göz atmak için ise");
             printOutput("aşağıdaki komutları kullanabilirsiniz:");
             printOutput("\n* Özgeçmiş özeti: cat ozgecmis.txt");
-            printOutput("* Becerilerim: cd beceriler (ardından 'ls' ve 'cat')");
-            printOutput("* Deneyimlerim: cd tecrube");
-            printOutput("* Sertifikalarım: cd sertifikalar");
+            printOutput("* Deneyimler: cd deneyimler (ardından 'ls' ve 'cat')");
+            printOutput("* Beceriler: cd beceriler");
+            printOutput("* Sertifikalar: cd sertifikalar");
             printOutput("\nKeşfetmek için 'ls' yazabilir veya Tab tuşunu kullanabilirsiniz.");
             
             input.focus();
@@ -142,7 +142,7 @@
                 printOutput(`<span class="prompt">atakan@production:${currentPath === 'home' ? '~' : '~/' + currentPath}$</span> <span style="color:white">${rawInput}</span>`, true);
 
                 if (cmd === 'clear') { history.innerHTML = ''; }
-                else if (cmd === 'yardim' || cmd === 'help') { printOutput("Komutlar: ls, cd, cat, pwd, clear, linkedin, tr/en"); }
+                else if (cmd === 'yardim' || cmd === 'help') { printOutput("Komutlar: ls, cd, cat, pwd, clear, linkedin"); }
                 else if (cmd === 'pwd') { printOutput(currentPath === 'home' ? "/home/atakan" : "/home/atakan/" + currentPath); }
                 else if (cmd === 'ls') {
                     let output = "";
