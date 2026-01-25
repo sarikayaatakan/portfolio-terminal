@@ -1,715 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="Tux.png" type="image/png" />
-  <title>Atakan Sarıkaya | DevOps & Cloud Infrastructure Specialist</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atakan Sarıkaya | Terminal Portfolio</title>
+<link rel="icon" href="Tux.png" type="image/png">
 
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+<!-- CSP -->
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'">
 
-    body {
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-      color: #00ff41;
-      font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
-      padding: 20px;
-      line-height: 1.6;
-      min-height: 100vh;
-      cursor: text;
-    }
-
-    #terminal {
-      max-width: 1100px;
-      margin: 40px auto;
-      background: rgba(13, 13, 13, 0.95);
-      border-radius: 12px;
-      box-shadow: 0 20px 60px rgba(0, 255, 65, 0.15);
-      overflow: hidden;
-      border: 1px solid rgba(0, 255, 65, 0.2);
-    }
-
-    .terminal-header {
-      background: linear-gradient(90deg, #1e1e1e 0%, #2d2d2d 100%);
-      padding: 12px 20px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border-bottom: 1px solid rgba(0, 255, 65, 0.2);
-      user-select: none;
-    }
-
-    .terminal-button { width: 12px; height: 12px; border-radius: 50%; }
-    .btn-close { background: #ff5f57; }
-    .btn-minimize { background: #ffbd2e; }
-    .btn-maximize { background: #28ca42; }
-
-    .terminal-title {
-      flex: 1;
-      text-align: center;
-      color: #888;
-      font-size: 13px;
-      letter-spacing: 0.5px;
-    }
-
-    .terminal-body {
-      padding: 30px;
-      min-height: 500px;
-      max-height: 80vh;
-      overflow-y: auto;
-    }
-
-    .terminal-body::-webkit-scrollbar { width: 8px; }
-    .terminal-body::-webkit-scrollbar-track { background: #1a1a1a; }
-    .terminal-body::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-
-    .prompt { color: #00aaff; font-weight: bold; user-select:none; }
-    .prompt-path { color: #ffcc00; font-weight: normal; user-select:none; }
-
-    .command-input {
-      background: transparent;
-      border: none;
-      color: #ffffff;
-      font-family: inherit;
-      font-size: 15px;
-      outline: none;
-      width: 70%;
-      caret-color: #00ff41;
-      margin-left: 8px;
-    }
-
-    .output {
-      margin-bottom: 15px;
-      white-space: pre-wrap;
-      color: #d1d1d1;
-      animation: fadeIn 0.2s ease-in;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .input-line {
-      display: none;
-      align-items: center;
-      margin-top: 10px;
-      position: sticky;
-      bottom: 0;
-      background: rgba(13, 13, 13, 0.95);
-      padding-top: 6px;
-      padding-bottom: 6px;
-    }
-
-    .error { color: #ff5f57; }
-    .dir { color: #00aaff; font-weight: bold; margin-right: 15px; }
-    .file { color: #aaa; margin-right: 15px; }
-
-    .section-header {
-      color: #ffcc00;
-      font-weight: bold;
-      margin: 20px 0 10px 0;
-      border-bottom: 1px solid rgba(255, 204, 0, 0.3);
-      padding-bottom: 5px;
-    }
-
-    .highlight { color: #00ff41; font-weight: bold; }
-
-    .info-box {
-      background: rgba(0, 170, 255, 0.05);
-      border-left: 3px solid #00aaff;
-      padding: 15px;
-      margin: 15px 0;
-      border-radius: 4px;
-    }
-
-    @media (max-width: 768px) {
-      body { padding: 10px; }
-      #terminal { margin: 20px auto; }
-      .terminal-body { padding: 20px; font-size: 13px; }
-      .command-input { width: 65%; font-size: 14px; }
-    }
-  </style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+background:linear-gradient(135deg,#0a0a0a 0%,#1a1a2e 100%);
+color:#00ff41;
+font-family:Consolas,monospace;
+padding:20px;min-height:100vh
+}
+#terminal{
+max-width:1100px;margin:40px auto;background:#0d0d0d;
+border-radius:12px;border:1px solid rgba(0,255,65,.2);
+overflow:hidden
+}
+.terminal-header{
+background:#1e1e1e;padding:12px 20px;display:flex;align-items:center
+}
+.terminal-title{flex:1;text-align:center;color:#888;font-size:13px}
+.terminal-body{
+padding:30px;max-height:80vh;overflow-y:auto
+}
+.prompt{color:#00aaff;font-weight:bold}
+.prompt-path{color:#ffcc00}
+.command-input{
+background:transparent;border:none;color:#fff;font-family:inherit;
+font-size:15px;outline:none;width:70%;margin-left:6px
+}
+.output{margin-bottom:12px;white-space:pre-wrap;color:#d1d1d1}
+.input-line{
+display:flex;align-items:center;margin-top:10px;
+position:sticky;bottom:0;background:#0d0d0d
+}
+.dir{color:#00aaff;font-weight:bold;margin-right:15px}
+.file{color:#aaa;margin-right:15px}
+.error{color:#ff5f57}
+</style>
 </head>
 
 <body>
-  <div id="terminal">
-    <div class="terminal-header">
-      <div class="terminal-button btn-close"></div>
-      <div class="terminal-button btn-minimize"></div>
-      <div class="terminal-button btn-maximize"></div>
-      <div class="terminal-title">atakan@devops-portfolio: ~</div>
-    </div>
-
-    <div class="terminal-body" id="terminal-body">
-      <div id="intro-container"></div>
-      <div id="history"></div>
-
-      <div class="input-line" id="input-area">
-        <span class="prompt">atakan@production</span>
-        <span class="prompt-path" id="prompt-path">:~</span>
-        <span class="prompt">$</span>
-        <input type="text" id="command-input" class="command-input" autofocus autocomplete="off" spellcheck="false" />
-      </div>
+<div id="terminal">
+  <div class="terminal-header">
+    <div class="terminal-title">atakan@devops-portfolio: ~</div>
+  </div>
+  <div class="terminal-body" id="terminal-body">
+    <div id="history"></div>
+    <div class="input-line">
+      <span class="prompt">atakan@production</span>
+      <span class="prompt-path">:~</span><span class="prompt">$</span>
+      <input id="input" class="command-input" autofocus autocomplete="off">
     </div>
   </div>
-
-  <script>
-    const input = document.getElementById('command-input');
-    const history = document.getElementById('history');
-    const inputArea = document.getElementById('input-area');
-    const introContainer = document.getElementById('intro-container');
-    const promptPath = document.getElementById('prompt-path');
-    const terminalBody = document.getElementById('terminal-body');
-
-    let currentPath = 'home';
-    let commandHistory = [];
-    let historyIndex = -1;
-    const linkedin_url = "https://www.linkedin.com/in/atakansarikaya/";
-
-    const fs = {
-      'home': {
-        dirs: ['certifications', 'experience', 'skills'],
-        files: ['README.md', 'contact.sh', 'about.txt'],
-        content: {
-          'README.md': `# Atakan Sarıkaya
-## DevOps & Cloud Infrastructure Specialist
-
-👨‍💻 Application Operations Specialist @ Türk Telekom
-🎯 Specializing in DevOps, Cloud Computing & Linux System Administration
-📍 Istanbul, Turkey | 27 years old
-
-### Quick Start
-• cat about.txt       - Detailed bio
-• cd skills          - Technical competencies
-• cd experience      - Professional background
-• cd certifications  - Credentials & training
-• cat contact.sh     - Connect with me
-
-Type 'help' for available commands.`,
-
-          'about.txt': `PROFESSIONAL SUMMARY
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Linux system administrator transitioning to DevOps with hands-on
-experience in container orchestration and application operations.
-Currently working at Türk Telekom and actively seeking DevOps
-opportunities to grow and contribute.
-
-HOBBYIST LAB & HARDWARE:
-├── OS: RHEL / Ubuntu Server
-├── CPU: Ryzen 5 7500X3D
-├── GPU: RTX 5070
-└── Local AI: Running local LLM models and infrastructure testing
-
-CORE COMPETENCIES:
-├── Container Orchestration (Docker, OpenShift)
-├── Cloud Platform (Huawei Cloud - Certified)
-├── Linux System Administration (RHEL, CentOS)
-├── Continuous Deployment & Automation
-└── Monitoring & Observability (Prometheus, Grafana)
-
-APPROACH:
-Solving complex system problems through root-cause analysis,
-automating manual tasks with Bash scripts, and building
-highly available infrastructure.
-
-🎯 CAREER STATUS: Actively seeking DevOps Engineer positions`,
-
-          'contact.sh': `#!/bin/bash
-# Contact Information
-
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  PROFESSIONAL CONTACT"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
-echo "LinkedIn: ${linkedin_url}"
-echo "Location: Istanbul, Turkey"
-echo "Role: Application Operations Specialist"
-echo "Company: Türk Telekom"
-echo ""
-echo "Opening LinkedIn profile..."
-
-# Redirecting to LinkedIn...`
-        }
-      },
-
-      'certifications': {
-        dirs: [],
-        files: ['cloud.txt', 'linux.txt', 'database.txt', 'list.sh'],
-        content: {
-          'cloud.txt': `CLOUD CERTIFICATION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-📜 Huawei Cloud Certified Associate (HCCDA)
-   • Cloud Computing Tech Essentials
-   • Cloud Infrastructure & Services
-   • Cloud Security Fundamentals`,
-
-          'linux.txt': `LINUX CERTIFICATION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-🐧 Red Hat System Administration (RH124)
-   • RHEL System Management
-   • User & Permission Management
-   • Service Configuration & Troubleshooting
-   • Storage & File System Management`,
-
-          'database.txt': `DATABASE CERTIFICATION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-💾 SQL Database Management - BTK Academy
-   • Advanced SQL Queries
-   • Database Design & Optimization
-   • Data Analysis & Reporting`,
-
-          'list.sh': `#!/bin/bash
-# All Certifications
-
-certifications=(
-    "Huawei Cloud Certified Associate (HCCDA)"
-    "Red Hat Linux System Administration (RH124)"
-    "SQL Database Management - BTK Academy"
-)
-
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  PROFESSIONAL CERTIFICATIONS"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
-
-for cert in "\${certifications[@]}"; do
-    echo "✓ $cert"
-done`
-        }
-      },
-
-      'experience': {
-        dirs: [],
-        files: ['current.txt', 'previous.txt', 'timeline.sh'],
-        content: {
-          'current.txt': `CURRENT POSITION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-🏢 Türk Telekom
-📍 Application Operations Specialist
-⏱️  6+ Months (Current)
-
-KEY RESPONSIBILITIES:
-• Managing enterprise-level application infrastructure
-• Implementing DevOps best practices and automation
-• Monitoring and optimizing system performance
-• Ensuring high availability and disaster recovery
-• Collaborating with development teams for seamless deployments
-
-TECHNOLOGIES:
-Docker, OpenShift, Linux (RHEL), Bash Scripting,
-Monitoring Tools (Prometheus, Grafana)`,
-
-          'previous.txt': `PREVIOUS EXPERIENCE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-🏢 Sekom
-📍 Software Support Specialist / Cloud Operations
-⏱️  1 Year 3 Months
-
-ACHIEVEMENTS:
-• Managed deployment processes and application operations
-• Implemented containerization with Docker
-• Enhanced operational efficiency through automation
-• Managed cloud infrastructure on Huawei Cloud
-• Led incident response and system troubleshooting initiatives
-
-TECHNOLOGIES:
-Huawei Cloud, Docker, GitLab, Bash Scripting,
-Linux System Administration, Application Deployment`,
-
-          'timeline.sh': `#!/bin/bash
-# Career Timeline
-
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  PROFESSIONAL TIMELINE"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
-echo "2024 - Present   │ Türk Telekom"
-echo "                 │ Application Operations Specialist"
-echo "                 │"
-echo "2023 - 2024      │ Sekom"
-echo "                 │ Cloud Operations"
-echo "                 │"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
-echo "Total Experience: 1 Year 9+ Months"`
-        }
-      },
-
-      'skills': {
-        dirs: [],
-        files: ['orchestration.txt', 'systems.txt', 'monitoring.txt', 'automation.txt', 'summary.sh'],
-        content: {
-          'orchestration.txt': `CONTAINER ORCHESTRATION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-🐳 Docker
-   • Multi-stage builds & optimization
-   • Docker Compose for local development
-   • Container security best practices
-   • Registry management
-
-☸️  Red Hat OpenShift
-   • Application deployment & management
-   • Pod autoscaling & resource optimization
-   • Route & service configuration
-   • Operator framework understanding`,
-
-          'systems.txt': `LINUX SYSTEM ADMINISTRATION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-🐧 Operating Systems
-   • Red Hat Enterprise Linux (RHEL)
-   • CentOS / Rocky Linux
-   • Ubuntu Server
-
-⚙️  System Management
-   • Systemd service management
-   • User & permission administration
-   • Storage configuration & management
-   • Network configuration & troubleshooting
-   • Performance tuning & optimization
-   • Bash scripting for automation`,
-
-          'monitoring.txt': `MONITORING & OBSERVABILITY
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-📊 Prometheus
-   • Metric collection & aggregation
-   • Alert rule configuration
-   • Service discovery setup
-
-📈 Grafana
-   • Custom dashboard creation
-   • Data visualization & analysis
-   • Alert integration
-
-🔍 Log Management
-   • Log aggregation & analysis
-   • Troubleshooting & root cause analysis
-   • Performance monitoring`,
-
-          'automation.txt': `AUTOMATION & DEPLOYMENT
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-💻 Bash Scripting
-   • Automation of routine tasks
-   • System administration scripts
-   • Deployment automation
-   • Backup & recovery scripts
-
-🔄 Continuous Deployment
-   • Application deployment processes
-   • Automated rollout strategies
-   • Environment provisioning
-   • Deployment pipeline understanding
-
-📚 Currently Learning
-   • CI/CD Integration (GitLab CI, Jenkins)
-   • Infrastructure as Code (Terraform, Ansible)`,
-
-          'summary.sh': `#!/bin/bash
-# Technical Skills Summary
-
-categories=(
-    "Container Orchestration:Docker,OpenShift"
-    "Operating Systems:RHEL,CentOS,Ubuntu"
-    "Monitoring:Prometheus,Grafana"
-    "Scripting:Bash,Shell"
-    "Cloud Platform:Huawei Cloud (Certified)"
-    "Version Control:Git,GitLab"
-    "Deployment:CD Processes,Automation"
-)
-
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  TECHNICAL COMPETENCIES"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
-
-for category in "\${categories[@]}"; do
-    IFS=':' read -r name skills <<< "$category"
-    echo "▸ $name"
-    echo "  └─ $skills"
-    echo ""
-done
-
-echo "🎯 Currently expanding skills in CI/CD and IaC"`
-        }
-      }
-    };
-
-    // ---- helpers ----
-    function scrollToBottom() {
-      terminalBody.scrollTop = terminalBody.scrollHeight;
-    }
-
-    async function typeWriter(element, text, speed = 30) {
-      for (let i = 0; i < text.length; i++) {
-        element.textContent += text.charAt(i);
-        await new Promise(resolve => setTimeout(resolve, speed));
-      }
-    }
-
-    function escapeHtml(str) {
-      return String(str)
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#039;');
-    }
-
-    function printPrompt(command = '') {
-      const path = currentPath === 'home' ? '~' : `~/${currentPath}`;
-      const resp = document.createElement('div');
-      resp.className = 'output';
-      resp.innerHTML =
-        `<span class="prompt">atakan@production</span>` +
-        `<span class="prompt-path">:${path}</span>` +
-        `<span class="prompt">$</span> ` +
-        `<span style="color:white">${escapeHtml(command)}</span>`;
-      history.appendChild(resp);
-    }
-
-    function printOutput(text, isHTML = false) {
-      const resp = document.createElement('div');
-      resp.className = 'output';
-      if (isHTML) resp.innerHTML = text;
-      else resp.textContent = text;
-      history.appendChild(resp);
-    }
-
-    function updatePrompt() {
-      const path = currentPath === 'home' ? '~' : `~/${currentPath}`;
-      promptPath.textContent = `:${path}`;
-    }
-
-    // ---- intro ----
-    async function showIntro() {
-      const welcomeLine = document.createElement('div');
-      welcomeLine.className = 'output';
-      welcomeLine.style.color = '#00aaff';
-      welcomeLine.style.marginBottom = '20px';
-      introContainer.appendChild(welcomeLine);
-
-      await typeWriter(welcomeLine, '> Initializing DevOps Portfolio System...', 40);
-      await new Promise(r => setTimeout(r, 400));
-
-      printOutput(
-        `<div class="info-box">
-╔════════════════════════════════════════════════════════════╗
-║   Welcome to Atakan Sarıkaya's Interactive Portfolio      ║
-║   Linux System Admin & DevOps Engineer                    ║
-║   🎯 Currently seeking DevOps opportunities                ║
-╚════════════════════════════════════════════════════════════╝
-
-Type <span class="highlight">help</span> to see available commands
-Type <span class="highlight">cat README.md</span> for quick start guide
-Use <span class="highlight">Tab</span> key for auto-completion
-Use <span class="highlight">↑↓</span> arrow keys for command history
-</div>`,
-        true
-      );
-
-      inputArea.style.display = 'flex';
-      input.focus();
-      scrollToBottom();
-    }
-
-    document.addEventListener('click', () => input.focus());
-
-    // ---- optional: "harder to view source" (bypassable) ----
-    document.addEventListener('contextmenu', (e) => e.preventDefault());
-    document.addEventListener('keydown', (e) => {
-      const k = e.key.toLowerCase();
-      if (e.key === 'F12') e.preventDefault();
-      if (e.ctrlKey && (k === 'u' || k === 's')) e.preventDefault();
-      if (e.ctrlKey && e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) e.preventDefault();
-    });
-
-    // ---- commands ----
-    function executeCommand(cmd, target) {
-      switch (cmd) {
-        case 'clear':
-          history.innerHTML = '';
-          break;
-
-        case 'help':
-          printOutput(`<div class="section-header">Available Commands</div>
-<span class="highlight">Navigation:</span>
-  ls               - List directory contents
-  cd [dir]         - Change directory (use 'cd ..' or 'cd ~' to go back)
-  pwd              - Print working directory
-  tree             - Display directory structure
-
-<span class="highlight">File Operations:</span>
-  cat [file]       - Display file contents
-
-<span class="highlight">Information:</span>
-  whoami           - Display current user info
-  linkedin         - Open LinkedIn profile
-
-<span class="highlight">System:</span>
-  clear            - Clear terminal screen
-  help             - Show this help message
-
-<span class="highlight">Tip:</span> Tab for auto-completion, ↑↓ for history`, true);
-          break;
-
-        case 'pwd':
-          printOutput(currentPath === 'home' ? '/home/atakan' : `/home/atakan/${currentPath}`);
-          break;
-
-        case 'ls': {
-          let output = '';
-          if (fs[currentPath].dirs.length > 0) {
-            fs[currentPath].dirs.forEach(d => output += `<span class="dir">${d}/</span>`);
-            output += '\n';
-          }
-          if (fs[currentPath].files.length > 0) {
-            fs[currentPath].files.forEach(f => output += `<span class="file">${f}</span>`);
-          }
-          printOutput(output, true);
-          break;
-        }
-
-        case 'tree': {
-          let tree = '<span class="highlight">/home/atakan</span>\n';
-          fs['home'].dirs.forEach(d => tree += `├── <span class="dir">${d}/</span>\n`);
-          fs['home'].files.forEach(f => tree += `├── ${escapeHtml(f)}\n`);
-          printOutput(tree, true);
-          break;
-        }
-
-        case 'cd':
-          if (!target || target === '~' || target === '..') {
-            currentPath = 'home';
-          } else if (fs[currentPath].dirs.includes(target)) {
-            currentPath = target;
-          } else {
-            printOutput(`<span class="error">bash: cd: ${escapeHtml(target)}: No such directory</span>`, true);
-          }
-          updatePrompt();
-          break;
-
-        case 'cat':
-          if (fs[currentPath].content && fs[currentPath].content[target]) {
-            printOutput(fs[currentPath].content[target], false);
-            if (target === 'contact.sh') setTimeout(() => window.open(linkedin_url, '_blank'), 900);
-          } else {
-            printOutput(`<span class="error">bash: cat: ${escapeHtml(target)}: No such file</span>`, true);
-          }
-          break;
-
-        case 'whoami':
-          printOutput(`<div class="info-box">atakan - Application Operations Specialist
-Currently working at Türk Telekom
-DevOps enthusiast focusing on cloud infrastructure and automation
-
-🎯 Open to DevOps opportunities
-
-Use 'cat about.txt' for detailed information</div>`, true);
-          break;
-
-        case 'linkedin':
-          printOutput('Opening LinkedIn profile...', false);
-          window.open(linkedin_url, '_blank');
-          break;
-
-        default:
-          if (cmd) {
-            printOutput(`<span class="error">bash: ${escapeHtml(cmd)}: command not found</span>
-Type 'help' to see available commands`, true);
-          }
-      }
-    }
-
-    // ---- key handling (NORMAL TERMINAL) ----
-    input.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        if (historyIndex < commandHistory.length - 1) {
-          historyIndex++;
-          input.value = commandHistory[historyIndex];
-        }
-        return;
-      }
-
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        if (historyIndex > 0) {
-          historyIndex--;
-          input.value = commandHistory[historyIndex];
-        } else if (historyIndex === 0) {
-          historyIndex = -1;
-          input.value = '';
-        }
-        return;
-      }
-
-      if (e.key === 'Tab') {
-        e.preventDefault();
-
-        const words = input.value.trim().split(' ');
-        const lastWord = words[words.length - 1]?.toLowerCase();
-        if (!lastWord) return;
-
-        const commands = ['help', 'clear', 'pwd', 'ls', 'cd', 'cat', 'whoami', 'linkedin', 'tree'];
-        const currentItems = [...fs[currentPath].files, ...fs[currentPath].dirs];
-        const allPossible = words.length === 1 ? commands : currentItems;
-
-        const matches = allPossible.filter(item => item.toLowerCase().startsWith(lastWord));
-
-        if (matches.length === 1) {
-          words[words.length - 1] = matches[0];
-          input.value = words.join(' ');
-        } else if (matches.length > 1) {
-          printOutput(`\nPossible matches: ${matches.join('  ')}`, false);
-          printPrompt(input.value);
-          scrollToBottom();
-        }
-        return;
-      }
-
-      // ENTER: execute + new prompt stays at bottom (input line)
-      if (e.key === 'Enter') {
-        e.preventDefault();
-
-        const rawInput = input.value.trim();
-        // boş enter: sadece yeni prompt bas
-        if (!rawInput) {
-          printPrompt('');
-          input.value = '';
-          scrollToBottom();
-          return;
-        }
-
-        commandHistory.unshift(rawInput);
-        historyIndex = -1;
-
-        const args = rawInput.split(' ');
-        const cmd = args[0].toLowerCase();
-        const target = args.slice(1).join(' ');
-
-        // 1) komutu history'ye yaz
-        printPrompt(rawInput);
-
-        // 2) çalıştır
-        executeCommand(cmd, target);
-
-        // 3) input temizle, en alta kaydır
-        input.value = '';
-        scrollToBottom();
-      }
-    });
-
-    showIntro();
-  </script>
+</div>
+
+<script>
+const input=document.getElementById("input");
+const history=document.getElementById("history");
+const body=document.getElementById("terminal-body");
+
+const fs={
+home:{dirs:["skills"],files:["README.md"],content:{
+"README.md":"Atakan Sarıkaya\\nDevOps & Cloud Infrastructure Specialist\\n\\nType: ls, cd skills, cat README.md"
+}},
+skills:{dirs:[],files:["skills.txt"],content:{
+"skills.txt":"Linux, RHEL, CentOS, Docker, OpenShift, Prometheus, Grafana, Bash"
+}}
+};
+
+let path="home";
+
+function scrollBottom(){body.scrollTop=body.scrollHeight}
+
+function printPrompt(cmd=""){
+const p=document.createElement("div");
+p.className="output";
+p.innerHTML=`<span class="prompt">atakan@production</span><span class="prompt-path">:${path==="home"?"~":"~/"+path}</span>$ ${cmd}`;
+history.appendChild(p);
+}
+
+function printOut(txt){const o=document.createElement("div");o.className="output";o.textContent=txt;history.appendChild(o)}
+
+function run(cmd){
+const [c,...rest]=cmd.split(" ");
+const arg=rest.join(" ");
+if(c==="ls"){
+let out="";
+fs[path].dirs.forEach(d=>out+=d+"/ ");
+fs[path].files.forEach(f=>out+=f+" ");
+printOut(out);
+}
+else if(c==="cd"){
+if(!arg||arg==="..")path="home";
+else if(fs[path].dirs.includes(arg))path=arg;
+else printOut("No such directory");
+}
+else if(c==="cat"){
+if(fs[path].content[arg])printOut(fs[path].content[arg]);
+else printOut("No such file");
+}
+else if(c==="clear"){history.innerHTML="";}
+else printOut("command not found");
+}
+
+input.addEventListener("keydown",e=>{
+if(e.key==="Enter"){
+e.preventDefault();
+const v=input.value.trim();
+printPrompt(v);
+if(v)run(v);
+input.value="";
+scrollBottom();
+}
+});
+
+/* ============================
+   KAYNAK KOD GÖRÜNTÜLEMEYİ ZORLAŞTIRMA
+   ============================ */
+
+// Sağ tık kapat
+document.addEventListener("contextmenu",e=>e.preventDefault());
+
+// Kısayol engelleme
+document.addEventListener("keydown",e=>{
+const k=e.key.toLowerCase();
+if(e.key==="F12")e.preventDefault();
+if(e.ctrlKey&&(k==="u"||k==="s"))e.preventDefault();
+if(e.ctrlKey&&e.shiftKey&&(k==="i"||k==="j"||k==="c"))e.preventDefault();
+},true);
+
+// DevTools açık mı (yaklaşık tespit)
+(function(){
+const t=160;
+function chk(){
+if(window.outerWidth-window.innerWidth>t||window.outerHeight-window.innerHeight>t){
+document.body.innerHTML="<pre style='color:white;padding:30px'>DevTools detected</pre>";
+}
+requestAnimationFrame(chk);
+}
+chk();
+})();
+</script>
 </body>
 </html>
