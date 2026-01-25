@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -115,16 +115,34 @@
             margin-top: 10px;
         }
         
-        .boot-log { 
-            color: #888; 
-            margin-bottom: 3px; 
-            font-size: 13px;
-            letter-spacing: 0.3px;
+        .ascii-art {
+            color: #00ff41;
+            font-size: 11px;
+            line-height: 1.2;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
         }
         
-        .ok { 
-            color: #00ff41; 
-            font-weight: bold; 
+        .typing {
+            overflow: hidden;
+            white-space: nowrap;
+            display: inline-block;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background: #00ff41;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
         
         .error {
@@ -162,26 +180,12 @@
             margin: 15px 0;
             border-radius: 4px;
         }
-        
-        .link {
-            color: #00aaff;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-        
-        .blink {
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
 
         @media (max-width: 768px) {
             body { padding: 10px; }
             #terminal { margin: 20px auto; }
             .terminal-body { padding: 20px; font-size: 13px; }
+            .ascii-art { font-size: 8px; }
         }
     </style>
 </head>
@@ -194,7 +198,7 @@
             <div class="terminal-title">atakan@devops-portfolio: ~</div>
         </div>
         <div class="terminal-body">
-            <div id="boot-container"></div>
+            <div id="intro-container"></div>
             <div id="history"></div>
             <div class="input-line" id="input-area">
                 <span class="prompt">atakan@production</span><span class="prompt-path" id="prompt-path">:~</span><span class="prompt">$</span>
@@ -207,13 +211,23 @@
         const input = document.getElementById('command-input');
         const history = document.getElementById('history');
         const inputArea = document.getElementById('input-area');
-        const bootContainer = document.getElementById('boot-container');
+        const introContainer = document.getElementById('intro-container');
         const promptPath = document.getElementById('prompt-path');
         
         let currentPath = 'home';
         let commandHistory = [];
         let historyIndex = -1;
         const linkedin_url = "https://www.linkedin.com/in/atakansarikaya/";
+
+        const asciiArt = `
+    ___  _____  ___   __ __   ___   _  _ 
+   / _ \\|_   _|/ _ \\ |  / /  / _ \\ | \\| |
+  / /_\\ \\ | | / /_\\ \\| |/ /  / /_\\ \\| .\` |
+ /  _  \\ | |/  _  \\|   /  /  _  \\| |\\  |
+/_/   \\_\\|_/_/   \\_\\_|\\_\\ /_/   \\_\\_| \\_|
+                                          
+   S A R I K A Y A   |   D E V O P S      
+`;
 
         const fs = {
             'home': {
@@ -382,7 +396,7 @@ echo "2024 - Present   │ Türk Telekom"
 echo "                 │ Application Operations Specialist"
 echo "                 │"
 echo "2023 - 2024      │ Sekom"
-echo "                 │ DevSecOps Cloud Operations"
+echo "                 │ Cloud Operations"
 echo "                 │"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
@@ -470,8 +484,9 @@ categories=(
     "Operating Systems:RHEL,CentOS,Ubuntu"
     "Monitoring:Prometheus,Grafana"
     "Scripting:Bash,Shell"
-    "Cloud Platforms:AWS,Huawei Cloud"
+    "Cloud Platform:Huawei Cloud (Certified)"
     "Version Control:Git,GitLab"
+    "Deployment:CD Processes,Automation"
 )
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -484,36 +499,43 @@ for category in "\${categories[@]}"; do
     echo "▸ $name"
     echo "  └─ $skills"
     echo ""
-done`
+done
+
+echo "🎯 Currently expanding skills in CI/CD and IaC"`
                 }
             }
         };
 
-        const bootMessages = [
-            "[  0.000000] Initializing DevOps Portfolio System...",
-            "[  0.123456] Loading kernel modules...",
-            "[  OK  ] Mounted /home/atakan",
-            "[  OK  ] Started Docker Container Engine",
-            "[  OK  ] Started OpenShift Service",
-            "[  OK  ] Reached target Multi-User System",
-            "",
-            "System boot complete. Welcome, Atakan.",
-            ""
-        ];
-
-        async function runBootSequence() {
-            for (let msg of bootMessages) {
-                const log = document.createElement('div');
-                log.className = 'boot-log';
-                log.innerHTML = msg.replace(/\[ OK \]/g, "<span class='ok'>[ OK ]</span>");
-                bootContainer.appendChild(log);
-                await new Promise(r => setTimeout(r, 80));
+        async function typeWriter(element, text, speed = 30) {
+            for (let i = 0; i < text.length; i++) {
+                element.textContent += text.charAt(i);
+                await new Promise(resolve => setTimeout(resolve, speed));
             }
+        }
+
+        async function showIntro() {
+            const art = document.createElement('div');
+            art.className = 'ascii-art';
+            art.textContent = asciiArt;
+            introContainer.appendChild(art);
+            
+            await new Promise(r => setTimeout(r, 800));
+            
+            const welcomeLine = document.createElement('div');
+            welcomeLine.className = 'output';
+            welcomeLine.style.color = '#00aaff';
+            welcomeLine.style.textAlign = 'center';
+            welcomeLine.style.marginBottom = '30px';
+            introContainer.appendChild(welcomeLine);
+            
+            await typeWriter(welcomeLine, '> Initializing DevOps Portfolio System...', 40);
+            await new Promise(r => setTimeout(r, 500));
             
             printOutput(`<div class="info-box">
 ╔════════════════════════════════════════════════════════════╗
 ║   Welcome to Atakan Sarıkaya's Interactive Portfolio      ║
-║   DevOps & Cloud Infrastructure Specialist                ║
+║   Linux System Admin & DevOps Engineer                    ║
+║   🎯 Currently seeking DevOps opportunities               ║
 ╚════════════════════════════════════════════════════════════╝
 
 Type <span class="highlight">help</span> to see available commands
@@ -674,6 +696,8 @@ Use <span class="highlight">↑↓</span> arrow keys for command history
 Currently working at Türk Telekom
 DevOps enthusiast focusing on cloud infrastructure and automation
 
+🎯 Open to DevOps opportunities
+
 Use 'cat about.txt' for detailed information</div>`, true);
                     break;
                     
@@ -714,7 +738,7 @@ Type 'help' to see available commands`, true);
             promptPath.textContent = `:${path}`;
         }
 
-        runBootSequence();
+        showIntro();
     </script>
 </body>
 </html>
