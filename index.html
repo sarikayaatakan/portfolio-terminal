@@ -20,7 +20,7 @@
 <body>
     <div id="terminal">
         <div id="boot-container"></div>
-        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 3.8] - EXPERIENCE OPTIMIZED ***</div>
+        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 3.9] - DEVOPS REFACTORED ***</div>
         <div id="history"></div>
         <div class="input-line" id="input-area">
             <span class="prompt" id="prompt-label">atakan@production:~$</span>
@@ -46,7 +46,7 @@
 
         const fs = {
             'home': {
-                dirs: ['sertifikalar', 'deneyimler', 'beceriler'],
+                dirs: ['sertifikalar', 'deneyimler', 'devops'],
                 files: ['ozgecmis.txt', 'iletisim.sh'],
                 content: {
                     'ozgecmis.txt': "Atakan Sarıkaya | 27\n\nMerhaba, ben Atakan. Türk Telekom bünyesinde Uygulama Operasyon Uzmanı \nolarak görev almaktayım. DevOps, Cloud ve Linux teknolojileri üzerine \nderinleşerek, ölçeklenebilir ve dayanıklı sistem mimarileri inşa etmeye \nodaklanıyorum.",
@@ -70,12 +70,13 @@
                     'sekom.txt': "Sekom: Yazılım Destek Uzmanı / DevSecOps Cloud Operations (1 Yıl 3 Ay)"
                 }
             },
-            'beceriler': {
+            'devops': {
                 dirs: [],
-                files: ['sistem.txt', 'orchestration.txt', 'monitoring.txt'],
+                files: ['orchestration.txt', 'deployment.txt', 'sistem.txt', 'monitoring.txt'],
                 content: {
-                    'sistem.txt': "Linux (RHEL, CentOS), Systemd, Bash Scripting, Web Service Management",
                     'orchestration.txt': "Docker & RedHat OpenShift Orchestration",
+                    'deployment.txt': "Application Deployment, Environment Provisioning and Automated Rollouts",
+                    'sistem.txt': "Linux (RHEL, CentOS), Systemd, Bash Scripting, Web Service Management",
                     'monitoring.txt': "Prometheus, Grafana, Log Analysis, Alarm Tracking"
                 }
             }
@@ -84,9 +85,9 @@
         const bootMessages = [
             "[  0.000000] Linux version 5.14.0-70.13.1.el9_0.x86_64",
             "[  OK  ] Loading Atakan's Profile Core...",
-            "[  OK  ] Mounting /home/atakan/deneyimler...",
-            "[  OK  ] System Ready. Starting Interactive Shell...",
-            "Session Authorized. Login: Atakan Sarıkaya"
+            "[  OK  ] Mounting /home/atakan/devops...",
+            "[  OK  ] Initializing Orchestration & Deployment Engine...",
+            "Welcome, Specialist. Shell initialized."
         ];
 
         async function runBootSequence() {
@@ -109,8 +110,8 @@
             printOutput("komutları listeleyebilir; kariyer yolculuğuma göz atmak için ise");
             printOutput("aşağıdaki komutları kullanabilirsiniz:");
             printOutput("\n* Özgeçmiş özeti: cat ozgecmis.txt");
-            printOutput("* Deneyimler: cd deneyimler (ardından 'ls' ve 'cat')");
-            printOutput("* Beceriler: cd beceriler");
+            printOutput("* DevOps & Teknik Beceriler: cd devops (ardından 'ls' ve 'cat')");
+            printOutput("* Deneyimler: cd deneyimler");
             printOutput("* Sertifikalar: cd sertifikalar");
             printOutput("\nKeşfetmek için 'ls' yazabilir veya Tab tuşunu kullanabilirsiniz.");
             
