@@ -19,7 +19,7 @@
 <body>
     <div id="terminal">
         <div id="boot-container"></div>
-        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 3.1] - ORCHESTRATION CONSOLE ***</div>
+        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 3.3] - THE VISIONARY ***</div>
         <div id="history"></div>
         <div class="input-line" id="input-area">
             <span class="prompt" id="prompt-label">atakan@production:~$</span>
@@ -39,14 +39,16 @@
         const linkedin_url = "https://www.linkedin.com/in/atakansarikaya/";
 
         document.addEventListener('contextmenu', (e) => e.preventDefault());
-        document.onkeydown = (e) => { if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && [73, 74, 67].includes(e.keyCode)) || (e.ctrlKey && e.keyCode == 85)) return false; };
+        document.onkeydown = (e) => { 
+            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && [73, 74, 67].includes(e.keyCode)) || (e.ctrlKey && e.keyCode == 85)) return false; 
+        };
 
         const fs = {
             'home': {
                 dirs: ['sertifikalar', 'tecrube', 'beceriler'],
                 files: ['ozgecmis.txt', 'iletisim.sh'],
                 content: {
-                    'ozgecmis.txt': "Atakan Sarıkaya | 27\nDevOps / Cloud & Linux System Specialist\nTürk Telekom bünyesinde Uygulama Operasyon Uzmanı.",
+                    'ozgecmis.txt': "Atakan Sarıkaya | 27\n\nDevOps, Cloud ve Linux alanlarında derinleşerek sistem mimarilerini optimize etmeyi \nve modern altyapılar inşa etmeyi hedefliyorum. Şu anda Türk Telekom bünyesinde \nUygulama Operasyon Uzmanı olarak bu vizyonu hayata geçiriyorum.",
                     'iletisim.sh': "https://www.linkedin.com/in/atakansarikaya/"
                 }
             },
@@ -69,10 +71,10 @@
             },
             'beceriler': {
                 dirs: [],
-                files: ['sistem.txt', 'devops.txt', 'monitoring.txt'],
+                files: ['sistem.txt', 'orchestration.txt', 'monitoring.txt'],
                 content: {
                     'sistem.txt': "Linux (RHEL, CentOS), Systemd, Bash Scripting, Web Service Management",
-                    'devops.txt': "Docker, RedHat OpenShift, Orchestration",
+                    'orchestration.txt': "Docker & RedHat OpenShift Orchestration",
                     'monitoring.txt': "Prometheus, Grafana, Log Analysis, Alarm Tracking"
                 }
             }
@@ -80,10 +82,10 @@
 
         const bootMessages = [
             "[  0.000000] Linux version 5.14.0-70.13.1.el9_0.x86_64",
-            "[  OK  ] TLS Handshake... Established",
-            "[  OK  ] Mounting /home/atakan... (Local FS)",
-            "[  OK  ] Loading Orchestration Modules...",
-            "Welcome, Admin. System is secure."
+            "[  OK  ] Loading Atakan's Profile...",
+            "[  OK  ] Mounting /home/atakan/vision...",
+            "[  OK  ] System Ready. Initializing Welcome Banner...",
+            "Welcome, Atakan Sarıkaya. Shell initialized."
         ];
 
         async function runBootSequence() {
@@ -97,7 +99,16 @@
             bootContainer.style.display = 'none';
             header.style.display = 'block';
             inputArea.style.display = 'flex';
-            printOutput("Erişim yetkisi verildi: misafir. Yardım için 'yardim' yazın.");
+            
+            // ANA SAYFA ÖZETİ VE NAVİGASYON REHBERİ
+            printOutput("Atakan Sarıkaya Terminal OS [v3.3]");
+            printOutput("----------------------------------");
+            printOutput("DevOps, Cloud ve Linux alanlarında kendimi geliştirmeye ve modern sistemler");
+            printOutput("yönetmeye odaklanmış bir Uygulama Operasyon Uzmanıyım.");
+            printOutput("\n* Özgeçmişim için: cat ozgecmis.txt (veya 'tecrube/' dizinine girin)");
+            printOutput("* Becerilerim için: cd beceriler (ardından 'ls' yapın)");
+            printOutput("\nYardım için 'yardim' yazabilirsiniz.");
+            
             input.focus();
         }
 
@@ -106,11 +117,11 @@
         input.addEventListener('keydown', function(e) {
             if (e.key === 'Tab') {
                 e.preventDefault();
-                const val = input.value.toLowerCase().trim().split(' ').pop();
-                if (!val) return;
+                const currentVal = input.value.toLowerCase().trim().split(' ').pop();
+                if (!currentVal) return;
                 const commands = ['yardim', 'help', 'clear', 'pwd', 'ls', 'cd', 'cat', 'linkedin'];
                 const allPossible = [...commands, ...fs[currentPath].files, ...fs[currentPath].dirs];
-                const match = allPossible.find(c => c.startsWith(val));
+                const match = allPossible.find(c => c.startsWith(currentVal));
                 if (match) {
                     const words = input.value.split(' ');
                     words[words.length - 1] = match;
