@@ -115,36 +115,6 @@
             margin-top: 10px;
         }
         
-        .ascii-art {
-            color: #00ff41;
-            font-size: 11px;
-            line-height: 1.2;
-            text-align: center;
-            margin: 20px 0;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
-        }
-        
-        .typing {
-            overflow: hidden;
-            white-space: nowrap;
-            display: inline-block;
-        }
-        
-        .cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background: #00ff41;
-            margin-left: 2px;
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        
         .error {
             color: #ff5f57;
         }
@@ -185,7 +155,6 @@
             body { padding: 10px; }
             #terminal { margin: 20px auto; }
             .terminal-body { padding: 20px; font-size: 13px; }
-            .ascii-art { font-size: 8px; }
         }
     </style>
 </head>
@@ -218,15 +187,6 @@
         let commandHistory = [];
         let historyIndex = -1;
         const linkedin_url = "https://www.linkedin.com/in/atakansarikaya/";
-
-        const asciiArt = `
-   _   _____  _   _  __   _   _   _     ___   _   ___ ___ _  __  _   _   _ 
-  /_\\ |_   _|/_\\ | |/ / /_\\ | \\ | |   / __| /_\\ | _ \\_ _| |/ / /_\\ \\ \\ / /
- / _ \\  | | / _ \\| ' < / _ \\|  \\| |   \\__ \\/ _ \\|   /| || ' < / _ \\ \\ V / 
-/_/ \\_\\ |_|/_/ \\_\\_|\\_\\/_/ \\_\\_| \\_|   |___/_/ \\_\\_|_|___|_|\\_\\/_/ \\_\\ |_|  
-
-                            D E V O P S
-        `;
 
         const fs = {
             'home': {
@@ -281,7 +241,7 @@ highly available infrastructure.
 # Contact Information
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  PROFESYONEL İLETİŞİM"
+echo "  PROFESSIONAL CONTACT"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 echo "LinkedIn: ${linkedin_url}"
@@ -513,22 +473,14 @@ echo "🎯 Currently expanding skills in CI/CD and IaC"`
         }
 
         async function showIntro() {
-            const art = document.createElement('div');
-            art.className = 'ascii-art';
-            art.textContent = asciiArt;
-            introContainer.appendChild(art);
-            
-            await new Promise(r => setTimeout(r, 800));
-            
             const welcomeLine = document.createElement('div');
             welcomeLine.className = 'output';
             welcomeLine.style.color = '#00aaff';
-            welcomeLine.style.textAlign = 'center';
-            welcomeLine.style.marginBottom = '30px';
+            welcomeLine.style.marginBottom = '20px';
             introContainer.appendChild(welcomeLine);
             
             await typeWriter(welcomeLine, '> Initializing DevOps Portfolio System...', 40);
-            await new Promise(r => setTimeout(r, 500));
+            await new Promise(r => setTimeout(r, 400));
             
             printOutput(`<div class="info-box">
 ╔════════════════════════════════════════════════════════════╗
