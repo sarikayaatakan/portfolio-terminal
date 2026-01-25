@@ -1,292 +1,103 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="Tux.png" type="image/png" />
-  <title>Atakan Sarıkaya | DevOps & Cloud Infrastructure Specialist</title>
-
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-      color: #00ff41;
-      font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
-      padding: 20px;
-      line-height: 1.6;
-      min-height: 100vh;
-      cursor: text;
-    }
-    #terminal {
-      max-width: 1100px;
-      margin: 40px auto;
-      background: rgba(13, 13, 13, 0.95);
-      border-radius: 12px;
-      box-shadow: 0 20px 60px rgba(0, 255, 65, 0.15);
-      overflow: hidden;
-      border: 1px solid rgba(0, 255, 65, 0.2);
-    }
-    .terminal-header {
-      background: linear-gradient(90deg, #1e1e1e 0%, #2d2d2d 100%);
-      padding: 12px 20px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border-bottom: 1px solid rgba(0, 255, 65, 0.2);
-      user-select: none;
-    }
-    .terminal-button { width: 12px; height: 12px; border-radius: 50%; }
-    .btn-close { background: #ff5f57; }
-    .btn-minimize { background: #ffbd2e; }
-    .btn-maximize { background: #28ca42; }
-    .terminal-title { flex: 1; text-align: center; color: #888; font-size: 13px; letter-spacing: 0.5px; }
-    .terminal-body { padding: 30px; min-height: 500px; max-height: 80vh; overflow-y: auto; }
-    .terminal-body::-webkit-scrollbar { width: 8px; }
-    .terminal-body::-webkit-scrollbar-track { background: #1a1a1a; }
-    .terminal-body::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-    .prompt { color: #00aaff; font-weight: bold; }
-    .prompt-path { color: #ffcc00; font-weight: normal; }
-    .command-input {
-      background: transparent;
-      border: none;
-      color: #ffffff;
-      font-family: inherit;
-      font-size: 15px;
-      outline: none;
-      width: 70%;
-      caret-color: #00ff41;
-      margin-left: 8px;
-    }
-    .output { margin-bottom: 15px; white-space: pre-wrap; color: #d1d1d1; animation: fadeIn 0.3s ease-in; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-    .input-line { display: none; align-items: center; margin-top: 10px; }
-    .error { color: #ff5f57; }
-    .dir { color: #00aaff; font-weight: bold; margin-right: 15px; }
-    .file { color: #aaa; margin-right: 15px; }
-    .section-header { color: #ffcc00; font-weight: bold; margin: 20px 0 10px 0; border-bottom: 1px solid rgba(255, 204, 0, 0.3); padding-bottom: 5px; }
-    .highlight { color: #00ff41; font-weight: bold; }
-    .info-box { background: rgba(0, 170, 255, 0.05); border-left: 3px solid #00aaff; padding: 15px; margin: 15px 0; border-radius: 4px; }
-    .loading { color: #00ff41; font-weight: bold; }
-    @media (max-width: 768px) { body { padding: 10px; } #terminal { margin: 20px auto; } .terminal-body { padding: 20px; font-size: 13px; } }
-  </style>
-</head>
-
-<body>
-  <div id="terminal">
-    <div class="terminal-header">
-      <div class="terminal-button btn-close"></div>
-      <div class="terminal-button btn-minimize"></div>
-      <div class="terminal-button btn-maximize"></div>
-      <div class="terminal-title">atakan@devops-portfolio: ~</div>
-    </div>
-
-    <div class="terminal-body" id="terminal-body">
-      <div id="intro-container"></div>
-      <div id="history"></div>
-
-      <div class="input-line" id="input-area">
-        <span class="prompt">atakan@production</span>
-        <span class="prompt-path" id="prompt-path">:~</span>
-        <span class="prompt">$</span>
-        <input type="text" id="command-input" class="command-input" autofocus autocomplete="off" spellcheck="false" />
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const input = document.getElementById('command-input');
-    const history = document.getElementById('history');
-    const inputArea = document.getElementById('input-area');
-    const introContainer = document.getElementById('intro-container');
-    const promptPath = document.getElementById('prompt-path');
-    const terminalBody = document.getElementById('terminal-body');
-
-    let currentPath = 'home';
-    let commandHistory = [];
-    let historyIndex = -1;
-
-    const CV_FILE = "ATAKAN_SARIKAYA_DEVOPS_CV.pdf";
-
-    const profile = {
-      name: "Atakan Sarıkaya",
-      role: "Application Operations Specialist at Türk Telekom (via Sekom A.Ş.)",
-      location: "İstanbul, Türkiye",
-      phone: "+90 552 922 52 77",
-      email: "sarikayaatakan@gmail.com",
-      linkedin: "https://www.linkedin.com/in/atakansarikaya/",
-      website: "atakansarikaya.info"
-    };
-
-    const fs = {
-      'home': {
-        dirs: ['sertifikalar', 'deneyim', 'yetkinlikler', 'projeler', 'egitim'],
-        files: ['readme.md', 'hakkimda.txt', 'iletisim.sh'],
-        content: {
-          'readme.md': `# ${profile.name}
-## DevOps & Cloud Infrastructure Specialist
-
-👨‍💻 ${profile.role}
-📍 ${profile.location}
-🌐 ${profile.website}
-
-### Hızlı Başlangıç
-• cat hakkimda.txt          - Profesyonel özet
-• cd yetkinlikler           - Teknik yetkinlikler
-• cd deneyim                - Profesyonel deneyim
-• cat iletisim.sh           - İletişim bilgileri
-• open cv                   - CV görüntüle
-
-Komutlar için 'help' yaz.`,
-
-          'hakkimda.txt': `PROFESYONEL ÖZET
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Yazılım Destek Uzmanı geçmişine sahip, DevOps ve Cloud altyapı alanında
-kendini profesyonel olarak geliştirmeye odaklanan bir Uygulama Operasyon Uzmanıyım.
-
-Şu anda Türk Telekom bünyesinde, Sekom A.Ş. aracılığıyla dedicated olarak 
-uygulama operasyon süreçlerinde görev alıyor, DevOps Engineer rollerine 
-doğru planlı şekilde ilerliyorum.`,
-
-          'iletisim.sh': `#!/bin/bash
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  İLETİŞİM"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "Telefon  : ${profile.phone}"
-echo "E-posta  : ${profile.email}"
-echo "LinkedIn : ${profile.linkedin}"`
-        }
-      },
-
-      'deneyim': {
-        dirs: [],
-        files: ['guncel.txt', 'onceki.txt', 'staj.txt', 'zaman-cizelgesi.sh'],
-        content: {
-          'guncel.txt': `GÜNCEL POZİSYON (DEDICATED)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🏢 Türk Telekom (via Sekom A.Ş.)
-📍 Application Operations Specialist
-🗓️ Ekim 2025 — Halen
-
-Sorumluluklar:
-• RHEL/CentOS tabanlı kurumsal sistemlerin operasyonel yönetimi
-• Prometheus/Grafana ile sistem metrikleri ve uygulama sağlık izleme
-• Docker ortamındaki uygulamalarda deployment ve operasyonel destek`,
-          'onceki.txt': `ÖNCEKİ DENEYİM\n🏢 Sekom A.Ş.\n📍 Yazılım Destek Uzmanı\n🗓️ Haziran 2024 — Ekim 2025`,
-          'staj.txt': `STAJ\n🏢 İstanbul Büyükşehir Belediyesi\n📍 Software Developer Intern\n🗓️ Ağustos 2023 — Ekim 2023`,
-          'zaman-cizelgesi.sh': `echo "Eki 2025 - Halen | Türk Telekom (via Sekom A.Ş.)"`
-        }
-      },
-      'sertifikalar': { dirs: [], files: ['bulut.txt'], content: { 'bulut.txt': 'Huawei Cloud (HCCDA)' } },
-      'yetkinlikler': { dirs: [], files: ['ozet.txt'], content: { 'ozet.txt': 'Linux, Docker, Prometheus, Bash' } },
-      'projeler': { dirs: [], files: ['portfolio.txt'], content: { 'portfolio.txt': 'Terminal Portfolio' } },
-      'egitim': { dirs: [], files: ['okul.txt'], content: { 'okul.txt': 'Yönetim Bilişim Sistemleri' } }
-    };
-
-    function scrollToBottom() { terminalBody.scrollTop = terminalBody.scrollHeight; }
-
-    async function typeWriter(element, text, speed = 30) {
-      for (let i = 0; i < text.length; i++) {
-        element.textContent += text.charAt(i);
-        await new Promise(resolve => setTimeout(resolve, speed));
-      }
-    }
-
-    function isMobile() { return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent); }
-
-    function startGreenLoading(message, durationMs, doneCb) {
-      const id = `ld_${Date.now()}`;
-      const resp = document.createElement('div');
-      resp.className = 'output';
-      resp.innerHTML = `<span class="loading" id="${id}">${message}</span>`;
-      history.appendChild(resp);
-      scrollToBottom();
-      setTimeout(() => {
-        document.getElementById(id).textContent = message + " ✓";
-        if (doneCb) doneCb();
-      }, durationMs);
-    }
-
-    async function showIntro() {
-      const welcomeLine = document.createElement('div');
-      welcomeLine.className = 'output';
-      welcomeLine.style.color = '#00aaff';
-      introContainer.appendChild(welcomeLine);
-      await typeWriter(welcomeLine, '> Portföy sistemi başlatılıyor...', 40);
-      printOutput(`<div class="info-box">╔════════════════════════════════════════════════════════════╗\n║   ${profile.name} — Dedicated Operations Specialist       ║\n╚════════════════════════════════════════════════════════════╝\n\nKomutlar: help, ls, cd, cat, whoami, open cv</div>`, true);
-      inputArea.style.display = 'flex';
-      input.focus();
-    }
-
-    input.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        const rawInput = input.value.trim();
-        const args = rawInput.split(' ');
-        const cmd = args[0].toLowerCase();
-        const target = args.slice(1).join(' ').trim().toLowerCase();
-
-        printPrompt(rawInput);
-        executeCommand(cmd, target);
-        input.value = '';
-        scrollToBottom();
-      }
-    });
-
-    function executeCommand(cmd, target) {
-      switch(cmd) {
-        case 'help':
-          printOutput(`Komutlar: ls, cd [dizin], cat [dosya], whoami, clear, open cv, linkedin`, true);
-          break;
-        case 'ls':
-          let output = '';
-          fs[currentPath].dirs.forEach(d => output += `<span class="dir">${d}/</span>`);
-          fs[currentPath].files.forEach(f => output += `<span class="file">${f}</span>`);
-          printOutput(output, true);
-          break;
-        case 'cd':
-          if (!target || target === '~' || target === '..') currentPath = 'home';
-          else if (fs[currentPath].dirs.includes(target)) currentPath = target;
-          else printOutput(`<span class="error">Dizin bulunamadı</span>`, true);
-          updatePrompt();
-          break;
+*** index.html	(original)
+--- index.html	(updated)
+***************
+*** 1,6 ****
+  <!DOCTYPE html>
+  <html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+--- 1,6 ----
+  <!DOCTYPE html>
+  <html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+***************
+*** 170,176 ****
+            'README.md': `# ${profile.name}
+  ## DevOps & Cloud Infrastructure Specialist
+  
+! 👨‍💻 ${profile.role} (Türk Telekom - Sekom A.Ş.)
+  📍 ${profile.location}
+  🌐 ${profile.website}
+  
+--- 170,176 ----
+            'README.md': `# ${profile.name}
+  ## DevOps & Cloud Infrastructure Specialist
+  
+! 👨‍💻 ${profile.role} (Türk Telekom via Sekom A.Ş.)
+  📍 ${profile.location}
+  🌐 ${profile.website}
+  
+***************
+*** 208,214 ****
+  
+- Şu anda Türk Telekom’da uygulama operasyon süreçlerinde görev alıyor,
+- DevOps Engineer rollerine doğru planlı şekilde ilerliyorum.`,
++ Şu anda Türk Telekom’da (Sekom A.Ş. üzerinden) uygulama operasyon süreçlerinde görev alıyor,
++ DevOps Engineer rollerine doğru planlı şekilde ilerliyorum.`,
+  
+            'iletisim.sh': `#!/bin/bash
+  # İletişim Bilgileri
+***************
+*** 313,319 ****
+  🏢 Türk Telekom (Sekom A.Ş.)
+  📍 Application Operations Specialist
+  🗓️ Ekim 2025 — Halen
+--- 313,319 ----
++ 🏢 Türk Telekom via Sekom A.Ş.
+  📍 Application Operations Specialist
+  🗓️ Ekim 2025 — Halen
+***************
+*** 560,566 ****
+- Türk Telekom (Sekom A.Ş.) | ${profile.location}
++ Türk Telekom via Sekom A.Ş. | ${profile.location}
+  
+  🎯 DevOps Engineer rollerine açık
+  • İzleme: Prometheus / Grafana / Alertmanager
+***************
+*** 652,676 ****
         case 'cat':
+          if (!target) {
+            printOutput(`<span class="error">Kullanım: cat [dosya]</span>`, true);
+            break;
+          }
+          if (target === 'cv') {
+            printOutput(cvHelpText(), false);
+            break;
+          }
           if (fs[currentPath].content && fs[currentPath].content[target]) {
             printOutput(fs[currentPath].content[target], false);
           } else {
-            printOutput(`<span class="error">Dosya bulunamadı. (cat readme.md yazmayı dene)</span>`, true);
+            printOutput(`<span class="error">bash: cat: ${target}: Böyle bir dosya yok</span>`, true);
           }
           break;
-        case 'whoami':
-          printOutput(`<div class="info-box"><span class="highlight">${profile.role}</span>\nŞu anda Türk Telekom bünyesinde Sekom A.Ş. üzerinden dedicated olarak çalışıyorum.</div>`, true);
+--- 652,697 ----
+        case 'cat': {
+          if (!target) {
+            printOutput(`<span class="error">Kullanım: cat [dosya]</span>`, true);
+            break;
+          }
+  
+          // cat cv özel davranış
+          if (target === 'cv') {
+            printOutput(cvHelpText(), false);
+            break;
+          }
+  
+          // case-insensitive dosya bulma (cat readme.md -> README.md)
+          const contentMap = (fs[currentPath] && fs[currentPath].content) ? fs[currentPath].content : null;
+          if (!contentMap) {
+            printOutput(`<span class="error">bash: cat: ${target}: Böyle bir dosya yok</span>`, true);
+            break;
+          }
+  
+          const key = Object.keys(contentMap).find(k => k.toLowerCase() === target);
+          if (key) {
+            printOutput(contentMap[key], false);
+          } else {
+            printOutput(`<span class="error">bash: cat: ${target}: Böyle bir dosya yok</span>`, true);
+          }
           break;
-        case 'clear': history.innerHTML = ''; break;
-        case 'open': if (target === 'cv') window.open(CV_FILE, "_blank"); break;
-        case 'linkedin': window.open(profile.linkedin, '_blank'); break;
-        default: if (cmd) printOutput(`<span class="error">Komut bulunamadı: ${cmd}</span>`, true);
-      }
-    }
-
-    function printPrompt(command = '') {
-      const path = currentPath === 'home' ? '~' : `~/${currentPath}`;
-      const resp = document.createElement('div');
-      resp.className = 'output';
-      resp.innerHTML = `<span class="prompt">atakan@production</span><span class="prompt-path">:${path}</span><span class="prompt">$</span> <span style="color:white">${command}</span>`;
-      history.appendChild(resp);
-    }
-
-    function printOutput(text, isHTML = false) {
-      const resp = document.createElement('div');
-      resp.className = 'output';
-      if (isHTML) resp.innerHTML = text; else resp.textContent = text;
-      history.appendChild(resp);
-    }
-
-    function updatePrompt() {
-      const path = currentPath === 'home' ? '~' : `~/${currentPath}`;
-      promptPath.textContent = `:${path}`;
-    }
-
-    document.addEventListener('click', () => input.focus());
-    showIntro();
-  </script>
-</body>
-</html>
+        }
