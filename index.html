@@ -39,12 +39,7 @@
       user-select: none;
     }
 
-    .terminal-button {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-    }
-
+    .terminal-button { width: 12px; height: 12px; border-radius: 50%; }
     .btn-close { background: #ff5f57; }
     .btn-minimize { background: #ffbd2e; }
     .btn-maximize { background: #28ca42; }
@@ -68,19 +63,9 @@
     .terminal-body::-webkit-scrollbar-track { background: #1a1a1a; }
     .terminal-body::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
 
-    .prompt {
-      color: #00aaff;
-      font-weight: bold;
-      user-select: none;
-    }
+    .prompt { color: #00aaff; font-weight: bold; user-select:none; }
+    .prompt-path { color: #ffcc00; font-weight: normal; user-select:none; }
 
-    .prompt-path {
-      color: #ffcc00;
-      font-weight: normal;
-      user-select: none;
-    }
-
-    /* textarea terminal input */
     .command-input {
       background: transparent;
       border: none;
@@ -91,46 +76,34 @@
       width: 70%;
       caret-color: #00ff41;
       margin-left: 8px;
-
-      resize: none;       /* disable manual resize */
-      overflow: hidden;   /* auto-resize handled in JS */
-      line-height: 1.4;
-      padding-top: 2px;
-      padding-bottom: 2px;
-      min-height: 22px;
     }
 
     .output {
       margin-bottom: 15px;
       white-space: pre-wrap;
       color: #d1d1d1;
-      animation: fadeIn 0.3s ease-in;
+      animation: fadeIn 0.2s ease-in;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-5px); }
+      from { opacity: 0; transform: translateY(-4px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .input-line {
       display: none;
-      align-items: flex-start; /* allow textarea to grow */
-      gap: 0;
+      align-items: center;
       margin-top: 10px;
+      position: sticky;
+      bottom: 0;
+      background: rgba(13, 13, 13, 0.95);
+      padding-top: 6px;
+      padding-bottom: 6px;
     }
 
     .error { color: #ff5f57; }
-
-    .dir {
-      color: #00aaff;
-      font-weight: bold;
-      margin-right: 15px;
-    }
-
-    .file {
-      color: #aaa;
-      margin-right: 15px;
-    }
+    .dir { color: #00aaff; font-weight: bold; margin-right: 15px; }
+    .file { color: #aaa; margin-right: 15px; }
 
     .section-header {
       color: #ffcc00;
@@ -140,10 +113,7 @@
       padding-bottom: 5px;
     }
 
-    .highlight {
-      color: #00ff41;
-      font-weight: bold;
-    }
+    .highlight { color: #00ff41; font-weight: bold; }
 
     .info-box {
       background: rgba(0, 170, 255, 0.05);
@@ -151,13 +121,6 @@
       padding: 15px;
       margin: 15px 0;
       border-radius: 4px;
-    }
-
-    .hint {
-      color: #888;
-      font-size: 12px;
-      margin-top: 8px;
-      user-select: none;
     }
 
     @media (max-width: 768px) {
@@ -186,14 +149,7 @@
         <span class="prompt">atakan@production</span>
         <span class="prompt-path" id="prompt-path">:~</span>
         <span class="prompt">$</span>
-
-        <!-- textarea: Enter new line, Ctrl+Enter executes -->
-        <textarea id="command-input" class="command-input" autofocus autocomplete="off"
-          spellcheck="false" rows="1" aria-label="terminal input"></textarea>
-      </div>
-
-      <div class="hint" id="hint" style="display:none;">
-        Enter = yeni satır • Ctrl+Enter = komutu çalıştır • Tab = tamamlama • ↑↓ = geçmiş (tek satırdayken)
+        <input type="text" id="command-input" class="command-input" autofocus autocomplete="off" spellcheck="false" />
       </div>
     </div>
   </div>
@@ -205,14 +161,12 @@
     const introContainer = document.getElementById('intro-container');
     const promptPath = document.getElementById('prompt-path');
     const terminalBody = document.getElementById('terminal-body');
-    const hint = document.getElementById('hint');
 
     let currentPath = 'home';
     let commandHistory = [];
     let historyIndex = -1;
     const linkedin_url = "https://www.linkedin.com/in/atakansarikaya/";
 
-    // Simple in-memory filesystem
     const fs = {
       'home': {
         dirs: ['certifications', 'experience', 'skills'],
@@ -490,25 +444,25 @@ echo "🎯 Currently expanding skills in CI/CD and IaC"`
       }
     };
 
-    // ---- UX helpers ----
+    // ---- helpers ----
     function scrollToBottom() {
-      // terminal-body is scroll container
       terminalBody.scrollTop = terminalBody.scrollHeight;
     }
 
-    function autoResizeTextarea(el) {
-      el.style.height = 'auto';
-      el.style.height = (el.scrollHeight) + 'px';
+    async function typeWriter(element, text, speed = 30) {
+      for (let i = 0; i < text.length; i++) {
+        element.textContent += text.charAt(i);
+        await new Promise(resolve => setTimeout(resolve, speed));
+      }
     }
 
-    function typeWriter(element, text, speed = 30) {
-      return new Promise(async (resolve) => {
-        for (let i = 0; i < text.length; i++) {
-          element.textContent += text.charAt(i);
-          await new Promise(r => setTimeout(r, speed));
-        }
-        resolve();
-      });
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
     }
 
     function printPrompt(command = '') {
@@ -536,16 +490,7 @@ echo "🎯 Currently expanding skills in CI/CD and IaC"`
       promptPath.textContent = `:${path}`;
     }
 
-    function escapeHtml(str) {
-      return String(str)
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#039;');
-    }
-
-    // ---- Intro ----
+    // ---- intro ----
     async function showIntro() {
       const welcomeLine = document.createElement('div');
       welcomeLine.className = 'output';
@@ -554,7 +499,7 @@ echo "🎯 Currently expanding skills in CI/CD and IaC"`
       introContainer.appendChild(welcomeLine);
 
       await typeWriter(welcomeLine, '> Initializing DevOps Portfolio System...', 40);
-      await new Promise(r => setTimeout(r, 350));
+      await new Promise(r => setTimeout(r, 400));
 
       printOutput(
         `<div class="info-box">
@@ -568,34 +513,27 @@ Type <span class="highlight">help</span> to see available commands
 Type <span class="highlight">cat README.md</span> for quick start guide
 Use <span class="highlight">Tab</span> key for auto-completion
 Use <span class="highlight">↑↓</span> arrow keys for command history
-<span class="highlight">Enter</span> = new line • <span class="highlight">Ctrl+Enter</span> = execute
 </div>`,
         true
       );
 
       inputArea.style.display = 'flex';
-      hint.style.display = 'block';
       input.focus();
-      autoResizeTextarea(input);
       scrollToBottom();
     }
 
-    // focus input on click
     document.addEventListener('click', () => input.focus());
 
-    // ---- "source code hide" (NOT bulletproof) ----
-    // Right-click disable
+    // ---- optional: "harder to view source" (bypassable) ----
     document.addEventListener('contextmenu', (e) => e.preventDefault());
-
-    // Prevent common shortcuts (bypassable)
     document.addEventListener('keydown', (e) => {
       const k = e.key.toLowerCase();
       if (e.key === 'F12') e.preventDefault();
-      if (e.ctrlKey && (k === 'u' || k === 's')) e.preventDefault(); // view-source/save
-      if (e.ctrlKey && e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) e.preventDefault(); // devtools
+      if (e.ctrlKey && (k === 'u' || k === 's')) e.preventDefault();
+      if (e.ctrlKey && e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) e.preventDefault();
     });
 
-    // ---- terminal commands ----
+    // ---- commands ----
     function executeCommand(cmd, target) {
       switch (cmd) {
         case 'clear':
@@ -603,8 +541,7 @@ Use <span class="highlight">↑↓</span> arrow keys for command history
           break;
 
         case 'help':
-          printOutput(
-            `<div class="section-header">Available Commands</div>
+          printOutput(`<div class="section-header">Available Commands</div>
 <span class="highlight">Navigation:</span>
   ls               - List directory contents
   cd [dir]         - Change directory (use 'cd ..' or 'cd ~' to go back)
@@ -622,13 +559,7 @@ Use <span class="highlight">↑↓</span> arrow keys for command history
   clear            - Clear terminal screen
   help             - Show this help message
 
-<span class="highlight">Multi-line:</span>
-  Enter            - New line
-  Ctrl+Enter       - Execute command
-
-<span class="highlight">Tip:</span> Use Tab for auto-completion, ↑↓ for command history (single-line only)`,
-            true
-          );
+<span class="highlight">Tip:</span> Tab for auto-completion, ↑↓ for history`, true);
           break;
 
         case 'pwd':
@@ -650,16 +581,8 @@ Use <span class="highlight">↑↓</span> arrow keys for command history
 
         case 'tree': {
           let tree = '<span class="highlight">/home/atakan</span>\n';
-          // show only root, like you did
-          Object.keys(fs).forEach(dir => {
-            if (dir === 'home') {
-              fs[dir].dirs.forEach(d => tree += `├── <span class="dir">${d}/</span>\n`);
-              fs[dir].files.forEach((f, i) => {
-                const prefix = '├──';
-                tree += `${prefix} ${f}\n`;
-              });
-            }
-          });
+          fs['home'].dirs.forEach(d => tree += `├── <span class="dir">${d}/</span>\n`);
+          fs['home'].files.forEach(f => tree += `├── ${escapeHtml(f)}\n`);
           printOutput(tree, true);
           break;
         }
@@ -678,25 +601,20 @@ Use <span class="highlight">↑↓</span> arrow keys for command history
         case 'cat':
           if (fs[currentPath].content && fs[currentPath].content[target]) {
             printOutput(fs[currentPath].content[target], false);
-            if (target === 'contact.sh') {
-              setTimeout(() => window.open(linkedin_url, '_blank'), 900);
-            }
+            if (target === 'contact.sh') setTimeout(() => window.open(linkedin_url, '_blank'), 900);
           } else {
             printOutput(`<span class="error">bash: cat: ${escapeHtml(target)}: No such file</span>`, true);
           }
           break;
 
         case 'whoami':
-          printOutput(
-            `<div class="info-box">atakan - Application Operations Specialist
+          printOutput(`<div class="info-box">atakan - Application Operations Specialist
 Currently working at Türk Telekom
 DevOps enthusiast focusing on cloud infrastructure and automation
 
 🎯 Open to DevOps opportunities
 
-Use 'cat about.txt' for detailed information</div>`,
-            true
-          );
+Use 'cat about.txt' for detailed information</div>`, true);
           break;
 
         case 'linkedin':
@@ -705,34 +623,25 @@ Use 'cat about.txt' for detailed information</div>`,
           break;
 
         default:
-          if (cmd !== '') {
-            printOutput(
-              `<span class="error">bash: ${escapeHtml(cmd)}: command not found</span>
-Type 'help' to see available commands`,
-              true
-            );
+          if (cmd) {
+            printOutput(`<span class="error">bash: ${escapeHtml(cmd)}: command not found</span>
+Type 'help' to see available commands`, true);
           }
       }
     }
 
-    // ---- input behavior (multi-line) ----
-    input.addEventListener('input', () => autoResizeTextarea(input));
-
+    // ---- key handling (NORMAL TERMINAL) ----
     input.addEventListener('keydown', function (e) {
-      // Arrow history: only when single-line
       if (e.key === 'ArrowUp') {
-        if (input.value.includes('\n')) return;
         e.preventDefault();
         if (historyIndex < commandHistory.length - 1) {
           historyIndex++;
           input.value = commandHistory[historyIndex];
-          autoResizeTextarea(input);
         }
         return;
       }
 
       if (e.key === 'ArrowDown') {
-        if (input.value.includes('\n')) return;
         e.preventDefault();
         if (historyIndex > 0) {
           historyIndex--;
@@ -741,11 +650,9 @@ Type 'help' to see available commands`,
           historyIndex = -1;
           input.value = '';
         }
-        autoResizeTextarea(input);
         return;
       }
 
-      // Tab completion (works with multiline too; it completes last "word")
       if (e.key === 'Tab') {
         e.preventDefault();
 
@@ -762,7 +669,6 @@ Type 'help' to see available commands`,
         if (matches.length === 1) {
           words[words.length - 1] = matches[0];
           input.value = words.join(' ');
-          autoResizeTextarea(input);
         } else if (matches.length > 1) {
           printOutput(`\nPossible matches: ${matches.join('  ')}`, false);
           printPrompt(input.value);
@@ -771,16 +677,15 @@ Type 'help' to see available commands`,
         return;
       }
 
-      // Enter = newline (default textarea behavior)
-      // Ctrl+Enter = execute command
-      if (e.key === 'Enter' && e.ctrlKey) {
+      // ENTER: execute + new prompt stays at bottom (input line)
+      if (e.key === 'Enter') {
         e.preventDefault();
 
         const rawInput = input.value.trim();
+        // boş enter: sadece yeni prompt bas
         if (!rawInput) {
-          printPrompt();
+          printPrompt('');
           input.value = '';
-          autoResizeTextarea(input);
           scrollToBottom();
           return;
         }
@@ -788,24 +693,22 @@ Type 'help' to see available commands`,
         commandHistory.unshift(rawInput);
         historyIndex = -1;
 
-        // normalize multiline into one command line
-        const normalized = rawInput.replace(/\n+/g, ' ').trim();
-
-        const args = normalized.split(' ');
+        const args = rawInput.split(' ');
         const cmd = args[0].toLowerCase();
         const target = args.slice(1).join(' ');
 
-        printPrompt(normalized);
+        // 1) komutu history'ye yaz
+        printPrompt(rawInput);
+
+        // 2) çalıştır
         executeCommand(cmd, target);
 
+        // 3) input temizle, en alta kaydır
         input.value = '';
-        autoResizeTextarea(input);
         scrollToBottom();
-        return;
       }
     });
 
-    // start
     showIntro();
   </script>
 </body>
