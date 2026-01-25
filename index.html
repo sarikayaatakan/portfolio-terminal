@@ -2,6 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="Tux.png" type="image/png">
     <title>Atakan Sarıkaya | DevOps / Cloud & Linux System Specialist</title>
     <style>
         body { background-color: #0d0d0d; color: #00ff41; font-family: 'Consolas', 'Courier New', monospace; padding: 30px; line-height: 1.5; cursor: text; user-select: none; }
@@ -19,7 +20,7 @@
 <body>
     <div id="terminal">
         <div id="boot-container"></div>
-        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 3.4] - DevOps / Cloud & Linux System Specialist ***</div>
+        <div class="header" id="terminal-header">*** ATAKAN_SARIKAYA_OS [Versiyon 3.5] - THE SPECIALIST ***</div>
         <div id="history"></div>
         <div class="input-line" id="input-area">
             <span class="prompt" id="prompt-label">atakan@production:~$</span>
@@ -38,6 +39,7 @@
         let currentPath = 'home';
         const linkedin_url = "https://www.linkedin.com/in/atakansarikaya/";
 
+        // GÜVENLİK ÖNLEMLERİ
         document.addEventListener('contextmenu', (e) => e.preventDefault());
         document.onkeydown = (e) => { 
             if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && [73, 74, 67].includes(e.keyCode)) || (e.ctrlKey && e.keyCode == 85)) return false; 
@@ -65,7 +67,7 @@
                 dirs: [],
                 files: ['turk_telekom.txt', 'sekom.txt'],
                 content: {
-                    'turk_telekom.txt': "Türk Telekom (via Sekom): Uygulama Operasyon Uzmanı (6 Ay - Güncel)",
+                    'turk_telekom.txt': "Türk Telekom: Uygulama Operasyon Uzmanı (6 Ay - Güncel)",
                     'sekom.txt': "Sekom: Yazılım Destek Uzmanı / DevSecOps Cloud Operations (1 Yıl 3 Ay)"
                 }
             },
@@ -100,7 +102,6 @@
             header.style.display = 'block';
             inputArea.style.display = 'flex';
             
-            // YENİ GİRİŞ MESAJI
             printOutput("Merhaba, ben Atakan.");
             printOutput("-----------------------");
             printOutput("Türk Telekom bünyesinde Uygulama Operasyon Uzmanı olarak görev almaktayım.");
@@ -118,11 +119,11 @@
         input.addEventListener('keydown', function(e) {
             if (e.key === 'Tab') {
                 e.preventDefault();
-                const val = input.value.toLowerCase().trim().split(' ').pop();
-                if (!val) return;
+                const currentVal = input.value.toLowerCase().trim().split(' ').pop();
+                if (!currentVal) return;
                 const commands = ['yardim', 'help', 'clear', 'pwd', 'ls', 'cd', 'cat', 'linkedin'];
                 const allPossible = [...commands, ...fs[currentPath].files, ...fs[currentPath].dirs];
-                const match = allPossible.find(c => c.startsWith(val));
+                const match = allPossible.find(c => c.startsWith(currentVal));
                 if (match) {
                     const words = input.value.split(' ');
                     words[words.length - 1] = match;
