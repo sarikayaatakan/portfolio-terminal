@@ -15,5 +15,4 @@ jobs:
 
       - name: Security Scan (Secret Detection)
         uses: trufflesecurity/trufflehog@main
-        with:
-          extra_args: --base=main
+       
