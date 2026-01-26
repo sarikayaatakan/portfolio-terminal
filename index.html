@@ -57,19 +57,10 @@
       padding: 12px 20px;
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 8px;
       border-bottom: 2px solid rgba(0, 255, 65, 0.3);
       user-select: none;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-      position: relative;
-    }
-
-    .terminal-buttons {
-      position: absolute;
-      left: 20px;
-      display: flex;
-      gap: 8px;
     }
 
     .terminal-button { 
@@ -102,6 +93,7 @@
     .command-input { caret-color: var(--primary-color) !important; }
 
     .terminal-title { 
+      flex: 1; 
       text-align: center; 
       color: #00ff41; 
       font-size: 13px; 
@@ -208,64 +200,6 @@
       box-shadow: 0 4px 15px rgba(0, 170, 255, 0.1);
     }
 
-    .main-content-box {
-      background: linear-gradient(135deg, rgba(0, 255, 65, 0.08) 0%, rgba(0, 170, 255, 0.05) 100%);
-      border: 2px solid rgba(0, 255, 65, 0.25);
-      padding: 30px;
-      margin: 20px 0;
-      border-radius: 8px;
-      box-shadow: 0 0 25px rgba(0, 255, 65, 0.12);
-    }
-
-    .section-divider {
-      display: flex;
-      align-items: center;
-      margin: 25px 0;
-      gap: 15px;
-    }
-
-    .section-divider::before,
-    .section-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.3), transparent);
-    }
-
-    .section-title {
-      color: #00ff41;
-      font-weight: bold;
-      font-size: 16px;
-      text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
-      white-space: nowrap;
-    }
-
-    .pipeline-step {
-      display: flex;
-      align-items: flex-start;
-      margin: 12px 0;
-      padding: 8px 0;
-    }
-
-    .pipeline-icon {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      background: #00ff41;
-      border-radius: 50%;
-      margin-right: 12px;
-      margin-top: 5px;
-      flex-shrink: 0;
-      box-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    .career-arrow {
-      color: #00ddff;
-      margin: 0 10px;
-      font-weight: bold;
-    }
-
     .loading { 
       color: #00ff41; 
       font-weight: bold;
@@ -309,9 +243,6 @@
       #terminal { margin: 20px auto; } 
       .terminal-body { padding: 20px; font-size: 13px; }
       .banner { font-size: 14px; }
-      .main-content-box { padding: 20px; }
-      .terminal-buttons { position: static; margin-bottom: 10px; }
-      .terminal-header { flex-direction: column; }
     }
   </style>
 </head>
@@ -319,11 +250,9 @@
 <body>
   <div id="terminal">
     <div class="terminal-header">
-      <div class="terminal-buttons">
-        <div class="terminal-button btn-close"></div>
-        <div class="terminal-button btn-minimize"></div>
-        <div class="terminal-button btn-maximize"></div>
-      </div>
+      <div class="terminal-button btn-close"></div>
+      <div class="terminal-button btn-minimize"></div>
+      <div class="terminal-button btn-maximize"></div>
       <div class="terminal-title">atakan@devops-portfolio:~</div>
     </div>
 
@@ -456,56 +385,24 @@
 
       const intro = `
 <div class="info-box">
-<span class="status-indicator"></span><span class="highlight">Sistem Aktif</span> | ${profile.name} (27) | ${profile.location}
-📧 ${profile.email}
-</div>
+<span class="status-indicator"></span><span class="highlight">Sistem Aktif</span> | Kullanıcı: ${profile.name} | Yaş: 27
 
-<div class="main-content-box">
+Bu interaktif terminal CV, modern DevOps (CI/CD) yaklaşımıyla tasarlanmıştır.
 
-<div class="section-divider">
-  <span class="section-title">🚀 CI/CD PIPELINE İLE YAYINLANAN PORTFOLIO</span>
-</div>
+Bu proje, GitHub Actions ile CI (lint + security scan) ve Plesk webhook üzerinden 
+CD süreçleri kurularak, testlerden geçmeyen kodun production'a çıkmasını engelleyen 
+bir DevOps pipeline ile yayınlanmaktadır.
 
-<div style="margin: 20px 0; color: #d1d1d1;">
-Bu interaktif terminal CV, modern <span class="highlight">DevOps yaklaşımıyla</span> tasarlanmıştır:
-</div>
+🎯 <span class="highlight">KARİYER HEDEFİM:</span>
+1,5 yıllık Software Support Specialist ve 4 aylık Application Operations Specialist 
+deneyimimi DevOps Engineer rolüne taşıyarak; operasyonel tecrübemi otomasyon, CI/CD 
+ve bulut teknolojileriyle birleştirebileceğim, öğrenmeye açık bir ekipte ilerlemek istiyorum.
 
-<div class="pipeline-step">
-<span class="pipeline-icon"></span>
-<span><span class="highlight">GitHub Actions CI:</span> Otomatik lint kontrolü ve güvenlik taraması</span>
-</div>
+📍 <span class="highlight">KONUM:</span> ${profile.location}
+📧 <span class="highlight">İLETİŞİM:</span> ${profile.email}
 
-<div class="pipeline-step">
-<span class="pipeline-icon"></span>
-<span><span class="highlight">Plesk Webhook CD:</span> Test başarılı kodun otomatik deployment'ı</span>
-</div>
-
-<div class="pipeline-step">
-<span class="pipeline-icon"></span>
-<span>Kalite kontrolünden geçmeyen kod <span class="highlight">production'a çıkmaz</span></span>
-</div>
-
-<div class="section-divider" style="margin-top: 35px;">
-  <span class="section-title">🎯 KARİYER HEDEFİM</span>
-</div>
-
-<div style="margin: 20px 0; line-height: 1.8;">
-<div style="margin-bottom: 15px;">
-<span style="color: #00ddff;">▸</span> <span style="color: #d1d1d1;">1.5 yıl</span> <span class="highlight">Software Support Specialist</span> <span class="career-arrow">→</span> <span style="color: #d1d1d1;">4 ay</span> <span class="highlight">Application Operations Specialist</span>
-</div>
-
-<div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(0, 255, 65, 0.2);">
-Bu operasyonel tecrübemi <span class="highlight">DevOps Engineer</span> rolüne taşıyarak;
-<span class="highlight">otomasyon, CI/CD ve bulut teknolojileriyle</span> birleştirebileceğim,
-sürekli <span class="highlight">öğrenmeye açık</span> bir ekipte ilerlemek istiyorum.
-</div>
-</div>
-
-</div>
-
-<div style="margin-top: 20px; padding: 15px; background: rgba(0, 170, 255, 0.05); border-radius: 6px; border-left: 3px solid #00ddff;">
-💡 Komutları keşfetmek için '<span class="highlight">help</span>' yazın
-⌨️  Tab tuşu ile otomatik tamamlama yapabilirsiniz
+Komutları keşfetmek için '<span class="highlight">help</span>' yazın.
+Tab tuşu ile otomatik tamamlama yapabilirsiniz.
 </div>`;
 
       printOutput(intro, true);
