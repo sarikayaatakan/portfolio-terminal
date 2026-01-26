@@ -200,6 +200,42 @@
       box-shadow: 0 4px 15px rgba(0, 170, 255, 0.1);
     }
 
+    .devops-box {
+      background: linear-gradient(135deg, rgba(0, 255, 65, 0.1) 0%, rgba(0, 170, 255, 0.08) 100%);
+      border: 2px solid rgba(0, 255, 65, 0.3);
+      padding: 25px;
+      margin: 20px 0;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.15);
+    }
+
+    .pipeline-step {
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+      padding: 8px 0;
+    }
+
+    .pipeline-icon {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #00ff41;
+      border-radius: 50%;
+      margin-right: 12px;
+      box-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .career-path {
+      background: linear-gradient(135deg, rgba(255, 204, 0, 0.1) 0%, rgba(0, 255, 65, 0.08) 100%);
+      border: 2px solid rgba(255, 204, 0, 0.3);
+      padding: 25px;
+      margin: 20px 0;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(255, 204, 0, 0.15);
+    }
+
     .loading { 
       color: #00ff41; 
       font-weight: bold;
@@ -243,6 +279,7 @@
       #terminal { margin: 20px auto; } 
       .terminal-body { padding: 20px; font-size: 13px; }
       .banner { font-size: 14px; }
+      .devops-box, .career-path { padding: 15px; }
     }
   </style>
 </head>
@@ -387,22 +424,50 @@
 <div class="info-box">
 <span class="status-indicator"></span><span class="highlight">Sistem Aktif</span> | Kullanıcı: ${profile.name} | Yaş: 27
 
-Bu interaktif terminal CV, modern DevOps (CI/CD) yaklaşımıyla tasarlanmıştır.
-
-Bu proje, GitHub Actions ile CI (lint + security scan) ve Plesk webhook üzerinden 
-CD süreçleri kurularak, testlerden geçmeyen kodun production'a çıkmasını engelleyen 
-bir DevOps pipeline ile yayınlanmaktadır.
-
-🎯 <span class="highlight">KARİYER HEDEFİM:</span>
-1,5 yıllık Software Support Specialist ve 4 aylık Application Operations Specialist 
-deneyimimi DevOps Engineer rolüne taşıyarak; operasyonel tecrübemi otomasyon, CI/CD 
-ve bulut teknolojileriyle birleştirebileceğim, öğrenmeye açık bir ekipte ilerlemek istiyorum.
-
 📍 <span class="highlight">KONUM:</span> ${profile.location}
 📧 <span class="highlight">İLETİŞİM:</span> ${profile.email}
+</div>
 
-Komutları keşfetmek için '<span class="highlight">help</span>' yazın.
-Tab tuşu ile otomatik tamamlama yapabilirsiniz.
+<div class="devops-box">
+<span class="highlight">⚙️ DEVOPS PIPELINE İLE YAYINLANAN PORTFOLIO</span>
+
+Bu interaktif terminal CV, modern <span class="highlight">DevOps (CI/CD)</span> yaklaşımıyla tasarlanmıştır.
+
+<div class="pipeline-step">
+<span class="pipeline-icon"></span>
+<span><span class="highlight">GitHub Actions</span> ile CI süreçleri (lint + security scan)</span>
+</div>
+
+<div class="pipeline-step">
+<span class="pipeline-icon"></span>
+<span><span class="highlight">Plesk webhook</span> üzerinden otomatik deployment</span>
+</div>
+
+<div class="pipeline-step">
+<span class="pipeline-icon"></span>
+<span>Testlerden geçmeyen kodun <span class="highlight">production'a çıkması engellenir</span></span>
+</div>
+
+💡 Bu proje, DevOps prensiplerini pratik olarak uygulama örneğidir.
+</div>
+
+<div class="career-path">
+<span class="highlight">🎯 KARİYER HEDEFİM</span>
+
+<span style="color: #ffcc00;">▸</span> <span style="color: #d1d1d1;">1,5 yıllık</span> <span class="highlight">Software Support Specialist</span> deneyimi
+<span style="color: #ffcc00;">▸</span> <span style="color: #d1d1d1;">4 aylık</span> <span class="highlight">Application Operations Specialist</span> deneyimi
+
+Bu operasyonel tecrübemi <span class="highlight">DevOps Engineer</span> rolüne taşıyarak;
+otomasyon, CI/CD ve bulut teknolojileriyle birleştirebileceğim,
+<span class="highlight">öğrenmeye açık</span> bir ekipte ilerlemek istiyorum.
+
+<span style="color: #00ddff;">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+Support Specialist → App Operations → <span class="highlight">DevOps Engineer</span> 🚀
+</div>
+
+<div style="margin-top: 20px; padding: 15px; background: rgba(0, 170, 255, 0.05); border-radius: 6px;">
+💡 Komutları keşfetmek için '<span class="highlight">help</span>' yazın
+⌨️  Tab tuşu ile otomatik tamamlama yapabilirsiniz
 </div>`;
 
       printOutput(intro, true);
