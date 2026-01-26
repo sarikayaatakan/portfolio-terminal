@@ -1,0 +1,19 @@
+name: Terminal CV CI
+on: [push, pull_request]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: HTML Hint (Linting)
+        run: |
+          # Kod kalitesini kontrol eder
+          npx htmlhint index.html
+
+      - name: Security Scan (Secret Detection)
+        uses: trufflesecurity/trufflehog@main
+        with:
+          extra_args: --base=main
