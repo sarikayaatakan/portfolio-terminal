@@ -67,12 +67,30 @@
       width: 12px; 
       height: 12px; 
       border-radius: 50%;
-      transition: all 0.2s;
+      transition: all 0.3s;
+      cursor: pointer;
     }
-    .terminal-button:hover { transform: scale(1.1); cursor: pointer; }
+    .terminal-button:hover { transform: scale(1.2); }
     .btn-close { background: #ff5f57; box-shadow: 0 0 5px rgba(255, 95, 87, 0.5); }
     .btn-minimize { background: #ffbd2e; box-shadow: 0 0 5px rgba(255, 189, 46, 0.5); }
     .btn-maximize { background: #28ca42; box-shadow: 0 0 5px rgba(40, 202, 66, 0.5); }
+
+    /* Theme variations */
+    body.theme-green { --primary-color: #00ff41; --secondary-color: #00ddff; --accent-color: #ffcc00; }
+    body.theme-red { --primary-color: #ff5f57; --secondary-color: #ff8585; --accent-color: #ffb3b3; }
+    body.theme-yellow { --primary-color: #ffbd2e; --secondary-color: #ffd666; --accent-color: #ffe599; }
+
+    body { --primary-color: #00ff41; --secondary-color: #00ddff; --accent-color: #ffcc00; }
+    
+    .highlight, .loading, body::before { color: var(--primary-color) !important; }
+    .prompt, .dir, .banner { color: var(--secondary-color) !important; text-shadow: 0 0 10px var(--secondary-color) !important; }
+    .prompt-path, .section-header { color: var(--accent-color) !important; }
+    .status-indicator { background: var(--primary-color) !important; box-shadow: 0 0 10px var(--primary-color) !important; }
+    #terminal { border-color: var(--primary-color) !important; box-shadow: 0 0 40px var(--primary-color), 0 0 80px var(--secondary-color), inset 0 0 60px rgba(0, 0, 0, 0.5) !important; }
+    .terminal-header { border-bottom-color: var(--primary-color) !important; }
+    .terminal-title { color: var(--primary-color) !important; text-shadow: 0 0 10px var(--primary-color) !important; }
+    .terminal-body::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important; box-shadow: 0 0 10px var(--primary-color) !important; }
+    .command-input { caret-color: var(--primary-color) !important; }
 
     .terminal-title { 
       flex: 1; 
@@ -282,7 +300,7 @@
         files: ['readme.md', 'hakkimda.txt', 'iletisim.sh'],
         content: {
           'readme.md': `# ${profile.name}\n## DevOps & Cloud Infrastructure Specialist\n\n👨‍💻 ${profile.role}\n📍 ${profile.location}\n🌐 ${profile.website}\n\nHızlı başlangıç için 'help' yazabilirsin.`,
-          'hakkimda.txt': `HAKKIMDA\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nMerhaba, ben Atakan. 27 yaşındayım.\n\n💼 Kariyer Yolculuğum:\n• 1 sene 9 aydır Sekom A.Ş.'de çalışıyorum\n• Bu sürenin 4 ay kadarı da Türk Telekom'da dedicated olarak görev alıyorum\n• Application Operations Specialist pozisyonundayım\n• DevOps Engineer rollerine doğru planlı şekilde ilerliyorum\n\n🎯 Odak Alanlarım:\nDevOps süreçleri, cloud altyapı yönetimi ve sürekli gelişim.\n\n'ls' ile diğer bölümleri keşfedebilirsin.`,
+          'hakkimda.txt': `HAKKIMDA\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nMerhaba, ben Atakan. 27 yaşındayım.\n\n💼 Kariyer Yolculuğum:\n• 1.5 senedir Sekom A.Ş.'de çalışıyorum\n• 4 aydır Türk Telekom'da dedicated olarak görev alıyorum\n• Application Operations Specialist pozisyonundayım\n• DevOps Engineer rollerine doğru planlı şekilde ilerliyorum\n\n🎯 Odak Alanlarım:\nDevOps süreçleri, cloud altyapı yönetimi ve sürekli gelişim.\n\n'ls' ile diğer bölümleri keşfedebilirsin.`,
           'iletisim.sh': `#!/bin/bash\necho "📞 Telefon  : ${profile.phone}"\necho "📧 E-posta  : ${profile.email}"\necho "💼 LinkedIn : ${profile.linkedin}"`
         }
       },
@@ -372,8 +390,13 @@
 Bu interaktif terminal CV, modern DevOps yaklaşımıyla tasarlanmıştır.
 
 🎯 <span class="highlight">KARİYER HEDEFİM:</span>
-   System / Application Operations Specialist olarak edindiğim neredeyse 2 yıllık deneyimimi,
+   Application Operations Specialist olarak edindiğim 1.5 yıllık deneyimimi,
    DevOps Engineer pozisyonlarında değerlendirmek üzere aktif iş arayışındayım.
+
+💡 <span class="highlight">NEDEN BU FORMATTA?</span>
+   • Linux ve terminal ortamına hakimiyetimi göstermek
+   • DevOps kültürü ve automation tutkusunu yansıtmak
+   • Farklı ve akılda kalıcı bir deneyim sunmak
 
 📍 <span class="highlight">KONUM:</span> ${profile.location}
 📧 <span class="highlight">İLETİŞİM:</span> ${profile.email}
@@ -556,6 +579,29 @@ Tab tuşu ile otomatik tamamlama yapabilirsiniz.
     }
 
     document.addEventListener('click', () => input.focus());
+    
+    // Theme switcher
+    document.querySelector('.btn-close').addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.body.className = 'theme-red';
+      printOutput('🎨 Tema değiştirildi: Red Alert', false);
+      scrollToBottom();
+    });
+
+    document.querySelector('.btn-minimize').addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.body.className = 'theme-yellow';
+      printOutput('🎨 Tema değiştirildi: Golden Sun', false);
+      scrollToBottom();
+    });
+
+    document.querySelector('.btn-maximize').addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.body.className = 'theme-green';
+      printOutput('🎨 Tema değiştirildi: Matrix Green', false);
+      scrollToBottom();
+    });
+
     showIntro();
   </script>
 </body>
