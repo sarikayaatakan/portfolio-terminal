@@ -1,4 +1,5 @@
-name: Terminal CV CI
+name: Terminal CV CI-CD
+
 on: [push, pull_request]
 
 jobs:
@@ -10,9 +11,16 @@ jobs:
 
       - name: HTML Hint (Linting)
         run: |
-          # Kod kalitesini kontrol eder
           npx htmlhint index.html
 
       - name: Security Scan (Secret Detection)
         uses: trufflesecurity/trufflehog@main
-       
+
+  deploy:
+    needs: lint-and-test # BURASI KRİTİK: Sadece testler geçerse çalışır.
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' # Sadece main branch'e push yapıldığında deploy et.
+    steps:
+      - name: Trigger Plesk Deployment
+        run: |
+          curl -X POST "${{ secrets.PLESK_WEBHOOK_URL }}"
