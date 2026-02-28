@@ -5,14 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="Tux.png" type="image/png" />
   <title>Atakan Sarıkaya | DevOps & Cloud Infrastructure Specialist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --green: #00ff88;
+      --cyan: #00d4ff;
+      --yellow: #ffd600;
+      --red: #ff4757;
+      --dim: #4a5568;
+      --text: #c8d6e5;
+      --bg: #080c10;
+    }
     
     body {
-      background: #0a0a0a;
-      color: #00ff41;
-      font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
+      background: var(--bg);
+      color: var(--green);
+      font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
       padding: 20px;
       line-height: 1.6;
       min-height: 100vh;
@@ -21,174 +33,266 @@
       overflow-x: hidden;
     }
 
+    /* Scanline effect */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+      );
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* Grid background */
     body::before {
       content: '';
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      inset: 0;
       background-image: 
-        linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
+        linear-gradient(rgba(0, 255, 136, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 136, 0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
       pointer-events: none;
       z-index: 0;
     }
 
     #terminal {
-      max-width: 1100px;
-      margin: 40px auto;
-      background: rgba(10, 10, 10, 0.98);
-      border-radius: 12px;
+      max-width: 1000px;
+      margin: 30px auto;
+      background: rgba(6, 10, 14, 0.97);
+      border-radius: 10px;
       box-shadow: 
-        0 0 40px rgba(0, 255, 65, 0.2),
-        0 0 80px rgba(0, 170, 255, 0.1),
-        inset 0 0 60px rgba(0, 0, 0, 0.5);
+        0 0 0 1px rgba(0, 255, 136, 0.15),
+        0 0 40px rgba(0, 255, 136, 0.08),
+        0 0 80px rgba(0, 180, 255, 0.05),
+        0 40px 80px rgba(0, 0, 0, 0.6);
       overflow: hidden;
-      border: 1px solid rgba(0, 255, 65, 0.3);
       position: relative;
       z-index: 1;
     }
 
+    body.theme-green { --green: #00ff88; --cyan: #00d4ff; --yellow: #ffd600; }
+    body.theme-red   { --green: #ff4757; --cyan: #ff8585; --yellow: #ffb3b3; }
+    body.theme-amber { --green: #ffb300; --cyan: #ffd740; --yellow: #ffe57f; }
+
     .terminal-header {
-      background: linear-gradient(90deg, #0d0d0d 0%, #1a1a1a 100%);
-      padding: 12px 20px;
+      background: linear-gradient(90deg, #0a0f14 0%, #111820 100%);
+      padding: 13px 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      border-bottom: 2px solid rgba(0, 255, 65, 0.3);
-      user-select: none;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      border-bottom: 1px solid rgba(0, 255, 136, 0.12);
       position: relative;
+      user-select: none;
     }
 
     .terminal-buttons {
       position: absolute;
-      left: 20px;
+      left: 16px;
       display: flex;
-      gap: 8px;
+      gap: 7px;
+      align-items: center;
     }
 
     .terminal-button { 
-      width: 12px; height: 12px; 
+      width: 13px; height: 13px; 
       border-radius: 50%;
-      transition: all 0.3s;
+      transition: all 0.2s;
       cursor: pointer;
     }
-    .terminal-button:hover { transform: scale(1.2); }
-    .btn-close   { background: #ff5f57; box-shadow: 0 0 5px rgba(255,95,87,0.5); }
-    .btn-minimize{ background: #ffbd2e; box-shadow: 0 0 5px rgba(255,189,46,0.5); }
-    .btn-maximize{ background: #28ca42; box-shadow: 0 0 5px rgba(40,202,66,0.5); }
-
-    body { --primary-color: #00ff41; --secondary-color: #00ddff; --accent-color: #ffcc00; }
-    body.theme-red    { --primary-color: #ff5f57; --secondary-color: #ff8585; --accent-color: #ffb3b3; }
-    body.theme-yellow { --primary-color: #ffbd2e; --secondary-color: #ffd666; --accent-color: #ffe599; }
-    body.theme-green  { --primary-color: #00ff41; --secondary-color: #00ddff; --accent-color: #ffcc00; }
-
-    .highlight { color: var(--primary-color) !important; font-weight: bold; text-shadow: 0 0 10px rgba(0,255,65,0.5); }
-    .prompt, .dir { color: var(--secondary-color) !important; }
-    .prompt-path, .section-header { color: var(--accent-color) !important; }
-    .status-indicator { background: var(--primary-color) !important; box-shadow: 0 0 10px var(--primary-color) !important; }
-    #terminal { border-color: var(--primary-color) !important; }
-    .terminal-header { border-bottom-color: var(--primary-color) !important; }
-    .terminal-title { color: var(--primary-color) !important; text-shadow: 0 0 10px var(--primary-color) !important; }
+    .terminal-button:hover { transform: scale(1.15); }
+    .btn-close    { background: #ff5f57; box-shadow: 0 0 8px rgba(255,95,87,0.5); }
+    .btn-minimize { background: #ffbd2e; box-shadow: 0 0 8px rgba(255,189,46,0.5); }
+    .btn-maximize { background: #28ca42; box-shadow: 0 0 8px rgba(40,202,66,0.5); }
 
     .terminal-title { 
-      text-align: center; 
-      color: #00ff41; 
-      font-size: 13px; 
-      letter-spacing: 1px;
-      font-weight: 600;
-      text-shadow: 0 0 10px rgba(0,255,65,0.5);
+      font-size: 12px; 
+      color: var(--green);
+      letter-spacing: 0.08em;
+      font-weight: 400;
+      opacity: 0.6;
+    }
+
+    .portfolio-btn {
+      position: absolute;
+      right: 16px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 13px;
+      background: rgba(0, 255, 136, 0.07);
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      border-radius: 5px;
+      color: var(--green);
+      text-decoration: none;
+      font-size: 12px;
+      font-family: inherit;
+      transition: all 0.2s;
+      opacity: 0.8;
+    }
+    .portfolio-btn:hover {
+      background: rgba(0, 255, 136, 0.15);
+      border-color: rgba(0, 255, 136, 0.4);
+      opacity: 1;
     }
 
     .terminal-body { 
-      padding: 30px; 
-      min-height: 500px; 
-      max-height: 80vh; 
+      padding: 28px 32px; 
+      min-height: 520px; 
+      max-height: 82vh; 
       overflow-y: auto;
-      background: rgba(0,0,0,0.3);
     }
 
-    .terminal-body::-webkit-scrollbar { width: 8px; }
-    .terminal-body::-webkit-scrollbar-track { background: #0a0a0a; }
+    .terminal-body::-webkit-scrollbar { width: 4px; }
+    .terminal-body::-webkit-scrollbar-track { background: transparent; }
     .terminal-body::-webkit-scrollbar-thumb { 
-      background: linear-gradient(180deg, #00ff41 0%, #00aa2e 100%);
-      border-radius: 5px;
+      background: rgba(0, 255, 136, 0.2);
+      border-radius: 2px;
     }
 
-    .prompt { color: #00ddff; font-weight: bold; }
-    .prompt-path { color: #ffcc00; }
+    .prompt-user  { color: var(--green); font-weight: 500; }
+    .prompt-at    { color: var(--dim); }
+    .prompt-host  { color: var(--cyan); font-weight: 500; }
+    .prompt-colon { color: var(--dim); }
+    .prompt-path  { color: var(--yellow); }
+    .prompt-dollar{ color: var(--dim); margin: 0 6px; }
     
     .command-input {
       background: transparent;
       border: none;
-      color: #ffffff;
+      color: var(--text);
       font-family: inherit;
-      font-size: 15px;
+      font-size: 14px;
       outline: none;
-      width: 70%;
-      caret-color: #00ff41;
-      margin-left: 8px;
+      width: 60%;
+      caret-color: var(--green);
     }
 
     .output { 
-      margin-bottom: 12px; 
+      margin-bottom: 4px; 
       white-space: pre-wrap; 
-      color: #d1d1d1; 
-      animation: fadeIn 0.2s ease-in;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.7;
+      animation: fadeIn 0.15s ease-in;
     }
 
-    @keyframes fadeIn { 
-      from { opacity: 0; transform: translateY(-3px); } 
-      to   { opacity: 1; transform: translateY(0); } 
+    .output-gap { margin-bottom: 16px; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes pulse  { 0%,100% { opacity:1; } 50% { opacity:0.2; } }
+
+    .input-line { display: none; align-items: center; margin-top: 4px; }
+
+    .c-green  { color: var(--green); }
+    .c-cyan   { color: var(--cyan); }
+    .c-yellow { color: var(--yellow); }
+    .c-red    { color: var(--red); }
+    .c-dim    { color: var(--dim); }
+    .c-white  { color: #fff; }
+    .c-text   { color: var(--text); }
+    .bold     { font-weight: 700; }
+
+    .boot-line {
+      font-size: 13px;
+      margin: 2px 0;
+      opacity: 0;
+      animation: fadeIn 0.2s ease-in forwards;
+      color: var(--dim);
+    }
+    .boot-line .ok   { color: var(--green); font-weight: 700; }
+    .boot-line .info { color: var(--cyan); }
+
+    .ascii-banner {
+      color: var(--green);
+      font-size: 11px;
+      line-height: 1.2;
+      margin: 16px 0 4px 0;
+      opacity: 0;
+      animation: fadeIn 0.4s ease-in forwards;
+      text-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+      white-space: pre;
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0.3; }
+    .ascii-sub {
+      color: var(--cyan);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeIn 0.4s ease-in forwards;
     }
 
-    .input-line { 
-      display: none; 
-      align-items: center; 
-      margin-top: 10px;
+    .info-box {
+      border-left: 2px solid var(--cyan);
+      padding: 10px 16px;
+      margin: 8px 0 4px 0;
+      background: rgba(0, 212, 255, 0.04);
+      border-radius: 0 4px 4px 0;
+      font-size: 13px;
+      line-height: 1.8;
     }
 
-    .error { color: #ff5f57; }
-    .dir   { color: #00ddff; font-weight: bold; margin-right: 15px; }
-    .file  { color: #888; margin-right: 15px; }
-
-    .info-box { 
-      background: linear-gradient(135deg, rgba(0,170,255,0.08) 0%, rgba(0,255,65,0.05) 100%);
-      border-left: 4px solid #00ddff; 
-      padding: 16px 20px; 
-      margin: 10px 0; 
-      border-radius: 6px;
+    .help-section-title {
+      color: var(--yellow);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 14px 0 6px 0;
+      font-weight: 700;
     }
 
-    .status-indicator {
+    .help-row {
+      display: flex;
+      margin: 3px 0;
+      font-size: 13px;
+    }
+
+    .help-cmd {
+      color: var(--green);
+      min-width: 200px;
+      font-weight: 500;
+    }
+
+    .help-arrow { color: var(--dim); margin-right: 10px; }
+    .help-desc  { color: var(--text); }
+
+    .help-tip {
+      margin-top: 14px;
+      padding: 8px 12px;
+      background: rgba(0, 255, 136, 0.05);
+      border-radius: 4px;
+      font-size: 12px;
+      color: var(--dim);
+    }
+    .help-tip span { color: var(--green); }
+
+    .status-dot {
       display: inline-block;
       width: 7px; height: 7px;
-      background: #00ff41;
+      background: var(--green);
       border-radius: 50%;
       margin-right: 8px;
-      box-shadow: 0 0 8px rgba(0,255,65,0.8);
+      box-shadow: 0 0 8px var(--green);
       animation: pulse 2s ease-in-out infinite;
+      vertical-align: middle;
     }
 
-    .boot-message {
-      color: #00ff41;
-      font-size: 13px;
-      margin: 3px 0;
-      opacity: 0;
-      animation: fadeIn 0.3s ease-in forwards;
-    }
+    .dir  { color: var(--cyan); font-weight: 500; margin-right: 18px; }
+    .file { color: var(--dim);  margin-right: 18px; }
 
     @media (max-width: 768px) { 
-      body { padding: 10px; } 
-      #terminal { margin: 10px auto; } 
-      .terminal-body { padding: 16px; font-size: 13px; }
+      body { padding: 8px; }
+      #terminal { margin: 8px auto; }
+      .terminal-body { padding: 16px 18px; }
+      .ascii-banner { font-size: 7px; }
+      .portfolio-btn span:last-child { display: none; }
     }
   </style>
 </head>
@@ -197,116 +301,134 @@
   <div id="terminal">
     <div class="terminal-header">
       <div class="terminal-buttons">
-        <div class="terminal-button btn-close"></div>
-        <div class="terminal-button btn-minimize"></div>
-        <div class="terminal-button btn-maximize"></div>
+        <div class="terminal-button btn-close" title="Tema: Red"></div>
+        <div class="terminal-button btn-minimize" title="Tema: Amber"></div>
+        <div class="terminal-button btn-maximize" title="Tema: Green"></div>
       </div>
       <div class="terminal-title">atakan@devops-portfolio:~</div>
-      <a href="index.html" style="position:absolute;right:20px;display:flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.3);border-radius:6px;color:#00ff88;text-decoration:none;font-size:13px;font-family:'Fira Code',monospace;">👤 Portfolio Mod</a>
+      <a href="index.html" class="portfolio-btn">
+        <span>👤</span>
+        <span>Portfolio Mod</span>
+      </a>
     </div>
 
     <div class="terminal-body" id="terminal-body">
       <div id="intro-container"></div>
       <div id="history"></div>
       <div class="input-line" id="input-area">
-        <span class="prompt">atakan@production</span>
-        <span class="prompt-path" id="prompt-path">:~</span>
-        <span class="prompt">$</span>
+        <span class="prompt-user">atakan</span><span class="prompt-at">@</span><span class="prompt-host">production</span><span class="prompt-colon">:</span><span class="prompt-path" id="prompt-path">~</span><span class="prompt-dollar">$</span>
         <input type="text" id="command-input" class="command-input" autofocus autocomplete="off" spellcheck="false" />
       </div>
     </div>
   </div>
 
   <script>
-    const input = document.getElementById('command-input');
-    const history = document.getElementById('history');
-    const inputArea = document.getElementById('input-area');
-    const introContainer = document.getElementById('intro-container');
-    const promptPath = document.getElementById('prompt-path');
+    const input        = document.getElementById('command-input');
+    const historyEl    = document.getElementById('history');
+    const inputArea    = document.getElementById('input-area');
+    const introEl      = document.getElementById('intro-container');
+    const promptPathEl = document.getElementById('prompt-path');
     const terminalBody = document.getElementById('terminal-body');
 
     let currentPath = 'home';
-    let commandHistory = [];
-    let historyIndex = -1;
+    let cmdHistory  = [];
+    let historyIdx  = -1;
 
     const CV_FILE = "ATAKAN_SARIKAYA_DEVOPS_CV.pdf";
 
     const profile = {
-      name: "Atakan Sarıkaya",
-      role: "Application Operations Specialist at Türk Telekom (via Sekom A.Ş.)",
+      name:     "Atakan Sarıkaya",
+      role:     "Application Operations Specialist",
+      company:  "Türk Telekom (via Sekom A.Ş.)",
       location: "İstanbul, Türkiye",
-      phone: "+90 552 922 52 77",
-      email: "sarikayaatakan@gmail.com",
+      phone:    "+90 552 922 52 77",
+      email:    "sarikayaatakan@gmail.com",
       linkedin: "https://www.linkedin.com/in/atakansarikaya/",
-      website: "atakansarikaya.info",
-      age: 27
+      age:      27
     };
 
     const fs = {
-      'home': {
-        dirs: ['deneyim', 'yetkinlikler', 'sertifikalar', 'egitim'],
+      home: {
+        dirs:  ['deneyim', 'yetkinlikler', 'sertifikalar', 'egitim'],
         files: ['hakkimda.txt', 'iletisim.sh'],
         content: {
-          'hakkimda.txt': `Atakan Sarıkaya — 27 yaşında, İstanbul\n\nSekom A.Ş. üzerinden Türk Telekom'da Application Operations Specialist.\nDevOps Engineer hedefiyle ilerliyor; otomasyon, CI/CD ve bulut odaklı.\n\n'ls' ile dizinleri, 'help' ile komutları görebilirsin.`,
-          'iletisim.sh': `#!/bin/bash\necho "📧 ${profile.email}"\necho "📞 ${profile.phone}"\necho "💼 ${profile.linkedin}"`
+          'hakkimda.txt': `${profile.name} — ${profile.age} yaşında, ${profile.location}\n\n${profile.role}\n${profile.company}\n\nSekom A.Ş.'de 1.5 yıl Software Support Specialist olarak\nçalıştıktan sonra Türk Telekom'a dedicated geçiş yaptım.\nHedefim: DevOps Engineer — otomasyon, CI/CD ve bulut odaklı.`,
+          'iletisim.sh':  `#!/bin/bash\necho "📧  ${profile.email}"\necho "📞  ${profile.phone}"\necho "💼  ${profile.linkedin}"`
         }
       },
-      'deneyim': {
-        dirs: [],
-        files: ['guncel.txt', 'onceki.txt', 'staj.txt'],
+      deneyim: {
+        dirs: [], files: ['guncel.txt', 'onceki.txt', 'staj.txt'],
         content: {
-          'guncel.txt': `Türk Telekom (via Sekom A.Ş.)\nApplication Operations Specialist — Ekim 2024 → Halen\n\n• Uygulama operasyon süreçleri\n• Sistem izleme ve performans optimizasyonu\n• DevOps pratiklerinin uygulanması`,
-          'onceki.txt': `Sekom A.Ş.\nSoftware Support Specialist — Haziran 2023 → Ekim 2024\n\n• Yazılım destek süreçleri\n• Teknik problem çözme\n• Müşteri iletişimi`,
-          'staj.txt': `İstanbul Büyükşehir Belediyesi\nSoftware Development Intern — Ağustos 2023 → Ekim 2023\n\n• Yazılım geliştirme süreçleri\n• Proje takibi ve dokümantasyon`
+          'guncel.txt': `┌─ Türk Telekom  (via Sekom A.Ş.)\n│  Application Operations Specialist — Dedicated\n│  Ekim 2024 → Halen\n│\n├─ Sorumluluklar\n│  • Kurumsal uygulama ve servislerin 7/24 operasyon yönetimi\n│  • Prometheus & Grafana ile sistem izleme, alert yönetimi\n│  • Incident süreçlerinde birincil müdahale ve koordinasyon\n│  • DevOps pratiklerinin operasyon süreçlerine entegrasyonu\n└─ Ortam: Linux, Docker, Prometheus, Grafana, ELK`,
+          'onceki.txt':  `┌─ Sekom A.Ş.\n│  Software Support Specialist\n│  Haziran 2023 → Ekim 2024  (1.5 yıl)\n│\n├─ Sorumluluklar\n│  • Kurumsal müşterilere yazılım destek ve sorun çözümü\n│  • Teknik analiz, log inceleme, root cause tespiti\n│  • Müşteri iletişimi ve SLA takibi\n└─ Sektör: Telekom & Kamu`,
+          'staj.txt':    `┌─ İstanbul Büyükşehir Belediyesi (İBB)\n│  Software Development Intern\n│  Ağustos 2023 → Ekim 2023\n│\n└─ Yazılım geliştirme süreçleri, proje takibi, teknik dokümantasyon`
         }
       },
-      'yetkinlikler': {
-        dirs: [],
-        files: ['stack.txt'],
+      yetkinlikler: {
+        dirs: [], files: ['stack.txt'],
         content: {
-          'stack.txt': `Linux (RHEL/Ubuntu/CentOS)  Docker  Kubernetes\nPrometheus  Grafana  ELK Stack\nGit  GitLab  CI/CD  Ansible\nPostgreSQL  MySQL  Bash  Python (temel)\nAWS (temel)  Jira  DataGrip`
+          'stack.txt': `┌─ İşletim Sistemleri\n│  Linux (RHEL · Ubuntu · CentOS)  Windows Server\n│\n├─ Container & Orchestration\n│  Docker  Kubernetes\n│\n├─ Monitoring & Observability\n│  Prometheus  Grafana  ELK Stack\n│\n├─ DevOps & Automation\n│  Git  GitLab  CI/CD  Ansible  Bash  Python\n│\n├─ Cloud & Database\n│  AWS (temel)  PostgreSQL  MySQL\n│\n└─ Araçlar\n   Jira  DataGrip`
         }
       },
-      'sertifikalar': {
-        dirs: [],
-        files: ['mevcut.txt', 'hedef.txt'],
+      sertifikalar: {
+        dirs: [], files: ['mevcut.txt', 'hedef.txt'],
         content: {
-          'mevcut.txt': `✓ HCCDA — Huawei Certified Cloud Data Associate\n✓ Red Hat System Administration I (RH124)`,
-          'hedef.txt': `→ RHCSA\n→ AWS Solutions Architect Associate\n→ CKA (Kubernetes)`
+          'mevcut.txt': `✓  HCCDA — Huawei Certified Cloud Data Associate\n✓  Red Hat System Administration I  (RH124)`,
+          'hedef.txt':  `→  RHCSA  — Red Hat Certified System Administrator\n→  AWS Solutions Architect Associate\n→  CKA   — Certified Kubernetes Administrator`
         }
       },
-      'egitim': {
-        dirs: [],
-        files: ['okul.txt'],
+      egitim: {
+        dirs: [], files: ['okul.txt'],
         content: {
-          'okul.txt': `Beykent Üniversitesi\nBilgisayar Programcılığı (Ön Lisans) — 2020-2022`
+          'okul.txt': `Beykent Üniversitesi\nBilgisayar Programcılığı  (Ön Lisans)\n2020 — 2022`
         }
       }
     };
 
-    const commands = ['help', 'ls', 'cd', 'cat', 'whoami', 'clear', 'linkedin', 'tree', 'pwd', 'open'];
+    const COMMANDS = ['help','ls','cd','cat','whoami','clear','linkedin','tree','pwd','open'];
 
     function scrollToBottom() { terminalBody.scrollTop = terminalBody.scrollHeight; }
+    function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
     async function showIntro() {
-      const bootMessages = [
-        '[ OK ] Loading user profile: atakan',
-        '[ OK ] Mounting /home/atakan',
-        '[ OK ] System ready'
+      const boots = [
+        { ok: '[ OK ]', msg: 'Kernel loaded' },
+        { ok: '[ OK ]', msg: 'Mounting /home/atakan' },
+        { ok: '[ OK ]', msg: 'DevOps environment initialized' },
       ];
 
-      for (let i = 0; i < bootMessages.length; i++) {
-        const msg = document.createElement('div');
-        msg.className = 'boot-message';
-        msg.style.animationDelay = `${i * 0.15}s`;
-        msg.textContent = bootMessages[i];
-        introContainer.appendChild(msg);
-        await new Promise(r => setTimeout(r, 180));
+      for (let i = 0; i < boots.length; i++) {
+        const el = document.createElement('div');
+        el.className = 'boot-line';
+        el.style.animationDelay = `${i * 0.12}s`;
+        el.innerHTML = `<span class="ok">${boots[i].ok}</span>  <span class="info">${boots[i].msg}</span>`;
+        introEl.appendChild(el);
+        await sleep(150);
       }
 
-      await new Promise(r => setTimeout(r, 300));
+      await sleep(350);
 
-      printOutput(`<div class="info-box"><span class="status-indicator"></span><span class="highlight">Atakan Sarıkaya</span> — DevOps & Cloud Infrastructure\n📍 ${profile.location} · 📧 ${profile.email}\n\n💡 <span style="color:#888">help yazarak başlayabilirsin</span></div>`, true);
+      const ascii = document.createElement('div');
+      ascii.className = 'ascii-banner';
+      ascii.textContent =
+`  █████╗ ████████╗ █████╗ ██╗  ██╗ █████╗ ███╗  ██╗
+ ██╔══██╗╚══██╔══╝██╔══██╗██║ ██╔╝██╔══██╗████╗ ██║
+ ███████║   ██║   ███████║█████╔╝ ███████║██╔██╗██║
+ ██╔══██║   ██║   ██╔══██║██╔═██╗ ██╔══██║██║╚████║
+ ██║  ██║   ██║   ██║  ██║██║  ██╗██║  ██║██║ ╚███║
+ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝`;
+      introEl.appendChild(ascii);
+      await sleep(100);
+
+      const sub = document.createElement('div');
+      sub.className = 'ascii-sub';
+      sub.innerHTML = `<span class="c-dim">───  </span>DevOps &amp; Cloud Infrastructure Specialist<span class="c-dim">  ───</span>`;
+      introEl.appendChild(sub);
+      await sleep(300);
+
+      printHTML(`<div class="info-box"><span class="status-dot"></span><span class="c-white bold">${profile.name}</span>  <span class="c-dim">·</span>  <span class="c-cyan">${profile.role}</span><br><span class="c-dim">${profile.company}  ·  ${profile.location}</span></div>`);
+      printHTML(`<div class="c-dim" style="font-size:13px;margin-top:8px">Keşfetmek için <span class="c-green">help</span> yaz &nbsp;·&nbsp; Tab ile otomatik tamamlama</div>`);
+      addGap();
 
       inputArea.style.display = 'flex';
       input.focus();
@@ -315,134 +437,201 @@
 
     function handleTab(e) {
       e.preventDefault();
-      const val = input.value.trim();
+      const val   = input.value.trim();
       const parts = val.split(' ');
-      const currentWord = parts[parts.length - 1].toLowerCase();
-      if (!currentWord) return;
+      const word  = parts[parts.length - 1].toLowerCase();
+      if (!word) return;
 
       let matches = [];
       if (parts.length === 1) {
-        matches = commands.filter(c => c.startsWith(currentWord));
+        matches = COMMANDS.filter(c => c.startsWith(word));
       } else {
-        const options = [...fs[currentPath].dirs, ...fs[currentPath].files];
-        matches = options.filter(o => o.toLowerCase().startsWith(currentWord));
+        const opts = [...fs[currentPath].dirs, ...fs[currentPath].files];
+        matches = opts.filter(o => o.toLowerCase().startsWith(word));
       }
 
       if (matches.length === 1) {
         parts[parts.length - 1] = matches[0];
         input.value = parts.join(' ') + (parts.length === 1 ? ' ' : '');
       } else if (matches.length > 1) {
-        printOutput(`\n${matches.join('  ')}`, true);
+        printText(matches.join('   '));
         scrollToBottom();
       }
     }
 
-    input.addEventListener('keydown', function(e) {
-      if (e.key === 'Tab') {
-        handleTab(e);
-      } else if (e.key === 'Enter') {
-        const rawInput = input.value.trim();
-        const args = rawInput.split(' ');
-        const cmd = args[0].toLowerCase();
-        const target = args.slice(1).join(' ').trim().toLowerCase();
-        if (rawInput) { commandHistory.push(rawInput); historyIndex = commandHistory.length; }
-        printPrompt(rawInput);
-        executeCommand(cmd, target);
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Tab') { handleTab(e); return; }
+      if (e.key === 'Enter') {
+        const raw  = input.value.trim();
+        const args = raw.split(' ');
+        const cmd  = args[0].toLowerCase();
+        const tgt  = args.slice(1).join(' ').trim().toLowerCase();
+        if (raw) { cmdHistory.push(raw); historyIdx = cmdHistory.length; }
+        printPromptLine(raw);
+        executeCommand(cmd, tgt);
         input.value = '';
         scrollToBottom();
-      } else if (e.key === 'ArrowUp') {
+        return;
+      }
+      if (e.key === 'ArrowUp') {
         e.preventDefault();
-        if (historyIndex > 0) { historyIndex--; input.value = commandHistory[historyIndex]; }
-      } else if (e.key === 'ArrowDown') {
+        if (historyIdx > 0) { historyIdx--; input.value = cmdHistory[historyIdx]; }
+        return;
+      }
+      if (e.key === 'ArrowDown') {
         e.preventDefault();
-        if (historyIndex < commandHistory.length - 1) { historyIndex++; input.value = commandHistory[historyIndex]; }
-        else { historyIndex = commandHistory.length; input.value = ''; }
+        if (historyIdx < cmdHistory.length - 1) { historyIdx++; input.value = cmdHistory[historyIdx]; }
+        else { historyIdx = cmdHistory.length; input.value = ''; }
       }
     });
 
     function executeCommand(cmd, target) {
-      switch(cmd) {
+      switch (cmd) {
         case 'help':
-          printOutput(`ls · cd [dizin] · cat [dosya] · pwd · tree\nwhoami · linkedin · open cv · clear`, false);
+          printHTML(`<div style="margin:4px 0">
+  <div class="help-section-title">// Hakkımda</div>
+  <div class="help-row"><span class="help-cmd">whoami</span><span class="help-arrow">→</span><span class="help-desc">kim olduğumu öğren</span></div>
+  <div class="help-row"><span class="help-cmd">cat hakkimda.txt</span><span class="help-arrow">→</span><span class="help-desc">hakkımda detaylı bilgi</span></div>
+  <div class="help-row"><span class="help-cmd">cat iletisim.sh</span><span class="help-arrow">→</span><span class="help-desc">iletişim bilgilerim</span></div>
+
+  <div class="help-section-title">// Deneyim & Yetkinlikler</div>
+  <div class="help-row"><span class="help-cmd">cd deneyim</span><span class="help-arrow">→</span><span class="help-desc">iş deneyimlerim</span></div>
+  <div class="help-row"><span class="help-cmd">cd yetkinlikler</span><span class="help-arrow">→</span><span class="help-desc">teknik stack</span></div>
+  <div class="help-row"><span class="help-cmd">cd sertifikalar</span><span class="help-arrow">→</span><span class="help-desc">sertifikalarım & hedefler</span></div>
+  <div class="help-row"><span class="help-cmd">cd egitim</span><span class="help-arrow">→</span><span class="help-desc">eğitim bilgilerim</span></div>
+
+  <div class="help-section-title">// Navigasyon</div>
+  <div class="help-row"><span class="help-cmd">ls</span><span class="help-arrow">→</span><span class="help-desc">bulunduğun dizini listele</span></div>
+  <div class="help-row"><span class="help-cmd">cat [dosya]</span><span class="help-arrow">→</span><span class="help-desc">dosya içeriğini oku</span></div>
+  <div class="help-row"><span class="help-cmd">cd ..</span><span class="help-arrow">→</span><span class="help-desc">üst dizine dön</span></div>
+  <div class="help-row"><span class="help-cmd">tree</span><span class="help-arrow">→</span><span class="help-desc">tüm yapıyı göster</span></div>
+
+  <div class="help-section-title">// Diğer</div>
+  <div class="help-row"><span class="help-cmd">linkedin</span><span class="help-arrow">→</span><span class="help-desc">LinkedIn profilimi aç</span></div>
+  <div class="help-row"><span class="help-cmd">open cv</span><span class="help-arrow">→</span><span class="help-desc">CV'yi indir</span></div>
+  <div class="help-row"><span class="help-cmd">clear</span><span class="help-arrow">→</span><span class="help-desc">ekranı temizle</span></div>
+
+  <div class="help-tip">💡 Başlamak için: <span>whoami</span> &nbsp;·&nbsp; Tab ile otomatik tamamlama</div>
+</div>`);
           break;
-        case 'ls':
+
+        case 'ls': {
           let out = '';
-          fs[currentPath].dirs.forEach(d => out += `<span class="dir">${d}/</span>`);
+          fs[currentPath].dirs.forEach(d  => out += `<span class="dir">${d}/</span>`);
           fs[currentPath].files.forEach(f => out += `<span class="file">${f}</span>`);
-          printOutput(out, true);
+          printHTML(out);
           break;
+        }
+
         case 'cd':
           if (!target || target === '~') { currentPath = 'home'; }
           else if (target === '..') { currentPath = 'home'; }
           else if (fs[target]) { currentPath = target; }
-          else { printOutput(`<span class="error">cd: ${target}: dizin bulunamadı</span>`, true); }
+          else { printHTML(`<span class="c-red">cd: ${target}: dizin bulunamadı</span>`); }
           updatePrompt();
           break;
+
         case 'pwd':
-          printOutput(currentPath === 'home' ? '/home/atakan' : `/home/atakan/${currentPath}`, false);
+          printText(currentPath === 'home' ? '/home/atakan' : `/home/atakan/${currentPath}`);
           break;
+
         case 'cat':
           if (!target) {
-            printOutput(`<span class="error">kullanım: cat [dosya]</span>`, true);
+            printHTML(`<span class="c-red">kullanım: cat [dosya]</span>`);
           } else if (fs[currentPath].content?.[target]) {
-            printOutput(fs[currentPath].content[target], false);
+            printText(fs[currentPath].content[target]);
           } else {
-            printOutput(`<span class="error">cat: ${target}: dosya bulunamadı</span>`, true);
+            printHTML(`<span class="c-red">cat: ${target}: dosya bulunamadı</span>`);
           }
           break;
+
         case 'whoami':
-          printOutput(`<div class="info-box"><span class="highlight">${profile.name}</span>, ${profile.age}\n\n${profile.role}\n\nSekom A.Ş. (1.5 yıl) → Türk Telekom dedicated (4 ay)\nHedef: DevOps Engineer\n\nCI/CD: GitHub Actions lint + Plesk webhook ile otomatik deploy</div>`, true);
+          printHTML(`<div class="info-box">
+<span class="c-white bold">${profile.name}</span>  <span class="c-dim">·</span>  ${profile.age} yaşında<br><br>
+<span class="c-cyan">${profile.role}</span><br>
+<span class="c-dim">${profile.company}</span><br><br>
+<span class="c-dim">Kariyer :</span>  Sekom A.Ş. (1.5 yıl)  →  Türk Telekom dedicated (4 ay+)<br>
+<span class="c-dim">Hedef   :</span>  <span class="c-green">DevOps Engineer</span>  —  otomasyon · CI/CD · bulut<br><br>
+<span class="c-dim">Bu site GitHub Actions + Plesk webhook ile otomatik deploy edilmektedir.</span>
+</div>`);
           break;
-        case 'tree':
-          let tree = '<span class="highlight">/home/atakan</span>\n';
-          fs['home'].dirs.forEach((d, i) => {
-            const isLast = i === fs['home'].dirs.length - 1 && fs['home'].files.length === 0;
-            tree += `${isLast ? '└──' : '├──'} <span class="dir">${d}/</span>\n`;
+
+        case 'tree': {
+          let tree = `<span class="c-green">/home/atakan</span>\n`;
+          const dirs  = fs.home.dirs;
+          const files = fs.home.files;
+          dirs.forEach((d, i) => {
+            const last = i === dirs.length - 1 && files.length === 0;
+            tree += `${last ? '└──' : '├──'} <span class="dir">${d}/</span>\n`;
           });
-          fs['home'].files.forEach((f, i) => {
-            tree += `${i === fs['home'].files.length - 1 ? '└──' : '├──'} ${f}\n`;
+          files.forEach((f, i) => {
+            tree += `${i === files.length - 1 ? '└──' : '├──'} <span class="file">${f}</span>\n`;
           });
-          printOutput(tree, true);
+          printHTML(tree);
           break;
+        }
+
         case 'clear':
-          history.innerHTML = '';
+          historyEl.innerHTML = '';
           break;
+
         case 'linkedin':
-          printOutput(`→ ${profile.linkedin}`, false);
+          printHTML(`<span class="c-cyan">→ ${profile.linkedin}</span>`);
           window.open(profile.linkedin, '_blank');
           break;
+
         case 'open':
-          if (target === 'cv') { window.open(CV_FILE, '_blank'); }
-          else { printOutput(`<span class="error">kullanım: open cv</span>`, true); }
+          if (target === 'cv') {
+            printText('CV açılıyor...');
+            window.open(CV_FILE, '_blank');
+          } else {
+            printHTML(`<span class="c-red">kullanım: open cv</span>`);
+          }
           break;
+
         default:
-          if (cmd) printOutput(`<span class="error">komut bulunamadı: ${cmd} — 'help' yaz</span>`, true);
+          if (cmd) printHTML(`<span class="c-red">komut bulunamadı: ${cmd}</span>  <span class="c-dim">— 'help' yaz</span>`);
       }
+
+      addGap();
     }
 
-    function printPrompt(command = '') {
+    function printPromptLine(command = '') {
       const path = currentPath === 'home' ? '~' : `~/${currentPath}`;
       const el = document.createElement('div');
       el.className = 'output';
-      el.innerHTML = `<span class="prompt">atakan@production</span><span class="prompt-path">:${path}</span><span class="prompt">$</span> <span style="color:white">${command}</span>`;
-      history.appendChild(el);
+      el.innerHTML = `<span class="prompt-user">atakan</span><span class="prompt-at">@</span><span class="prompt-host">production</span><span class="prompt-colon">:</span><span class="prompt-path">${path}</span><span class="prompt-dollar">$</span> <span class="c-white">${command}</span>`;
+      historyEl.appendChild(el);
     }
 
-    function printOutput(text, isHTML = false) {
+    function printText(text) {
       const el = document.createElement('div');
       el.className = 'output';
-      if (isHTML) el.innerHTML = text; else el.textContent = text;
-      history.appendChild(el);
+      el.textContent = text;
+      historyEl.appendChild(el);
+    }
+
+    function printHTML(html) {
+      const el = document.createElement('div');
+      el.className = 'output';
+      el.innerHTML = html;
+      historyEl.appendChild(el);
+    }
+
+    function addGap() {
+      const el = document.createElement('div');
+      el.className = 'output-gap';
+      historyEl.appendChild(el);
     }
 
     function updatePrompt() {
-      promptPath.textContent = currentPath === 'home' ? ':~' : `:~/${currentPath}`;
+      promptPathEl.textContent = currentPath === 'home' ? '~' : `~/${currentPath}`;
     }
 
     document.addEventListener('click', () => input.focus());
 
     document.querySelector('.btn-close').addEventListener('click', e => { e.stopPropagation(); document.body.className = 'theme-red'; });
-    document.querySelector('.btn-minimize').addEventListener('click', e => { e.stopPropagation(); document.body.className = 'theme-yellow'; });
+    document.querySelector('.btn-minimize').addEventListener('click', e => { e.stopPropagation(); document.body.className = 'theme-amber'; });
     document.querySelector('.btn-maximize').addEventListener('click', e => { e.stopPropagation(); document.body.className = 'theme-green'; });
 
     showIntro();
