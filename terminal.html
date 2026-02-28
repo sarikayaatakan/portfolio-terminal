@@ -339,7 +339,7 @@
     const profile = {
       name:     "Atakan Sarıkaya",
       role:     "Application Operations Specialist",
-      company:  "Türk Telekom (via Sekom A.Ş.)",
+      company:  "Türk Telekom  via Sekom A.Ş.",
       location: "İstanbul, Türkiye",
       phone:    "+90 552 922 52 77",
       email:    "sarikayaatakan@gmail.com",
@@ -426,7 +426,8 @@
       introEl.appendChild(sub);
       await sleep(300);
 
-      printHTML(`<div class="info-box"><span class="status-dot"></span><span class="c-white bold">${profile.name}</span>  <span class="c-dim">·</span>  <span class="c-cyan">${profile.role}</span><br><span class="c-dim">${profile.company}  ·  ${profile.location}</span></div>`);
+      const ttLogo = `<img src="TT-Logo.png" height="20" style="vertical-align:middle;margin-right:8px;object-fit:contain">`;
+      printHTML(`<div class="info-box"><span class="status-dot"></span><span class="c-white bold">${profile.name}</span>  <span class="c-dim">·</span>  <span class="c-cyan">${profile.role}</span><br><span style="display:inline-flex;align-items:center;margin-top:4px">${ttLogo}<span class="c-text">Türk Telekom</span><span class="c-dim" style="margin:0 8px">·</span><span class="c-dim">via Sekom A.Ş.</span><span class="c-dim" style="margin:0 8px">·</span><span class="c-dim">${profile.location}</span></span></div>`);
       printHTML(`<div class="c-dim" style="font-size:13px;margin-top:8px">Keşfetmek için <span class="c-green">help</span> yaz &nbsp;·&nbsp; Tab ile otomatik tamamlama</div>`);
       addGap();
 
@@ -550,9 +551,9 @@
 <span class="c-white bold">${profile.name}</span>  <span class="c-dim">·</span>  ${profile.age} yaşında<br><br>
 <span class="c-cyan">${profile.role}</span><br>
 <span class="c-dim">${profile.company}</span><br><br>
-<span class="c-cyan">Kariyer :</span>  <span class="c-text">Sekom A.Ş. (1.5 yıl)  →  Türk Telekom dedicated (4 ay+)</span><br>
-<span class="c-cyan">Hedef   :</span>  <span class="c-green">DevOps Engineer</span>  <span class="c-text">—  otomasyon · CI/CD · bulut</span><br><br>
-<span class="c-text">Bu site GitHub Actions + Plesk webhook ile otomatik deploy edilmektedir.</span>
+<span class="c-dim">Kariyer :</span>  Sekom A.Ş. (1.5 yıl)  →  Türk Telekom dedicated (4 ay+)<br>
+<span class="c-dim">Hedef   :</span>  <span class="c-green">DevOps Engineer</span>  —  otomasyon · CI/CD · bulut<br><br>
+<span class="c-dim">Bu site GitHub Actions + Plesk webhook ile otomatik deploy edilmektedir.</span>
 </div>`);
           break;
 
@@ -628,7 +629,9 @@
       promptPathEl.textContent = currentPath === 'home' ? '~' : `~/${currentPath}`;
     }
 
-    document.addEventListener('click', () => input.focus());
+    document.addEventListener('mouseup', () => {
+      if (window.getSelection().toString().length === 0) input.focus();
+    });
 
     document.querySelector('.btn-close').addEventListener('click', e => { e.stopPropagation(); document.body.className = 'theme-red'; });
     document.querySelector('.btn-minimize').addEventListener('click', e => { e.stopPropagation(); document.body.className = 'theme-amber'; });
