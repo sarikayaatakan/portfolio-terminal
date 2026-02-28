@@ -426,7 +426,9 @@
       introEl.appendChild(sub);
       await sleep(300);
 
-      const ttLogo = `<img src="Türk_Telekom_logo.svg" height="16" style="vertical-align:middle;margin-right:6px;position:relative;top:-1px">`;      printHTML(`<div class="c-dim" style="font-size:13px;margin-top:8px">Keşfetmek için <span class="c-green">help</span> yaz &nbsp;·&nbsp; Tab ile otomatik tamamlama</div>`);
+      const ttLogo = `<img src="Türk_Telekom_logo.svg" height="16" style="vertical-align:middle;margin-right:6px;position:relative;top:-1px">`;
+      printHTML(`<div class="info-box"><span class="status-dot"></span><span class="c-white bold">${profile.name}</span>  <span class="c-dim">·</span>  <span class="c-cyan">${profile.role}</span><br><span style="display:inline-flex;align-items:center;margin-top:4px">${ttLogo}<span class="c-text">Türk Telekom</span><span class="c-dim" style="margin:0 8px">·</span><span class="c-dim">via Sekom A.Ş.</span><span class="c-dim" style="margin:0 8px">·</span><span class="c-dim">${profile.location}</span></span></div>`);
+      printHTML(`<div class="c-dim" style="font-size:13px;margin-top:8px">Keşfetmek için <span class="c-green">help</span> yaz &nbsp;·&nbsp; Tab ile otomatik tamamlama</div>`);
       addGap();
 
       inputArea.style.display = 'flex';
