@@ -22,9 +22,7 @@
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
-
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--bg);
       color: var(--text);
@@ -32,7 +30,6 @@
       overflow-x: hidden;
     }
 
-    /* ── NOISE OVERLAY ── */
     body::after {
       content: '';
       position: fixed;
@@ -43,7 +40,6 @@
       opacity: 0.4;
     }
 
-    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -103,7 +99,6 @@
       border-color: var(--green);
     }
 
-    /* ── HERO ── */
     #hero {
       min-height: 100vh;
       display: flex;
@@ -115,20 +110,16 @@
 
     .hero-glow {
       position: absolute;
-      top: 20%;
-      right: 5%;
-      width: 500px;
-      height: 500px;
+      top: 20%; right: 5%;
+      width: 500px; height: 500px;
       background: radial-gradient(ellipse, rgba(0,180,255,0.08) 0%, transparent 70%);
       pointer-events: none;
     }
 
     .hero-glow2 {
       position: absolute;
-      bottom: 10%;
-      left: 0%;
-      width: 400px;
-      height: 400px;
+      bottom: 10%; left: 0%;
+      width: 400px; height: 400px;
       background: radial-gradient(ellipse, rgba(0,255,136,0.06) 0%, transparent 70%);
       pointer-events: none;
     }
@@ -189,7 +180,6 @@
     }
 
     .hero-desc strong { color: var(--text); font-weight: 500; }
-
     .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
 
     .btn-primary {
@@ -229,8 +219,7 @@
 
     .hero-scroll {
       position: absolute;
-      bottom: 40px;
-      left: 50%;
+      bottom: 40px; left: 50%;
       transform: translateX(-50%);
       display: flex;
       flex-direction: column;
@@ -253,16 +242,7 @@
       background: linear-gradient(to bottom, var(--text-dim), transparent);
     }
 
-    /* ── SECTIONS ── */
     section { padding: 100px 10%; }
-
-    .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--green);
-      letter-spacing: 0.15em;
-      margin-bottom: 12px;
-    }
 
     .section-title {
       font-size: clamp(28px, 4vw, 44px);
@@ -272,7 +252,6 @@
       margin-bottom: 60px;
     }
 
-    /* ── EXPERIENCE ── */
     #experience { background: var(--bg2); }
 
     .timeline { position: relative; max-width: 800px; }
@@ -293,30 +272,19 @@
       transition: all 0.5s ease;
     }
 
-    .timeline-item.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .timeline-item.visible { opacity: 1; transform: translateY(0); }
 
     .timeline-dot {
       position: absolute;
-      left: -5px;
-      top: 6px;
+      left: -5px; top: 6px;
       width: 11px; height: 11px;
       background: var(--green);
       border-radius: 50%;
       box-shadow: 0 0 12px rgba(0,255,136,0.6);
     }
 
-    .timeline-dot.blue {
-      background: var(--blue);
-      box-shadow: 0 0 12px rgba(0,180,255,0.6);
-    }
-
-    .timeline-dot.gold {
-      background: var(--gold);
-      box-shadow: 0 0 12px rgba(240,180,41,0.6);
-    }
+    .timeline-dot.blue { background: var(--blue); box-shadow: 0 0 12px rgba(0,180,255,0.6); }
+    .timeline-dot.gold { background: var(--gold); box-shadow: 0 0 12px rgba(240,180,41,0.6); }
 
     .timeline-date {
       font-family: 'JetBrains Mono', monospace;
@@ -339,11 +307,7 @@
       margin-bottom: 12px;
     }
 
-    .timeline-desc {
-      font-size: 15px;
-      color: var(--text-dim);
-      line-height: 1.7;
-    }
+    .timeline-desc { font-size: 15px; color: var(--text-dim); line-height: 1.7; }
 
     .timeline-badge {
       display: inline-block;
@@ -357,7 +321,6 @@
       margin-top: 10px;
     }
 
-    /* ── SKILLS / TECH ── */
     #skills { background: var(--bg); }
 
     .skills-grid {
@@ -381,10 +344,7 @@
       transform: scale(0.9);
     }
 
-    .skill-card.visible {
-      opacity: 1;
-      transform: scale(1);
-    }
+    .skill-card.visible { opacity: 1; transform: scale(1); }
 
     .skill-card:hover {
       border-color: rgba(0,255,136,0.3);
@@ -393,11 +353,7 @@
       box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     }
 
-    .skill-icon {
-      width: 36px; height: 36px;
-      display: flex; align-items: center; justify-content: center;
-    }
-
+    .skill-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
     .skill-icon svg, .skill-icon img { width: 100%; height: 100%; }
 
     .skill-name {
@@ -408,7 +364,6 @@
       letter-spacing: 0.02em;
     }
 
-    /* ── CERTS ── */
     #certs { background: var(--bg2); }
 
     .certs-grid {
@@ -436,17 +391,8 @@
 
     .cert-icon { font-size: 28px; margin-bottom: 14px; }
 
-    .cert-name {
-      font-size: 16px;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 8px;
-    }
-
-    .cert-org {
-      font-size: 13px;
-      color: var(--text-dim);
-    }
+    .cert-name { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+    .cert-org { font-size: 13px; color: var(--text-dim); }
 
     .cert-target {
       margin-top: 16px;
@@ -458,7 +404,6 @@
       color: var(--gold);
     }
 
-    /* ── CONTACT ── */
     #contact { background: var(--bg); }
 
     .contact-grid {
@@ -498,16 +443,8 @@
       flex-shrink: 0;
     }
 
-    .contact-item-label {
-      font-size: 12px;
-      color: var(--text-dim);
-      margin-bottom: 3px;
-    }
-
-    .contact-item-value {
-      font-size: 14px;
-      font-weight: 500;
-    }
+    .contact-item-label { font-size: 12px; color: var(--text-dim); margin-bottom: 3px; }
+    .contact-item-value { font-size: 14px; font-weight: 500; }
 
     .contact-cta {
       padding: 36px;
@@ -519,21 +456,9 @@
       justify-content: center;
     }
 
-    .contact-cta h3 {
-      font-size: 24px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 12px;
-    }
+    .contact-cta h3 { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .contact-cta p { font-size: 15px; color: var(--text-dim); line-height: 1.7; margin-bottom: 28px; }
 
-    .contact-cta p {
-      font-size: 15px;
-      color: var(--text-dim);
-      line-height: 1.7;
-      margin-bottom: 28px;
-    }
-
-    /* ── FOOTER ── */
     footer {
       padding: 32px 10%;
       border-top: 1px solid var(--border);
@@ -544,13 +469,8 @@
       color: var(--text-dim);
     }
 
-    footer a {
-      color: var(--green);
-      text-decoration: none;
-      font-family: 'JetBrains Mono', monospace;
-    }
+    footer a { color: var(--green); text-decoration: none; font-family: 'JetBrains Mono', monospace; }
 
-    /* ── PIPELINE SECTION ── */
     .pipeline-box {
       margin-top: 60px;
       padding: 32px;
@@ -567,17 +487,9 @@
       margin-bottom: 20px;
     }
 
-    .pipeline-steps {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
+    .pipeline-steps { display: flex; flex-direction: column; gap: 14px; }
 
-    .pipeline-step {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-    }
+    .pipeline-step { display: flex; align-items: flex-start; gap: 14px; }
 
     .pipeline-step-icon {
       width: 28px; height: 28px;
@@ -590,31 +502,21 @@
       margin-top: 1px;
     }
 
-    .pipeline-step-text {
-      font-size: 14px;
-      color: var(--text-dim);
-      line-height: 1.6;
-    }
-
+    .pipeline-step-text { font-size: 14px; color: var(--text-dim); line-height: 1.6; }
     .pipeline-step-text strong { color: var(--text); }
 
-    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity:0; transform: translateY(30px); }
       to { opacity:1; transform: translateY(0); }
     }
 
-    .hero-content > * {
-      animation: fadeUp 0.7s ease both;
-    }
-
+    .hero-content > * { animation: fadeUp 0.7s ease both; }
     .hero-badge { animation-delay: 0.1s; }
     .hero-name { animation-delay: 0.2s; }
     .hero-role { animation-delay: 0.3s; }
     .hero-desc { animation-delay: 0.4s; }
     .hero-actions { animation-delay: 0.5s; }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 0 6%; }
       .nav-links { display: none; }
@@ -653,7 +555,7 @@
     <h1 class="hero-name">Atakan<br><span class="accent">Sarıkaya</span></h1>
     <p class="hero-role">DevOps & Cloud Infrastructure Specialist</p>
     <p class="hero-desc">
-      Türk Telekom bünyesinde <strong>Application Operations Specialist</strong> olarak görev yapıyorum. 
+      Türk Telekom bünyesinde <strong>Application Operations Specialist</strong> olarak görev yapıyorum.
       Otomasyon, CI/CD ve bulut teknolojileri odaklı bir <strong>DevOps Engineer</strong> kariyerine doğru ilerliyorum.
     </p>
     <div class="hero-actions">
@@ -682,8 +584,8 @@
           <li><span style="color:var(--green);margin-right:8px">▸</span>RHEL/CentOS tabanlı kurumsal sistemlerin operasyonel yönetimi ve olay müdahale süreçleri</li>
           <li><span style="color:var(--green);margin-right:8px">▸</span>Prometheus, Grafana ve Alertmanager ile izleme, alarm yapılandırması ve log analizi</li>
           <li><span style="color:var(--green);margin-right:8px">▸</span>Docker ortamında monitoring uygulamalarının deployment ve servis yönetimi</li>
-          <li><span style="color:var(--green);margin-right:8px">▸</span>systemd servisleri olarak çalışan Java uygulamalarının hata tespit ve sorun giderme işlemleri</li>
-          <li><span style="color:var(--green);margin-right:8px">▸</span>Bash scriptler ile rutin operasyonel görevlerin otomatize edilmesi</li>
+          <li><span style="color:var(--green);margin-right:8px">▸</span>systemd servisleri olarak çalışan Java uygulamalarının hata tespiti ve giderme süreçleri</li>
+          <li><span style="color:var(--green);margin-right:8px">▸</span>Bash scriptler ile rutin operasyonel görevlerin otomatikleştirilmesi ve müdahale sürelerinin kısaltılması</li>
         </ul>
       </div>
       <span class="timeline-badge">Dedicated / Aktif</span>
@@ -696,11 +598,11 @@
       <div class="timeline-role">DevSecOps Cloud Operations Team / Software Support Specialist</div>
       <div class="timeline-desc">
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
-          <li><span style="color:var(--blue);margin-right:8px">▸</span>Docker ve Red Hat OpenShift ortamlarında Java / Python tabanlı uygulamaların deployment yönetimi</li>
-          <li><span style="color:var(--blue);margin-right:8px">▸</span>Prometheus, Grafana ve Alertmanager ile izleme ve alarm yapılandırması</li>
-          <li><span style="color:var(--blue);margin-right:8px">▸</span>PostgreSQL ve Oracle veritabanlarında SQL operasyonları, sorgu optimizasyonu ve yedekleme işlemleri</li>
-          <li><span style="color:var(--blue);margin-right:8px">▸</span>Linux sunucularda Docker & Red Hat OpenShift Container Platform & systemd ortamlarında servis yönetimi ve uygulama log takibi</li>
-          <li><span style="color:var(--blue);margin-right:8px">▸</span>Jira ve Confluence ile olay yönetimi ve teknik dokümantasyon hazırlama süreçleri</li>
+          <li><span style="color:var(--blue);margin-right:8px">▸</span>Docker ve Red Hat OpenShift ortamlarında Java/Python uygulamalarının deployment yönetimi</li>
+          <li><span style="color:var(--blue);margin-right:8px">▸</span>Prometheus, Grafana ve Alertmanager ile izleme ve alarm yapılandırması; olay tespit süreçleri</li>
+          <li><span style="color:var(--blue);margin-right:8px">▸</span>PostgreSQL ve Oracle veritabanlarında SQL operasyonları, yedekleme ve geri yükleme</li>
+          <li><span style="color:var(--blue);margin-right:8px">▸</span>Linux sunucularda systemd servis yönetimi, log takibi ve uygulama deploy desteği</li>
+          <li><span style="color:var(--blue);margin-right:8px">▸</span>Jira ve Confluence ile olay/değişiklik yönetimi ve teknik dokümantasyon hazırlanması</li>
         </ul>
       </div>
     </div>
@@ -712,8 +614,7 @@
       <div class="timeline-role">Software Development Intern</div>
       <div class="timeline-desc">
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
-          <li><span style="color:var(--gold);margin-right:8px">▸</span>Yazılım geliştirme süreçlerine katılım ve proje takibi</li>
-          <li><span style="color:var(--gold);margin-right:8px">▸</span>Teknik dokümantasyon hazırlama ve ekip içi raporlama</li>
+          <li><span style="color:var(--gold);margin-right:8px">▸</span>Python, Flask ve SQLite kullanılarak CRUD operasyonlarına sahip ToDo List web uygulaması geliştirildi</li>
         </ul>
       </div>
     </div>
@@ -824,15 +725,15 @@
 
   <div class="certs-grid">
     <div class="cert-card">
-      <div class="cert-icon"><img src="https://cdn.simpleicons.org/huawei/CF0A2C" style="width:32px;height:32px"></div>
-      <div class="cert-name">HCCDA — Huawei Cloud Tech Essentials</div>
-      <div class="cert-org">Bulut bilişim temel kavramları ve Huawei Cloud altyapısı · Compute, Storage, Network ve Database servisleri · Güvenlik modeli ve cloud-native dönüşüm · Yük dengeleme ve dağıtık uygulama yönetimi</div>
-    </div>
-
-    <div class="cert-card">
       <div class="cert-icon"><img src="https://cdn.simpleicons.org/redhat/EE0000" style="width:32px;height:32px"></div>
       <div class="cert-name">Red Hat System Administration I</div>
       <div class="cert-org">RH124 — Linux sistem yönetimi, RHEL operasyonları ve kullanıcı/yetki yönetimi</div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-icon"><img src="https://cdn.simpleicons.org/huawei/CF0A2C" style="width:32px;height:32px"></div>
+      <div class="cert-name">HCCDA — Huawei Cloud Tech Essentials</div>
+      <div class="cert-org">Bulut bilişim temel kavramları ve Huawei Cloud altyapısı · Compute, Storage, Network ve Database servisleri · Güvenlik modeli ve cloud-native dönüşüm · Yük dengeleme ve dağıtık uygulama yönetimi</div>
     </div>
 
     <div class="cert-card" style="border-color: rgba(240,180,41,0.2);">
@@ -901,7 +802,6 @@
 </footer>
 
 <script>
-  // E-posta obfuscation'a karşı JS ile render
   const u = 'sarikayaatakan';
   const d = 'gmail.com';
   const email = u + '@' + d;
@@ -912,9 +812,8 @@
   if (lnk) lnk.href = 'mailto:' + email;
   if (btn) btn.href = 'mailto:' + email;
 
-  // Scroll-triggered animations
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         setTimeout(() => {
           entry.target.classList.add('visible');
@@ -938,7 +837,6 @@
     observer.observe(el);
   });
 
-  // Smooth active nav highlight
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a');
 
