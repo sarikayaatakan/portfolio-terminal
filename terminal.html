@@ -328,38 +328,45 @@
 
     const fs = {
       home: {
-        dirs:  ['deneyim', 'yetkinlikler', 'sertifikalar', 'egitim'],
+        dirs:  ['deneyim', 'yetkinlikler', 'sertifikalar', 'egitim', 'projeler'],
         files: ['hakkimda.txt', 'iletisim.sh'],
         content: {
-          'hakkimda.txt': `${profile.name} — ${profile.age} yaşında, ${profile.location}\n\n${profile.role}\n${profile.company}\n\nSekom A.Ş.'de 1.5 yıl Software Support Specialist olarak\nçalıştıktan sonra Türk Telekom'a dedicated geçiş yaptım.\nHedefim: DevOps Engineer — otomasyon, CI/CD ve bulut odaklı.`,
+          'hakkimda.txt': `${profile.name} — ${profile.age} yaşında, ${profile.location}\n\n${profile.role}\n${profile.company}\n\nLinux sistemleri ve container teknolojilerinde tecrübe edinmiş\nDevOps Uzmanı adayıyım. Üretim ortamlarında daha verimli,\nizlenebilir ve sürdürülebilir sistemler kurmayı hedefliyorum.\n\nHedef: DevOps Engineer — otomasyon · CI/CD · bulut altyapısı`,
           'iletisim.sh':  `#!/bin/bash\necho "📧  ${profile.email}"\necho "📞  ${profile.phone}"\necho "💼  ${profile.linkedin}"`
         }
       },
       deneyim: {
         dirs: [], files: ['guncel.txt', 'onceki.txt', 'staj.txt'],
         content: {
-          'guncel.txt': `┌─ Türk Telekom  (via Sekom A.Ş.)\n│  Application Operations Specialist — Dedicated\n│  Ekim 2024 → Halen\n│\n├─ Sorumluluklar\n│  • Kurumsal uygulama ve servislerin 7/24 operasyon yönetimi\n│  • Prometheus & Grafana ile sistem izleme, alert yönetimi\n│  • Incident süreçlerinde birincil müdahale ve koordinasyon\n│  • DevOps pratiklerinin operasyon süreçlerine entegrasyonu\n└─ Ortam: Linux, Docker, Prometheus, Grafana, ELK`,
-          'onceki.txt':  `┌─ Sekom A.Ş.\n│  Software Support Specialist\n│  Haziran 2023 → Ekim 2024  (1.5 yıl)\n│\n├─ Sorumluluklar\n│  • Kurumsal müşterilere yazılım destek ve sorun çözümü\n│  • Teknik analiz, log inceleme, root cause tespiti\n│  • Müşteri iletişimi ve SLA takibi\n└─ Sektör: Telekom & Kamu`,
+          'guncel.txt': `┌─ Türk Telekom  (via Sekom A.Ş.)\n│  Uygulama Operasyon Uzmanı — Dedicated\n│  Ekim 2025 → Halen\n│\n├─ Sorumluluklar\n│  • RHEL/CentOS tabanlı kurumsal sistemlerin operasyonel yönetimi\n│  • Prometheus, Grafana ve Alertmanager ile izleme, alarm ve log analizi\n│  • Docker ortamında monitoring uygulamalarının deployment ve yönetimi\n│  • systemd servisleri olarak çalışan Java uygulamalarının hata giderme\n│  • Bash scriptler ile rutin görevlerin otomatikleştirilmesi\n└─ Ortam: RHEL/CentOS, Docker, Prometheus, Grafana, Alertmanager`,
+          'onceki.txt':  `┌─ Sekom A.Ş.\n│  DevSecOps Bulut Operasyonları / Yazılım Destek Uzmanı\n│  Haziran 2024 → Ekim 2025\n│\n├─ Sorumluluklar\n│  • Docker ve OpenShift ortamlarında Java/Python uygulamaları deployment\n│  • Prometheus, Grafana ve Alertmanager ile izleme ve alarm yapılandırması\n│  • PostgreSQL ve Oracle veritabanlarında SQL operasyonları ve yedekleme\n│  • Linux sunucular üzerinde systemd servis yönetimi ve log takibi\n│  • Jira ve Confluence ile olay yönetimi ve teknik dokümantasyon\n└─ Sektör: Telekom & Kamu`,
           'staj.txt':    `┌─ İstanbul Büyükşehir Belediyesi (İBB)\n│  Software Development Intern\n│  Ağustos 2023 → Ekim 2023\n│\n└─ Yazılım geliştirme süreçleri, proje takibi, teknik dokümantasyon`
         }
       },
       yetkinlikler: {
         dirs: [], files: ['stack.txt'],
         content: {
-          'stack.txt': `┌─ İşletim Sistemleri\n│  Linux (RHEL · Ubuntu · CentOS)  Windows Server\n│\n├─ Container & Orchestration\n│  Docker  Kubernetes\n│\n├─ Monitoring & Observability\n│  Prometheus  Grafana  ELK Stack\n│\n├─ DevOps & Automation\n│  Git  GitLab  CI/CD  Ansible  Bash  Python\n│\n├─ Cloud & Database\n│  AWS (temel)  PostgreSQL  MySQL\n│\n└─ Araçlar\n   Jira  DataGrip`
+          'stack.txt': `┌─ İşletim Sistemleri & Bulut\n│  RHEL · CentOS  Huawei Cloud (HCCDA Certified)\n│\n├─ Container & Orchestration\n│  Docker  Red Hat OpenShift  Kubernetes (Temel)\n│\n├─ Monitoring & Observability\n│  Prometheus  Grafana  Alertmanager  Log Analizi\n│\n├─ Otomasyon & Script\n│  Bash  Python (Temel)\n│\n├─ Veritabanı\n│  PostgreSQL  Oracle  SQLite\n│\n└─ Araçlar\n   Jira  Confluence  DataGrip  DBeaver`
         }
       },
       sertifikalar: {
         dirs: [], files: ['mevcut.txt', 'hedef.txt'],
         content: {
-          'mevcut.txt': `✓  HCCDA — Huawei Certified Cloud Data Associate\n✓  Red Hat System Administration I  (RH124)`,
+          'mevcut.txt': `✓  Red Hat System Administration I  (RH124)\n✓  HCCDA — Huawei Cloud Tech Essentials\n✓  Uygulamalarla SQL — BTK Akademi\n✓  Network Temelleri — BTK Akademi`,
           'hedef.txt':  `→  RHCSA  — Red Hat Certified System Administrator\n→  AWS Solutions Architect Associate\n→  CKA   — Certified Kubernetes Administrator`
         }
       },
       egitim: {
         dirs: [], files: ['okul.txt'],
         content: {
-          'okul.txt': `Beykent Üniversitesi\nBilgisayar Programcılığı  (Ön Lisans)\n2020 — 2022`
+          'okul.txt': `Anadolu Üniversitesi\nYönetim Bilişim Sistemleri  (Açıköğretim)\nEylül 2025 — Halen\n\nİstanbul Beykent Üniversitesi\nBilgisayar Programcılığı  (Önlisans)\nEylül 2021 — Ağustos 2023`
+        }
+      },
+      projeler: {
+        dirs: [], files: ['terminal-portfolyo.txt', 'todo-app.txt'],
+        content: {
+          'terminal-portfolyo.txt': `┌─ İnteraktif Terminal Portfolyosu\n│  HTML · CSS · JavaScript  —  Ocak 2026\n│\n│  Linux terminalini simüle eden interaktif portfolyo sitesi.\n│  ls, cd, cat komutları · tab tamamlama · boot animasyonu\n│\n└─ 🌐  atakansarikaya.info`,
+          'todo-app.txt':          `┌─ ToDo List Web Uygulaması\n│  Python · Flask · SQLite  —  Eylül 2023\n│\n│  CRUD operasyonları ve veri kalıcılığı içeren\n│  görev yönetim uygulaması.\n└─ SQLite entegrasyonu`
         }
       }
     };
@@ -478,6 +485,7 @@
   <div class="help-row"><span class="help-cmd">cd yetkinlikler</span><span class="help-arrow">→</span><span class="help-desc">teknik stack</span></div>
   <div class="help-row"><span class="help-cmd">cd sertifikalar</span><span class="help-arrow">→</span><span class="help-desc">sertifikalarım & hedefler</span></div>
   <div class="help-row"><span class="help-cmd">cd egitim</span><span class="help-arrow">→</span><span class="help-desc">eğitim bilgilerim</span></div>
+  <div class="help-row"><span class="help-cmd">cd projeler</span><span class="help-arrow">→</span><span class="help-desc">projelerim</span></div>
 
   <div class="help-section-title">// Navigasyon</div>
   <div class="help-row"><span class="help-cmd">ls</span><span class="help-arrow">→</span><span class="help-desc">bulunduğun dizini listele</span></div>
@@ -527,10 +535,10 @@
         case 'whoami':
           printHTML(`<div class="info-box">
 <span class="c-white bold">${profile.name}</span>  <span class="c-dim">·</span>  ${profile.age} yaşında<br><br>
-<span class="c-cyan">${profile.role}</span><br>
+<span class="c-cyan">Uygulama Operasyon Uzmanı</span><br>
 <span class="c-text">Türk Telekom  <span class="c-dim">·</span>  via Sekom A.Ş.</span><br><br>
-<span class="c-cyan">Kariyer :</span>  <span class="c-text">Sekom A.Ş. (1.5 yıl)  →  Türk Telekom dedicated (4 ay+)</span><br>
-<span class="c-cyan">Hedef   :</span>  <span class="c-green">DevOps Engineer</span>  <span class="c-text">—  otomasyon · CI/CD · bulut</span><br><br>
+<span class="c-cyan">Kariyer :</span>  <span class="c-text">Sekom A.Ş. (Haz 2024 → Eki 2025)  →  Türk Telekom dedicated (Eki 2025 → Halen)</span><br>
+<span class="c-cyan">Hedef   :</span>  <span class="c-green">DevOps Engineer</span>  <span class="c-text">—  otomasyon · CI/CD · bulut altyapısı</span><br><br>
 <span class="c-text">Bu site GitHub Actions + Plesk webhook ile otomatik deploy edilmektedir.</span>
 </div>`);
           break;
