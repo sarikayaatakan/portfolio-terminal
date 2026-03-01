@@ -338,8 +338,8 @@
       deneyim: {
         dirs: [], files: ['guncel.txt', 'onceki.txt', 'staj.txt'],
         content: {
-          'guncel.txt': `┌─ Türk Telekom  (via Sekom A.Ş.)\n│  Uygulama Operasyon Uzmanı — Dedicated\n│  Ekim 2025 → Halen\n│\n├─ Sorumluluklar\n│  • RHEL/CentOS tabanlı kurumsal sistemlerin operasyonel yönetimi\n│  • Prometheus, Grafana ve Alertmanager ile izleme, alarm ve log analizi\n│  • Docker ortamında monitoring uygulamalarının deployment ve yönetimi\n│  • systemd servisleri olarak çalışan Java uygulamalarının hata giderme\n│  • Bash scriptler ile rutin görevlerin otomatikleştirilmesi\n└─ Ortam: RHEL/CentOS, Docker, Prometheus, Grafana, Alertmanager`,
-          'onceki.txt':  `┌─ Sekom A.Ş.\n│  DevSecOps Bulut Operasyonları / Yazılım Destek Uzmanı\n│  Haziran 2024 → Ekim 2025\n│\n├─ Sorumluluklar\n│  • Docker ve OpenShift ortamlarında Java/Python uygulamaları deployment\n│  • Prometheus, Grafana ve Alertmanager ile izleme ve alarm yapılandırması\n│  • PostgreSQL ve Oracle veritabanlarında SQL operasyonları ve yedekleme\n│  • Linux sunucular üzerinde systemd servis yönetimi ve log takibi\n│  • Jira ve Confluence ile olay yönetimi ve teknik dokümantasyon\n└─ Sektör: Telekom & Kamu`,
+          'guncel.txt': `┌─ Türk Telekom  via Sekom A.Ş.\n│  Element Management Systems / Application Operations Specialist\n│  Ekim 2025 → Halen\n│\n├─ Sorumluluklar\n│  • RHEL/CentOS tabanlı kurumsal sistemlerin operasyonel yönetimi\n│  • Prometheus, Grafana ve Alertmanager ile izleme, alarm ve log analizi\n│  • Docker ortamında monitoring uygulamalarının deployment ve yönetimi\n│  • systemd servisleri olarak çalışan Java uygulamalarının hata giderme\n│  • Bash scriptler ile rutin görevlerin otomatikleştirilmesi\n└─ Ortam: RHEL/CentOS, Docker, Prometheus, Grafana, Alertmanager`,
+          'onceki.txt':  `┌─ Sekom A.Ş.\n│  DevSecOps Cloud Operations Team / Software Support Specialist\n│  Haziran 2024 → Ekim 2025\n│\n├─ Sorumluluklar\n│  • Docker ve OpenShift ortamlarında Java/Python uygulamaları deployment\n│  • Prometheus, Grafana ve Alertmanager ile izleme ve alarm yapılandırması\n│  • PostgreSQL ve Oracle veritabanlarında SQL operasyonları ve yedekleme\n│  • Linux sunucular üzerinde systemd servis yönetimi ve log takibi\n│  • Jira ve Confluence ile olay yönetimi ve teknik dokümantasyon\n└─ Sektör: Telekom & Kamu`,
           'staj.txt':    `┌─ İstanbul Büyükşehir Belediyesi (İBB)\n│  Software Development Intern\n│  Ağustos 2023 → Ekim 2023\n│\n└─ Yazılım geliştirme süreçleri, proje takibi, teknik dokümantasyon`
         }
       },
@@ -412,7 +412,7 @@
       introEl.appendChild(sub);
       await sleep(300);
 
-      printHTML(`<div class="info-box"><span class="status-dot"></span><span class="c-white bold">${profile.name}</span>  <span class="c-dim">·</span>  <span class="c-cyan">${profile.role}</span><br><span class="c-text" style="display:inline-block;margin-top:2px">Türk Telekom  <span class="c-dim">·</span>  via Sekom A.Ş.  <span class="c-dim">·</span>  ${profile.location}</span></div>`);
+      printHTML(`<div class="info-box"><span class="status-dot"></span><span class="c-white bold">${profile.name}</span>  <span class="c-dim">·</span>  <span class="c-cyan">Application Operations Specialist</span><br><span class="c-text" style="display:inline-block;margin-top:2px">Türk Telekom  <span class="c-dim">·</span>  via Sekom A.Ş.  <span class="c-dim">·</span>  ${profile.location}</span></div>`);
       printHTML(`<div class="c-dim" style="font-size:13px;margin-top:8px">Keşfetmek için <span class="c-green">help</span> yaz &nbsp;·&nbsp; Tab ile otomatik tamamlama</div>`);
       addGap();
 
@@ -535,7 +535,7 @@
         case 'whoami':
           printHTML(`<div class="info-box">
 <span class="c-white bold">${profile.name}</span>  <span class="c-dim">·</span>  ${profile.age} yaşında<br><br>
-<span class="c-cyan">Uygulama Operasyon Uzmanı</span><br>
+<span class="c-cyan">Element Management Systems / Application Operations Specialist</span><br>
 <span class="c-text">Türk Telekom  <span class="c-dim">·</span>  via Sekom A.Ş.</span><br><br>
 <span class="c-cyan">Kariyer :</span>  <span class="c-text">Sekom A.Ş. (Haz 2024 → Eki 2025)  →  Türk Telekom dedicated (Eki 2025 → Halen)</span><br>
 <span class="c-cyan">Hedef   :</span>  <span class="c-green">DevOps Engineer</span>  <span class="c-text">—  otomasyon · CI/CD · bulut altyapısı</span><br><br>
