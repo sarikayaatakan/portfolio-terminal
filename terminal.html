@@ -33,30 +33,22 @@
       overflow-x: hidden;
     }
 
-    /* Scanline effect */
     body::after {
       content: '';
       position: fixed;
       inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0, 0, 0, 0.03) 2px,
-        rgba(0, 0, 0, 0.03) 4px
-      );
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
       pointer-events: none;
       z-index: 1000;
     }
 
-    /* Grid background */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       background-image: 
-        linear-gradient(rgba(0, 255, 136, 0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 136, 0.025) 1px, transparent 1px);
+        linear-gradient(rgba(0,255,136,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,136,0.025) 1px, transparent 1px);
       background-size: 40px 40px;
       pointer-events: none;
       z-index: 0;
@@ -65,13 +57,13 @@
     #terminal {
       max-width: 1000px;
       margin: 30px auto;
-      background: rgba(6, 10, 14, 0.97);
+      background: rgba(6,10,14,0.97);
       border-radius: 10px;
       box-shadow: 
-        0 0 0 1px rgba(0, 255, 136, 0.15),
-        0 0 40px rgba(0, 255, 136, 0.08),
-        0 0 80px rgba(0, 180, 255, 0.05),
-        0 40px 80px rgba(0, 0, 0, 0.6);
+        0 0 0 1px rgba(0,255,136,0.15),
+        0 0 40px rgba(0,255,136,0.08),
+        0 0 80px rgba(0,180,255,0.05),
+        0 40px 80px rgba(0,0,0,0.6);
       overflow: hidden;
       position: relative;
       z-index: 1;
@@ -87,7 +79,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border-bottom: 1px solid rgba(0, 255, 136, 0.12);
+      border-bottom: 1px solid rgba(0,255,136,0.12);
       position: relative;
       user-select: none;
     }
@@ -126,8 +118,8 @@
       align-items: center;
       gap: 7px;
       padding: 5px 13px;
-      background: rgba(0, 255, 136, 0.07);
-      border: 1px solid rgba(0, 255, 136, 0.2);
+      background: rgba(0,255,136,0.07);
+      border: 1px solid rgba(0,255,136,0.2);
       border-radius: 5px;
       color: var(--green);
       text-decoration: none;
@@ -137,8 +129,8 @@
       opacity: 0.8;
     }
     .portfolio-btn:hover {
-      background: rgba(0, 255, 136, 0.15);
-      border-color: rgba(0, 255, 136, 0.4);
+      background: rgba(0,255,136,0.15);
+      border-color: rgba(0,255,136,0.4);
       opacity: 1;
     }
 
@@ -151,10 +143,7 @@
 
     .terminal-body::-webkit-scrollbar { width: 4px; }
     .terminal-body::-webkit-scrollbar-track { background: transparent; }
-    .terminal-body::-webkit-scrollbar-thumb { 
-      background: rgba(0, 255, 136, 0.2);
-      border-radius: 2px;
-    }
+    .terminal-body::-webkit-scrollbar-thumb { background: rgba(0,255,136,0.2); border-radius: 2px; }
 
     .prompt-user  { color: var(--green); font-weight: 500; }
     .prompt-at    { color: var(--dim); }
@@ -216,7 +205,7 @@
       margin: 16px 0 4px 0;
       opacity: 0;
       animation: fadeIn 0.4s ease-in forwards;
-      text-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+      text-shadow: 0 0 20px rgba(0,255,136,0.4);
       white-space: pre;
     }
 
@@ -233,7 +222,7 @@
       border-left: 2px solid var(--cyan);
       padding: 10px 16px;
       margin: 8px 0 4px 0;
-      background: rgba(0, 212, 255, 0.04);
+      background: rgba(0,212,255,0.04);
       border-radius: 0 4px 4px 0;
       font-size: 13px;
       line-height: 1.8;
@@ -248,25 +237,15 @@
       font-weight: 700;
     }
 
-    .help-row {
-      display: flex;
-      margin: 3px 0;
-      font-size: 13px;
-    }
-
-    .help-cmd {
-      color: var(--green);
-      min-width: 200px;
-      font-weight: 500;
-    }
-
+    .help-row { display: flex; margin: 3px 0; font-size: 13px; }
+    .help-cmd { color: var(--green); min-width: 200px; font-weight: 500; }
     .help-arrow { color: var(--dim); margin-right: 10px; }
     .help-desc  { color: var(--text); }
 
     .help-tip {
       margin-top: 14px;
       padding: 8px 12px;
-      background: rgba(0, 255, 136, 0.05);
+      background: rgba(0,255,136,0.05);
       border-radius: 4px;
       font-size: 12px;
       color: var(--dim);
@@ -426,8 +405,7 @@
       introEl.appendChild(sub);
       await sleep(300);
 
-      const ttLogo = `<img src="Türk_Telekom_logo.svg" height="16" style="vertical-align:middle;margin-right:6px;position:relative;top:-1px">`;
-      printHTML(`<div class="info-box"><span class="status-dot"></span><span class="c-white bold">${profile.name}</span>  <span class="c-dim">·</span>  <span class="c-cyan">${profile.role}</span><br><span style="display:inline-flex;align-items:center;margin-top:4px">${ttLogo}<span class="c-text">Türk Telekom</span><span class="c-dim" style="margin:0 8px">·</span><span class="c-dim">via Sekom A.Ş.</span><span class="c-dim" style="margin:0 8px">·</span><span class="c-dim">${profile.location}</span></span></div>`);
+      printHTML(`<div class="info-box"><span class="status-dot"></span><span class="c-white bold">${profile.name}</span>  <span class="c-dim">·</span>  <span class="c-cyan">${profile.role}</span><br><span class="c-text" style="display:inline-block;margin-top:2px">Türk Telekom  <span class="c-dim">·</span>  via Sekom A.Ş.  <span class="c-dim">·</span>  ${profile.location}</span></div>`);
       printHTML(`<div class="c-dim" style="font-size:13px;margin-top:8px">Keşfetmek için <span class="c-green">help</span> yaz &nbsp;·&nbsp; Tab ile otomatik tamamlama</div>`);
       addGap();
 
@@ -550,10 +528,10 @@
           printHTML(`<div class="info-box">
 <span class="c-white bold">${profile.name}</span>  <span class="c-dim">·</span>  ${profile.age} yaşında<br><br>
 <span class="c-cyan">${profile.role}</span><br>
-<span class="c-dim">${profile.company}</span><br><br>
-<span class="c-dim">Kariyer :</span>  Sekom A.Ş. (1.5 yıl)  →  Türk Telekom dedicated (4 ay+)<br>
-<span class="c-dim">Hedef   :</span>  <span class="c-green">DevOps Engineer</span>  —  otomasyon · CI/CD · bulut<br><br>
-<span class="c-dim">Bu site GitHub Actions + Plesk webhook ile otomatik deploy edilmektedir.</span>
+<span class="c-text">Türk Telekom  <span class="c-dim">·</span>  via Sekom A.Ş.</span><br><br>
+<span class="c-cyan">Kariyer :</span>  <span class="c-text">Sekom A.Ş. (1.5 yıl)  →  Türk Telekom dedicated (4 ay+)</span><br>
+<span class="c-cyan">Hedef   :</span>  <span class="c-green">DevOps Engineer</span>  <span class="c-text">—  otomasyon · CI/CD · bulut</span><br><br>
+<span class="c-text">Bu site GitHub Actions + Plesk webhook ile otomatik deploy edilmektedir.</span>
 </div>`);
           break;
 
