@@ -828,11 +828,11 @@
 
   <div class="contact-grid">
     <div class="contact-info">
-      <a class="contact-item" href="/cdn-cgi/l/email-protection#cbb8aab9a2a0aab2aaaabfaaa0aaa58baca6aaa2a7e5a8a4a6">
+      <a class="contact-item" href="mailto:sarikayaatakan@gmail.com">
         <div class="contact-item-icon">✉️</div>
         <div>
           <div class="contact-item-label">E-posta</div>
-          <div class="contact-item-value"><span class="__cf_email__" data-cfemail="9fecfeedf6f4fee6fefeebfef4fef1dff8f2fef6f3b1fcf0f2">[email&#160;protected]</span></div>
+          <div class="contact-item-value">sarikayaatakan@gmail.com</div>
         </div>
       </a>
 
@@ -866,7 +866,7 @@
     <div class="contact-cta">
       <h3>Birlikte çalışalım.</h3>
       <p>DevOps, cloud altyapı ve otomasyon konularında fırsat arıyorum. İstanbul merkezli, remote pozisyonlara da açığım.</p>
-      <a href="/cdn-cgi/l/email-protection#542735263d3f352d353520353f353a143339353d387a373b39" class="btn-primary" style="display:inline-block; text-align:center;">Mesaj Gönder</a>
+      <a href="mailto:sarikayaatakan@gmail.com" class="btn-primary" style="display:inline-block; text-align:center;">Mesaj Gönder</a>
     </div>
   </div>
 </section>
@@ -878,7 +878,7 @@
   <a href="index.html">← Terminal Mod</a>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // Scroll-triggered animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
@@ -909,4 +909,15 @@
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a');
 
-  window.a
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? '#fff' : '';
+    });
+  });
+</script>
+</body>
+</html>
