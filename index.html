@@ -175,7 +175,7 @@
       font-size: 17px;
       line-height: 1.75;
       color: var(--text-dim);
-      max-width: 540px;
+      max-width: 580px;
       margin-bottom: 40px;
     }
 
@@ -368,12 +368,12 @@
 
     .certs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 20px;
     }
 
     .cert-card {
-      padding: 28px;
+      padding: 24px;
       background: var(--bg3);
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -389,18 +389,18 @@
       background: rgba(240,180,41,0.03);
     }
 
-    .cert-icon { font-size: 28px; margin-bottom: 14px; }
+    .cert-icon { font-size: 26px; margin-bottom: 12px; }
 
-    .cert-name { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 8px; }
-    .cert-org { font-size: 13px; color: var(--text-dim); }
+    .cert-name { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 6px; }
+    .cert-org { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
 
     .cert-target {
-      margin-top: 16px;
-      padding: 12px;
+      margin-top: 14px;
+      padding: 10px 12px;
       background: rgba(240,180,41,0.06);
       border-radius: 8px;
       border-left: 3px solid var(--gold);
-      font-size: 13px;
+      font-size: 12px;
       color: var(--gold);
     }
 
@@ -553,10 +553,9 @@
       $ open-to-work --status=active
     </div>
     <h1 class="hero-name">Atakan<br><span class="accent">Sarıkaya</span></h1>
-    <p class="hero-role">DevOps & Cloud Infrastructure Specialist</p>
+    <p class="hero-role">Cloud / DevOps / Linux System Administrator</p>
     <p class="hero-desc">
-      Türk Telekom bünyesinde <strong>Application Operations Specialist</strong> olarak görev yapıyorum.
-      Otomasyon, CI/CD ve bulut teknolojileri odaklı bir <strong>DevOps Engineer</strong> kariyerine doğru ilerliyorum.
+      Kurumsal Linux ortamlarında (RHEL/CentOS) uygulama operasyonu ve container teknolojileri alanında <strong>2 yılı aşkın production deneyimine sahip</strong>, otomasyon ve sistem sürekliliği odaklı <strong>Cloud / DevOps ve Sistem Mühendisi</strong>.
     </p>
     <div class="hero-actions">
       <a href="Atakan_Sarikaya_CV.pdf" target="_blank" class="btn-primary">CV İndir</a>
@@ -581,11 +580,11 @@
       <div class="timeline-role">Element Management Systems / Application Operations Specialist</div>
       <div class="timeline-desc">
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
-          <li><span style="color:var(--green);margin-right:8px">▸</span>RHEL/CentOS tabanlı kurumsal sistemlerin operasyonel yönetimi ve olay müdahale süreçleri</li>
-          <li><span style="color:var(--green);margin-right:8px">▸</span>Prometheus, Grafana ve Alertmanager ile izleme, alarm yapılandırması ve log analizi</li>
-          <li><span style="color:var(--green);margin-right:8px">▸</span>Docker ortamında monitoring uygulamalarının deployment ve servis yönetimi</li>
-          <li><span style="color:var(--green);margin-right:8px">▸</span>systemd servisleri olarak çalışan Java uygulamalarının hata tespiti ve giderme süreçleri</li>
-          <li><span style="color:var(--green);margin-right:8px">▸</span>Bash scriptler ile rutin operasyonel görevlerin otomatikleştirilmesi ve müdahale sürelerinin kısaltılması</li>
+          <li><span style="color:var(--green);margin-right:8px">▸</span>RHEL/CentOS tabanlı kurumsal sistemlerin operasyonel yönetimi ve olay müdahale süreçlerinin yürütülmesi</li>
+          <li><span style="color:var(--green);margin-right:8px">▸</span>Kritik servis metrikleri için Prometheus ve Grafana panelleri tasarlama; Alertmanager entegrasyonuyla proaktif alarm mekanizmaları kurarak SLA hedeflerinin korunmasını sağlama</li>
+          <li><span style="color:var(--green);margin-right:8px">▸</span>Docker ortamında monitoring uygulamalarının deployment ve operasyonel yönetimi</li>
+          <li><span style="color:var(--green);margin-right:8px">▸</span>Production ortamında systemd tabanlı Java servislerinin kesintisiz dağıtımını (deployment) yürütme ve log analizleriyle kök neden (troubleshooting) tespiti yapma</li>
+          <li><span style="color:var(--green);margin-right:8px">▸</span>Rutin operasyonel kontrolleri Bash scriptler ile otomatikleştirerek manuel iş yükünü ve olay müdahale sürelerini (MTTR) belirgin şekilde optimize etme</li>
         </ul>
       </div>
       <span class="timeline-badge">Dedicated / Aktif</span>
@@ -595,13 +594,13 @@
       <div class="timeline-dot blue"></div>
       <div class="timeline-date">Haziran 2024 — Ekim 2025</div>
       <div class="timeline-company">Sekom A.Ş.</div>
-      <div class="timeline-role">DevSecOps Cloud Operations Team / Software Support Specialist</div>
+      <div class="timeline-role">DevSecOps Bulut Operasyonları Ekibi / Yazılım Destek Uzmanı</div>
       <div class="timeline-desc">
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
-          <li><span style="color:var(--blue);margin-right:8px">▸</span>Docker ve Red Hat OpenShift ortamlarında Java/Python uygulamalarının deployment yönetimi</li>
-          <li><span style="color:var(--blue);margin-right:8px">▸</span>Prometheus, Grafana ve Alertmanager ile izleme ve alarm yapılandırması; olay tespit süreçleri</li>
-          <li><span style="color:var(--blue);margin-right:8px">▸</span>PostgreSQL ve Oracle veritabanlarında SQL operasyonları, yedekleme ve geri yükleme</li>
-          <li><span style="color:var(--blue);margin-right:8px">▸</span>Linux sunucularda systemd servis yönetimi, log takibi ve uygulama deploy desteği</li>
+          <li><span style="color:var(--blue);margin-right:8px">▸</span>Docker ve OpenShift ortamlarında Java/Python uygulamalarının deployment ve operasyonel takibi</li>
+          <li><span style="color:var(--blue);margin-right:8px">▸</span>Prometheus, Grafana ve Alertmanager ile izleme ve alarm yapılandırması; proaktif olay tespit süreçleri</li>
+          <li><span style="color:var(--blue);margin-right:8px">▸</span>PostgreSQL ve Oracle veritabanlarında periyodik yedekleme (backup/restore) planlarını yürütme ve veri bütünlüğünü sağlayan SQL bakım sorgularını çalıştırma</li>
+          <li><span style="color:var(--blue);margin-right:8px">▸</span>Linux sunucular üzerinde systemd servis yönetimi, log takibi ve uygulama deploy süreçlerine destek sağlama</li>
           <li><span style="color:var(--blue);margin-right:8px">▸</span>Jira ve Confluence ile olay/değişiklik yönetimi ve teknik dokümantasyon hazırlanması</li>
         </ul>
       </div>
@@ -614,7 +613,7 @@
       <div class="timeline-role">Software Development Intern</div>
       <div class="timeline-desc">
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
-          <li><span style="color:var(--gold);margin-right:8px">▸</span>Python, Flask ve SQLite kullanılarak CRUD operasyonlarına sahip ToDo List web uygulaması geliştirildi</li>
+          <li><span style="color:var(--gold);margin-right:8px">▸</span>Python (Flask) ve SQLite mimarisiyle veritabanı CRUD operasyonlarını, veri doğrulama ve kullanıcı akışlarını içeren görev yönetim modülünün geliştirilmesi ve test edilmesi</li>
         </ul>
       </div>
     </div>
@@ -733,7 +732,19 @@
     <div class="cert-card">
       <div class="cert-icon"><img src="https://cdn.simpleicons.org/huawei/CF0A2C" style="width:32px;height:32px"></div>
       <div class="cert-name">HCCDA — Huawei Cloud Tech Essentials</div>
-      <div class="cert-org">Bulut bilişim temel kavramları ve Huawei Cloud altyapısı · Compute, Storage, Network ve Database servisleri · Güvenlik modeli ve cloud-native dönüşüm · Yük dengeleme ve dağıtık uygulama yönetimi</div>
+      <div class="cert-org">Huawei Cloud · Compute, Storage, Network ve Database servisleri · Cloud mimarisi ve dağıtık uygulama yönetimi</div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-icon">🌐</div>
+      <div class="cert-name">Network Temelleri</div>
+      <div class="cert-org">BTK Akademi — Ağ topolojileri, TCP/IP protokolleri, alt ağ yapılandırması ve yönlendirme</div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-icon">🗄️</div>
+      <div class="cert-name">Uygulamalarla SQL</div>
+      <div class="cert-org">BTK Akademi — İlişkisel veritabanı yönetimi, veri sorgulama, indeksleme ve performans optimizasyonu</div>
     </div>
 
     <div class="cert-card" style="border-color: rgba(240,180,41,0.2);">
@@ -759,7 +770,7 @@
         </div>
       </a>
 
-      <a class="contact-item" href="https://www.linkedin.com/in/atakansarikaya/" target="_blank">
+      <a class="contact-item" href="https://linkedin.com/in/atakansarikaya" target="_blank">
         <div class="contact-item-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         </div>
@@ -802,7 +813,7 @@
 </footer>
 
 <script>
-  const u = 'sarikayaatakan';
+  const u = 'atakansarikayawork';
   const d = 'gmail.com';
   const email = u + '@' + d;
   const el = document.getElementById('email-display');
